@@ -583,11 +583,15 @@ h1.hero-title{
 .crpe-annales-year{
   display:flex;
   flex-direction:column;
-  gap:12px;
-  padding:18px;
+  gap:0;
   border:1px solid var(--line);
   border-radius:var(--radius-md);
   background:#FDF6F9;
+  overflow:hidden;
+  transition:border-color 0.2s;
+}
+.crpe-annales-year.is-collapsed{
+  border-color:var(--line);
 }
 .crpe-annales-year h3{
   margin:0 0 2px;
@@ -595,6 +599,52 @@ h1.hero-title{
   font-weight:800;
   color:#2A1420;
 }
+.crpe-annales-year-toggle{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  width:100%;
+  padding:16px 20px;
+  border:none;
+  background:#FDF6F9;
+  color:#2A1420;
+  font-family:inherit;
+  cursor:pointer;
+  text-align:left;
+}
+.crpe-annales-year-toggle h3{ margin:0; font-size:1.02rem; }
+.crpe-annales-year-toggle-meta{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-shrink:0;
+}
+.crpe-annales-year-count{
+  font-size:0.68rem;
+  font-weight:700;
+  color:#C2366B;
+  background:rgba(232,89,138,0.14);
+  border:1px solid rgba(194,54,107,0.25);
+  border-radius:999px;
+  padding:3px 9px;
+  white-space:nowrap;
+}
+.crpe-annales-year-chevron{
+  width:18px; height:18px;
+  flex-shrink:0;
+  color:var(--accent);
+  transition:transform 0.25s ease;
+}
+.crpe-annales-year.is-collapsed .crpe-annales-year-chevron{ transform:rotate(-90deg); }
+.crpe-annales-year-body{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  padding:0 18px 18px;
+  background:#FDF6F9;
+}
+.crpe-annales-year.is-collapsed .crpe-annales-year-body{ display:none; }
 .crpe-annales-links{
   display:grid;
   grid-template-columns:repeat(auto-fit, minmax(140px, 1fr));
@@ -931,8 +981,15 @@ h1.hero-title{
       <div class="snt-big-card">
         <div class="crpe-annales-grid">
 
-          <div class="crpe-annales-year">
-            <h3>2026</h3>
+          <div class="crpe-annales-year is-collapsed">
+            <button type="button" class="crpe-annales-year-toggle" aria-expanded="false">
+              <h3>2026</h3>
+              <span class="crpe-annales-year-toggle-meta">
+                <span class="crpe-annales-year-count">Voir les sujets</span>
+                <svg class="crpe-annales-year-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </span>
+            </button>
+            <div class="crpe-annales-year-body">
             <div class="crpe-annales-2026-row">
               <div class="crpe-annales-links crpe-annales-2026-main">
                 <div class="crpe-annales-doc">
@@ -1184,10 +1241,18 @@ h1.hero-title{
                 </div>
               </div>
             </div>
+            </div>
           </div>
 
-          <div class="crpe-annales-year">
-            <h3>2025</h3>
+          <div class="crpe-annales-year is-collapsed">
+            <button type="button" class="crpe-annales-year-toggle" aria-expanded="false">
+              <h3>2025</h3>
+              <span class="crpe-annales-year-toggle-meta">
+                <span class="crpe-annales-year-count">Voir les sujets</span>
+                <svg class="crpe-annales-year-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </span>
+            </button>
+            <div class="crpe-annales-year-body">
             <div class="crpe-annales-links">
               <div class="crpe-annales-doc">
                 <div class="crpe-doc-header">
@@ -1409,10 +1474,18 @@ h1.hero-title{
                 </div>
               </div>
             </div>
+            </div>
           </div>
 
-          <div class="crpe-annales-year">
-            <h3>2024</h3>
+          <div class="crpe-annales-year is-collapsed">
+            <button type="button" class="crpe-annales-year-toggle" aria-expanded="false">
+              <h3>2024</h3>
+              <span class="crpe-annales-year-toggle-meta">
+                <span class="crpe-annales-year-count">Voir les sujets</span>
+                <svg class="crpe-annales-year-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </span>
+            </button>
+            <div class="crpe-annales-year-body">
             <div class="crpe-annales-links">
               <div class="crpe-annales-doc">
                 <div class="crpe-doc-header">
@@ -1480,7 +1553,67 @@ h1.hero-title{
                     <a class="crpe-doc-btn crpe-doc-btn-corrige" href="Annales/2024 gr2 corrigé.pdf" target="_blank" rel="noopener">Corrigé</a>
                   </div>
                 </div>
-                <div class="crpe-annales-doc-themes"><span class="crpe-theme-tag-empty">Thèmes à venir</span></div>
+                <div class="crpe-annales-doc-exercises">
+                  <div class="crpe-exercise">
+                    <span class="crpe-exercise-name">Ex.1 — Le tournoi sportif</span>
+                    <div class="crpe-annales-doc-themes">
+                      <span class="crpe-theme-tag">PGCD</span>
+                      <span class="crpe-theme-tag">Décomposition en facteurs premiers</span>
+                      <span class="crpe-theme-tag">Diviseurs communs</span>
+                      <span class="crpe-theme-tag">Pourcentages</span>
+                      <span class="crpe-theme-tag">Moyenne</span>
+                      <span class="crpe-theme-tag">Probabilités</span>
+                    </div>
+                  </div>
+                  <div class="crpe-exercise">
+                    <span class="crpe-exercise-name">Ex.2 — La cour d'école</span>
+                    <div class="crpe-annales-doc-themes">
+                      <span class="crpe-theme-tag">Théorème de Thalès</span>
+                      <span class="crpe-theme-tag">Théorème de Pythagore</span>
+                      <span class="crpe-theme-tag">Aire</span>
+                      <span class="crpe-theme-tag">Échelle</span>
+                      <span class="crpe-theme-tag">Fonctions affines</span>
+                      <span class="crpe-theme-tag">Lecture graphique</span>
+                    </div>
+                  </div>
+                  <div class="crpe-exercise">
+                    <span class="crpe-exercise-name">Ex.3 — Les fournisseurs de résine</span>
+                    <div class="crpe-annales-doc-themes">
+                      <span class="crpe-theme-tag">Tableur</span>
+                      <span class="crpe-theme-tag">Fonctions affines</span>
+                      <span class="crpe-theme-tag">Inéquations</span>
+                    </div>
+                  </div>
+                  <div class="crpe-exercise">
+                    <span class="crpe-exercise-name">Ex.3 — Programme de calcul et Scratch</span>
+                    <div class="crpe-annales-doc-themes">
+                      <span class="crpe-theme-tag">Programme de calcul</span>
+                      <span class="crpe-theme-tag">Calcul littéral</span>
+                      <span class="crpe-theme-tag">Scratch</span>
+                      <span class="crpe-theme-tag">Équations</span>
+                      <span class="crpe-theme-tag">Factorisation</span>
+                    </div>
+                  </div>
+                  <div class="crpe-exercise">
+                    <span class="crpe-exercise-name">Ex.4 — Le cuisinier et les gâteaux</span>
+                    <div class="crpe-annales-doc-themes">
+                      <span class="crpe-theme-tag">Volume de la demi-sphère</span>
+                      <span class="crpe-theme-tag">Volume du cylindre</span>
+                      <span class="crpe-theme-tag">Volume du pavé droit</span>
+                      <span class="crpe-theme-tag">Conversions d'unités</span>
+                      <span class="crpe-theme-tag">Pourcentages</span>
+                    </div>
+                  </div>
+                  <div class="crpe-exercise">
+                    <span class="crpe-exercise-name">Ex.5 — Vrai ou faux et QCM</span>
+                    <div class="crpe-annales-doc-themes">
+                      <span class="crpe-theme-tag">Nombres rationnels</span>
+                      <span class="crpe-theme-tag">Intervalles</span>
+                      <span class="crpe-theme-tag">Équations</span>
+                      <span class="crpe-theme-tag">Inéquations</span>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="crpe-annales-doc">
                 <div class="crpe-doc-header">
@@ -1490,7 +1623,63 @@ h1.hero-title{
                     <a class="crpe-doc-btn crpe-doc-btn-corrige" href="Annales/2024 gr3 corrigé.pdf" target="_blank" rel="noopener">Corrigé</a>
                   </div>
                 </div>
-                <div class="crpe-annales-doc-themes"><span class="crpe-theme-tag-empty">Thèmes à venir</span></div>
+                <div class="crpe-annales-doc-exercises">
+                  <div class="crpe-exercise">
+                    <span class="crpe-exercise-name">Ex.1 — Les cartes et les boules</span>
+                    <div class="crpe-annales-doc-themes">
+                      <span class="crpe-theme-tag">Probabilités</span>
+                      <span class="crpe-theme-tag">Dénombrement</span>
+                      <span class="crpe-theme-tag">Multiples</span>
+                      <span class="crpe-theme-tag">Proportions</span>
+                    </div>
+                  </div>
+                  <div class="crpe-exercise">
+                    <span class="crpe-exercise-name">Ex.2 — Les offres de téléchargement</span>
+                    <div class="crpe-annales-doc-themes">
+                      <span class="crpe-theme-tag">Fonctions affines</span>
+                      <span class="crpe-theme-tag">Équations</span>
+                      <span class="crpe-theme-tag">Inéquations</span>
+                      <span class="crpe-theme-tag">Tableur</span>
+                      <span class="crpe-theme-tag">Pourcentages</span>
+                    </div>
+                  </div>
+                  <div class="crpe-exercise">
+                    <span class="crpe-exercise-name">Ex.3 — Vrai ou faux</span>
+                    <div class="crpe-annales-doc-themes">
+                      <span class="crpe-theme-tag">Nombres décimaux</span>
+                      <span class="crpe-theme-tag">Nombres entiers relatifs</span>
+                      <span class="crpe-theme-tag">Pourcentages</span>
+                    </div>
+                  </div>
+                  <div class="crpe-exercise">
+                    <span class="crpe-exercise-name">Ex.4 — Scratch et figure de base</span>
+                    <div class="crpe-annales-doc-themes">
+                      <span class="crpe-theme-tag">Scratch</span>
+                      <span class="crpe-theme-tag">Algorithmique</span>
+                      <span class="crpe-theme-tag">Polygones réguliers</span>
+                      <span class="crpe-theme-tag">Rapport d'aires</span>
+                    </div>
+                  </div>
+                  <div class="crpe-exercise">
+                    <span class="crpe-exercise-name">Ex.5 — Programmes de calcul</span>
+                    <div class="crpe-annales-doc-themes">
+                      <span class="crpe-theme-tag">Programme de calcul</span>
+                      <span class="crpe-theme-tag">Calcul littéral</span>
+                      <span class="crpe-theme-tag">Équations</span>
+                    </div>
+                  </div>
+                  <div class="crpe-exercise">
+                    <span class="crpe-exercise-name">Ex.6 — Les saupoudreurs de stevia</span>
+                    <div class="crpe-annales-doc-themes">
+                      <span class="crpe-theme-tag">Volume du cône</span>
+                      <span class="crpe-theme-tag">Volume du cylindre</span>
+                      <span class="crpe-theme-tag">Théorème de Pythagore</span>
+                      <span class="crpe-theme-tag">Proportionnalité</span>
+                      <span class="crpe-theme-tag">Patron du cône</span>
+                      <span class="crpe-theme-tag">Angles</span>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="crpe-annales-doc">
                 <div class="crpe-doc-header">
@@ -1500,13 +1689,68 @@ h1.hero-title{
                     <a class="crpe-doc-btn crpe-doc-btn-corrige" href="Annales/2024 supp corrigé.pdf" target="_blank" rel="noopener">Corrigé</a>
                   </div>
                 </div>
-                <div class="crpe-annales-doc-themes"><span class="crpe-theme-tag-empty">Thèmes à venir</span></div>
+                <div class="crpe-annales-doc-exercises">
+                  <div class="crpe-exercise">
+                    <span class="crpe-exercise-name">Ex.1 — Vrai ou faux</span>
+                    <div class="crpe-annales-doc-themes">
+                      <span class="crpe-theme-tag">Médiane</span>
+                      <span class="crpe-theme-tag">Nombres décimaux</span>
+                      <span class="crpe-theme-tag">Fractions</span>
+                      <span class="crpe-theme-tag">Division euclidienne</span>
+                      <span class="crpe-theme-tag">Fonctions linéaires</span>
+                    </div>
+                  </div>
+                  <div class="crpe-exercise">
+                    <span class="crpe-exercise-name">Ex.2 — Le jeu de dés</span>
+                    <div class="crpe-annales-doc-themes">
+                      <span class="crpe-theme-tag">Probabilités</span>
+                      <span class="crpe-theme-tag">Dénombrement</span>
+                    </div>
+                  </div>
+                  <div class="crpe-exercise">
+                    <span class="crpe-exercise-name">Ex.3 — Scratch et enchaînements de touches</span>
+                    <div class="crpe-annales-doc-themes">
+                      <span class="crpe-theme-tag">Scratch</span>
+                      <span class="crpe-theme-tag">Algorithmique</span>
+                      <span class="crpe-theme-tag">Repérage</span>
+                    </div>
+                  </div>
+                  <div class="crpe-exercise">
+                    <span class="crpe-exercise-name">Ex.4 — La dalle de terrasse</span>
+                    <div class="crpe-annales-doc-themes">
+                      <span class="crpe-theme-tag">Volume du prisme droit</span>
+                      <span class="crpe-theme-tag">Aire</span>
+                      <span class="crpe-theme-tag">Tableur</span>
+                      <span class="crpe-theme-tag">TVA</span>
+                      <span class="crpe-theme-tag">Pourcentages</span>
+                      <span class="crpe-theme-tag">Proportions</span>
+                    </div>
+                  </div>
+                  <div class="crpe-exercise">
+                    <span class="crpe-exercise-name">Ex.5 — Le pavage du Caire</span>
+                    <div class="crpe-annales-doc-themes">
+                      <span class="crpe-theme-tag">Transformations géométriques</span>
+                      <span class="crpe-theme-tag">Rotation</span>
+                      <span class="crpe-theme-tag">Symétrie</span>
+                      <span class="crpe-theme-tag">Angles</span>
+                      <span class="crpe-theme-tag">Somme des angles d'un polygone</span>
+                    </div>
+                  </div>
+                </div>
               </div>
+            </div>
             </div>
           </div>
 
-          <div class="crpe-annales-year">
-            <h3>2023</h3>
+          <div class="crpe-annales-year is-collapsed">
+            <button type="button" class="crpe-annales-year-toggle" aria-expanded="false">
+              <h3>2023</h3>
+              <span class="crpe-annales-year-toggle-meta">
+                <span class="crpe-annales-year-count">Voir les sujets</span>
+                <svg class="crpe-annales-year-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </span>
+            </button>
+            <div class="crpe-annales-year-body">
             <div class="crpe-annales-links">
               <div class="crpe-annales-doc">
                 <div class="crpe-doc-header">
@@ -1673,13 +1917,83 @@ h1.hero-title{
                     <span class="crpe-doc-btn crpe-doc-btn-disabled" title="Corrigé à venir">Corrigé</span>
                   </div>
                 </div>
-                <div class="crpe-annales-doc-themes"><span class="crpe-theme-tag-empty">Thèmes à venir</span></div>
+                <div class="crpe-annales-doc-exercises">
+                  <div class="crpe-exercise">
+                    <span class="crpe-exercise-name">Ex.1 — Sortie scolaire à La Rochelle</span>
+                    <div class="crpe-annales-doc-themes">
+                      <span class="crpe-theme-tag">Théorème de Pythagore</span>
+                      <span class="crpe-theme-tag">Vitesse moyenne</span>
+                      <span class="crpe-theme-tag">Périmètre du cercle</span>
+                      <span class="crpe-theme-tag">Conversions d'unités</span>
+                      <span class="crpe-theme-tag">Fonctions du second degré</span>
+                      <span class="crpe-theme-tag">Lecture graphique</span>
+                    </div>
+                  </div>
+                  <div class="crpe-exercise">
+                    <span class="crpe-exercise-name">Ex.2 — Les appuis de la cour d'école</span>
+                    <div class="crpe-annales-doc-themes">
+                      <span class="crpe-theme-tag">Volume du pavé droit</span>
+                      <span class="crpe-theme-tag">Aire</span>
+                      <span class="crpe-theme-tag">Conversions d'unités</span>
+                      <span class="crpe-theme-tag">Proportionnalité</span>
+                    </div>
+                  </div>
+                  <div class="crpe-exercise">
+                    <span class="crpe-exercise-name">Ex.3 — Le jeu de 52 cartes</span>
+                    <div class="crpe-annales-doc-themes">
+                      <span class="crpe-theme-tag">Probabilités</span>
+                      <span class="crpe-theme-tag">Événements</span>
+                    </div>
+                  </div>
+                  <div class="crpe-exercise">
+                    <span class="crpe-exercise-name">Ex.4 — Scripts Scratch et carrés</span>
+                    <div class="crpe-annales-doc-themes">
+                      <span class="crpe-theme-tag">Scratch</span>
+                      <span class="crpe-theme-tag">Algorithmique</span>
+                      <span class="crpe-theme-tag">Transformations géométriques</span>
+                      <span class="crpe-theme-tag">Rotation</span>
+                    </div>
+                  </div>
+                  <div class="crpe-exercise">
+                    <span class="crpe-exercise-name">Ex.5 — Salaires d'une entreprise</span>
+                    <div class="crpe-annales-doc-themes">
+                      <span class="crpe-theme-tag">Tableur</span>
+                      <span class="crpe-theme-tag">Pourcentages</span>
+                      <span class="crpe-theme-tag">Étendue</span>
+                      <span class="crpe-theme-tag">Médiane</span>
+                      <span class="crpe-theme-tag">Moyenne</span>
+                    </div>
+                  </div>
+                  <div class="crpe-exercise">
+                    <span class="crpe-exercise-name">Ex.6 — Nombre et son retourné</span>
+                    <div class="crpe-annales-doc-themes">
+                      <span class="crpe-theme-tag">Calcul littéral</span>
+                      <span class="crpe-theme-tag">Multiples</span>
+                      <span class="crpe-theme-tag">Numération</span>
+                    </div>
+                  </div>
+                  <div class="crpe-exercise">
+                    <span class="crpe-exercise-name">Ex.7 — Le problème des glaces (TIMSS)</span>
+                    <div class="crpe-annales-doc-themes">
+                      <span class="crpe-theme-tag">Système d'équations</span>
+                      <span class="crpe-theme-tag">Mise en équation</span>
+                    </div>
+                  </div>
+                </div>
               </div>
+            </div>
             </div>
           </div>
 
-          <div class="crpe-annales-year">
-            <h3>2022</h3>
+          <div class="crpe-annales-year is-collapsed">
+            <button type="button" class="crpe-annales-year-toggle" aria-expanded="false">
+              <h3>2022</h3>
+              <span class="crpe-annales-year-toggle-meta">
+                <span class="crpe-annales-year-count">Voir les sujets</span>
+                <svg class="crpe-annales-year-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </span>
+            </button>
+            <div class="crpe-annales-year-body">
             <div class="crpe-annales-links">
               <div class="crpe-annales-doc">
                 <div class="crpe-doc-header">
@@ -1791,13 +2105,66 @@ h1.hero-title{
                     <span class="crpe-doc-btn crpe-doc-btn-disabled" title="Corrigé à venir">Corrigé</span>
                   </div>
                 </div>
-                <div class="crpe-annales-doc-themes"><span class="crpe-theme-tag-empty">Thèmes à venir</span></div>
+                <div class="crpe-annales-doc-exercises">
+                  <div class="crpe-exercise">
+                    <span class="crpe-exercise-name">Ex.1 — QCM</span>
+                    <div class="crpe-annales-doc-themes">
+                      <span class="crpe-theme-tag">Volume du cylindre</span>
+                      <span class="crpe-theme-tag">Suites géométriques</span>
+                      <span class="crpe-theme-tag">Pourcentages</span>
+                      <span class="crpe-theme-tag">Nombres rationnels</span>
+                      <span class="crpe-theme-tag">Nombres décimaux</span>
+                      <span class="crpe-theme-tag">Fractions</span>
+                      <span class="crpe-theme-tag">Théorème de Pythagore</span>
+                    </div>
+                  </div>
+                  <div class="crpe-exercise">
+                    <span class="crpe-exercise-name">Ex.2 — L'entraînement de Célia</span>
+                    <div class="crpe-annales-doc-themes">
+                      <span class="crpe-theme-tag">Moyenne</span>
+                      <span class="crpe-theme-tag">Médiane</span>
+                      <span class="crpe-theme-tag">Étendue</span>
+                      <span class="crpe-theme-tag">Échelle</span>
+                      <span class="crpe-theme-tag">Périmètre du cercle</span>
+                      <span class="crpe-theme-tag">Vitesse moyenne</span>
+                    </div>
+                  </div>
+                  <div class="crpe-exercise">
+                    <span class="crpe-exercise-name">Ex.3 — Le potager de l'école</span>
+                    <div class="crpe-annales-doc-themes">
+                      <span class="crpe-theme-tag">Théorème de Pythagore</span>
+                      <span class="crpe-theme-tag">Aire</span>
+                      <span class="crpe-theme-tag">Fonctions du second degré</span>
+                      <span class="crpe-theme-tag">Lecture graphique</span>
+                      <span class="crpe-theme-tag">Volume du pavé droit</span>
+                      <span class="crpe-theme-tag">Proportionnalité</span>
+                      <span class="crpe-theme-tag">Pourcentages</span>
+                    </div>
+                  </div>
+                  <div class="crpe-exercise">
+                    <span class="crpe-exercise-name">Ex.4 — Script Scratch</span>
+                    <div class="crpe-annales-doc-themes">
+                      <span class="crpe-theme-tag">Scratch</span>
+                      <span class="crpe-theme-tag">Algorithmique</span>
+                      <span class="crpe-theme-tag">Transformations géométriques</span>
+                      <span class="crpe-theme-tag">Rotation</span>
+                    </div>
+                  </div>
+                </div>
               </div>
+            </div>
             </div>
           </div>
 
-          <div class="crpe-annales-year">
-            <h3>2021</h3>
+          <div class="crpe-annales-year is-collapsed">
+            <button type="button" class="crpe-annales-year-toggle" aria-expanded="false">
+              <h3>2021</h3>
+              <span class="crpe-annales-year-toggle-meta">
+                <span class="crpe-annales-year-count">Voir les sujets</span>
+                <svg class="crpe-annales-year-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </span>
+            </button>
+            <div class="crpe-annales-year-body">
             <div class="crpe-annales-links">
               <div class="crpe-annales-doc">
                 <div class="crpe-doc-header">
@@ -1840,10 +2207,18 @@ h1.hero-title{
                 <div class="crpe-annales-doc-themes"><span class="crpe-theme-tag-empty">Thèmes à venir</span></div>
               </div>
             </div>
+            </div>
           </div>
 
-          <div class="crpe-annales-year">
-            <h3>2020</h3>
+          <div class="crpe-annales-year is-collapsed">
+            <button type="button" class="crpe-annales-year-toggle" aria-expanded="false">
+              <h3>2020</h3>
+              <span class="crpe-annales-year-toggle-meta">
+                <span class="crpe-annales-year-count">Voir les sujets</span>
+                <svg class="crpe-annales-year-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </span>
+            </button>
+            <div class="crpe-annales-year-body">
             <div class="crpe-annales-links">
               <div class="crpe-annales-doc">
                 <div class="crpe-doc-header">
@@ -1915,6 +2290,7 @@ h1.hero-title{
                 </div>
                 <div class="crpe-annales-doc-themes"><span class="crpe-theme-tag-empty">Thèmes à venir</span></div>
               </div>
+            </div>
             </div>
           </div>
 
@@ -2048,6 +2424,18 @@ h1.hero-title{
     label.textContent = daysLeft > 0
       ? `Session 2027 - Environ ${daysLeft} jour${daysLeft > 1 ? 's' : ''} restant${daysLeft > 1 ? 's' : ''}`
       : `Jour J !`;
+  })();
+
+  // Accordéon des Annales par année
+  (function () {
+    document.querySelectorAll('.crpe-annales-year-toggle').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const wrap = btn.closest('.crpe-annales-year');
+        if (!wrap) return;
+        const collapsed = wrap.classList.toggle('is-collapsed');
+        btn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+      });
+    });
   })();
 
   // Bouton "haut de page"
