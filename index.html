@@ -577,7 +577,7 @@ h1.hero-title{
 /* Annales : cartes par année */
 .crpe-annales-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns:repeat(auto-fill, minmax(200px, 1fr));
   gap:20px;
 }
 .crpe-annales-year{
@@ -597,7 +597,7 @@ h1.hero-title{
 }
 .crpe-annales-links{
   display:flex;
-  flex-wrap:wrap;
+  flex-direction:column;
   gap:8px;
 }
 .crpe-annales-link{
@@ -617,6 +617,56 @@ h1.hero-title{
 .crpe-annales-link:hover{
   background:#F6CADE;
   border-color:var(--accent);
+}
+
+/* Annales v2 : une carte par document, avec thèmes affichés */
+.crpe-annales-doc{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  padding:10px 12px;
+  border-radius:10px;
+  border:1px solid #F0C7D6;
+  background:#FBE4EC;
+  transition:background 0.2s, border-color 0.2s;
+}
+.crpe-annales-doc:hover{
+  background:#F6CADE;
+  border-color:var(--accent);
+}
+.crpe-annales-doc-link{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  color:#C2366B;
+  font-size:0.78rem;
+  font-weight:800;
+  text-decoration:none;
+}
+.crpe-annales-doc-link:hover{ text-decoration:underline; }
+.crpe-annales-doc-themes{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+}
+.crpe-theme-tag{
+  display:inline-flex;
+  align-items:center;
+  padding:3px 9px;
+  border-radius:999px;
+  background:rgba(232,89,138,0.14);
+  border:1px solid rgba(194,54,107,0.25);
+  color:#8A2450;
+  font-size:0.66rem;
+  font-weight:700;
+  line-height:1.4;
+  white-space:nowrap;
+}
+.crpe-theme-tag-empty{
+  color:#B98098;
+  font-size:0.66rem;
+  font-style:italic;
+  font-weight:600;
 }
 
 </style>
@@ -784,75 +834,174 @@ h1.hero-title{
           <div class="crpe-annales-year">
             <h3>2026</h3>
             <div class="crpe-annales-links">
-              <a class="crpe-annales-link" href="Annales/2026 gr1.pdf" target="_blank" rel="noopener">Groupe 1 M2</a>
-              <a class="crpe-annales-link" href="Annales/2026 gr1 L3.pdf" target="_blank" rel="noopener">Groupe 1 L3</a>
-              <a class="crpe-annales-link" href="Annales/2026 gr2.pdf" target="_blank" rel="noopener">Groupe 2 M2</a>
-              <a class="crpe-annales-link" href="Annales/2026 gr2 L3.pdf" target="_blank" rel="noopener">Groupe 2 L3</a>
-              <a class="crpe-annales-link" href="Annales/2026 gr3.pdf" target="_blank" rel="noopener">Groupe 3 M2</a>
-              <a class="crpe-annales-link" href="Annales/2026 gr3 L3.pdf" target="_blank" rel="noopener">Groupe 3 L3</a>
-              <a class="crpe-annales-link" href="Annales/2026 supp.pdf" target="_blank" rel="noopener">Créteil-Versailles</a>
+              <div class="crpe-annales-doc">
+                <a class="crpe-annales-doc-link" href="Annales/2026 gr1.pdf" target="_blank" rel="noopener">Groupe 1 M2</a>
+                <div class="crpe-annales-doc-themes"><span class="crpe-theme-tag-empty">Thèmes à venir</span></div>
+              </div>
+              <div class="crpe-annales-doc">
+                <a class="crpe-annales-doc-link" href="Annales/2026 gr2.pdf" target="_blank" rel="noopener">Groupe 2 M2</a>
+                <div class="crpe-annales-doc-themes"><span class="crpe-theme-tag-empty">Thèmes à venir</span></div>
+              </div>
+              <div class="crpe-annales-doc">
+                <a class="crpe-annales-doc-link" href="Annales/2026 gr3.pdf" target="_blank" rel="noopener">Groupe 3 M2</a>
+                <div class="crpe-annales-doc-themes"><span class="crpe-theme-tag-empty">Thèmes à venir</span></div>
+              </div>
+              <div class="crpe-annales-doc">
+                <a class="crpe-annales-doc-link" href="Annales/2026 gr1 L3.pdf" target="_blank" rel="noopener">Groupe 1 L3</a>
+                <div class="crpe-annales-doc-themes"><span class="crpe-theme-tag-empty">Thèmes à venir</span></div>
+              </div>
+              <div class="crpe-annales-doc">
+                <a class="crpe-annales-doc-link" href="Annales/2026 gr2 L3.pdf" target="_blank" rel="noopener">Groupe 2 L3</a>
+                <div class="crpe-annales-doc-themes"><span class="crpe-theme-tag-empty">Thèmes à venir</span></div>
+              </div>
+              <div class="crpe-annales-doc">
+                <a class="crpe-annales-doc-link" href="Annales/2026 gr3 L3.pdf" target="_blank" rel="noopener">Groupe 3 L3</a>
+                <div class="crpe-annales-doc-themes"><span class="crpe-theme-tag-empty">Thèmes à venir</span></div>
+              </div>
+              <div class="crpe-annales-doc">
+                <a class="crpe-annales-doc-link" href="Annales/2026 supp.pdf" target="_blank" rel="noopener">Créteil-Versailles</a>
+                <div class="crpe-annales-doc-themes"><span class="crpe-theme-tag-empty">Thèmes à venir</span></div>
+              </div>
             </div>
           </div>
 
           <div class="crpe-annales-year">
             <h3>2025</h3>
             <div class="crpe-annales-links">
-              <a class="crpe-annales-link" href="Annales/2025 gr1.pdf" target="_blank" rel="noopener">Groupe 1</a>
-              <a class="crpe-annales-link" href="Annales/2025 gr2.pdf" target="_blank" rel="noopener">Groupe 2</a>
-              <a class="crpe-annales-link" href="Annales/2025 gr3.pdf" target="_blank" rel="noopener">Groupe 3</a>
-              <a class="crpe-annales-link" href="Annales/2025 supp.pdf" target="_blank" rel="noopener">Créteil-Versailles</a>
+              <div class="crpe-annales-doc">
+                <a class="crpe-annales-doc-link" href="Annales/2025 gr1.pdf" target="_blank" rel="noopener">Groupe 1</a>
+                <div class="crpe-annales-doc-themes"><span class="crpe-theme-tag-empty">Thèmes à venir</span></div>
+              </div>
+              <div class="crpe-annales-doc">
+                <a class="crpe-annales-doc-link" href="Annales/2025 gr2.pdf" target="_blank" rel="noopener">Groupe 2</a>
+                <div class="crpe-annales-doc-themes"><span class="crpe-theme-tag-empty">Thèmes à venir</span></div>
+              </div>
+              <div class="crpe-annales-doc">
+                <a class="crpe-annales-doc-link" href="Annales/2025 gr3.pdf" target="_blank" rel="noopener">Groupe 3</a>
+                <div class="crpe-annales-doc-themes"><span class="crpe-theme-tag-empty">Thèmes à venir</span></div>
+              </div>
+              <div class="crpe-annales-doc">
+                <a class="crpe-annales-doc-link" href="Annales/2025 supp.pdf" target="_blank" rel="noopener">Créteil-Versailles</a>
+                <div class="crpe-annales-doc-themes"><span class="crpe-theme-tag-empty">Thèmes à venir</span></div>
+              </div>
             </div>
           </div>
 
           <div class="crpe-annales-year">
             <h3>2024</h3>
             <div class="crpe-annales-links">
-              <a class="crpe-annales-link" href="Annales/2024 gr1.pdf" target="_blank" rel="noopener">Groupe 1</a>
-              <a class="crpe-annales-link" href="Annales/2024 gr2.pdf" target="_blank" rel="noopener">Groupe 2</a>
-              <a class="crpe-annales-link" href="Annales/2024 gr3.pdf" target="_blank" rel="noopener">Groupe 3</a>
-              <a class="crpe-annales-link" href="Annales/2024 supp.pdf" target="_blank" rel="noopener">Créteil-Versailles</a>
+              <div class="crpe-annales-doc">
+                <a class="crpe-annales-doc-link" href="Annales/2024 gr1.pdf" target="_blank" rel="noopener">Groupe 1</a>
+                <div class="crpe-annales-doc-themes"><span class="crpe-theme-tag-empty">Thèmes à venir</span></div>
+              </div>
+              <div class="crpe-annales-doc">
+                <a class="crpe-annales-doc-link" href="Annales/2024 gr2.pdf" target="_blank" rel="noopener">Groupe 2</a>
+                <div class="crpe-annales-doc-themes"><span class="crpe-theme-tag-empty">Thèmes à venir</span></div>
+              </div>
+              <div class="crpe-annales-doc">
+                <a class="crpe-annales-doc-link" href="Annales/2024 gr3.pdf" target="_blank" rel="noopener">Groupe 3</a>
+                <div class="crpe-annales-doc-themes"><span class="crpe-theme-tag-empty">Thèmes à venir</span></div>
+              </div>
+              <div class="crpe-annales-doc">
+                <a class="crpe-annales-doc-link" href="Annales/2024 supp.pdf" target="_blank" rel="noopener">Créteil-Versailles</a>
+                <div class="crpe-annales-doc-themes"><span class="crpe-theme-tag-empty">Thèmes à venir</span></div>
+              </div>
             </div>
           </div>
 
           <div class="crpe-annales-year">
             <h3>2023</h3>
             <div class="crpe-annales-links">
-              <a class="crpe-annales-link" href="Annales/2023 gr1.pdf" target="_blank" rel="noopener">Groupe 1</a>
-              <a class="crpe-annales-link" href="Annales/2023 gr2.pdf" target="_blank" rel="noopener">Groupe 2</a>
-              <a class="crpe-annales-link" href="Annales/2023 gr3.pdf" target="_blank" rel="noopener">Groupe 3</a>
-              <a class="crpe-annales-link" href="Annales/2023 supp.pdf" target="_blank" rel="noopener">Créteil-Versailles</a>
+              <div class="crpe-annales-doc">
+                <a class="crpe-annales-doc-link" href="Annales/2023 gr1.pdf" target="_blank" rel="noopener">Groupe 1</a>
+                <div class="crpe-annales-doc-themes"><span class="crpe-theme-tag-empty">Thèmes à venir</span></div>
+              </div>
+              <div class="crpe-annales-doc">
+                <a class="crpe-annales-doc-link" href="Annales/2023 gr2.pdf" target="_blank" rel="noopener">Groupe 2</a>
+                <div class="crpe-annales-doc-themes"><span class="crpe-theme-tag-empty">Thèmes à venir</span></div>
+              </div>
+              <div class="crpe-annales-doc">
+                <a class="crpe-annales-doc-link" href="Annales/2023 gr3.pdf" target="_blank" rel="noopener">Groupe 3</a>
+                <div class="crpe-annales-doc-themes"><span class="crpe-theme-tag-empty">Thèmes à venir</span></div>
+              </div>
+              <div class="crpe-annales-doc">
+                <a class="crpe-annales-doc-link" href="Annales/2023 supp.pdf" target="_blank" rel="noopener">Créteil-Versailles</a>
+                <div class="crpe-annales-doc-themes"><span class="crpe-theme-tag-empty">Thèmes à venir</span></div>
+              </div>
             </div>
           </div>
 
           <div class="crpe-annales-year">
             <h3>2022</h3>
             <div class="crpe-annales-links">
-              <a class="crpe-annales-link" href="Annales/2022 gr1.pdf" target="_blank" rel="noopener">Groupe 1</a>
-              <a class="crpe-annales-link" href="Annales/2022 gr2.pdf" target="_blank" rel="noopener">Groupe 2</a>
-              <a class="crpe-annales-link" href="Annales/2022 gr3.pdf" target="_blank" rel="noopener">Groupe 3</a>
+              <div class="crpe-annales-doc">
+                <a class="crpe-annales-doc-link" href="Annales/2022 gr1.pdf" target="_blank" rel="noopener">Groupe 1</a>
+                <div class="crpe-annales-doc-themes"><span class="crpe-theme-tag-empty">Thèmes à venir</span></div>
+              </div>
+              <div class="crpe-annales-doc">
+                <a class="crpe-annales-doc-link" href="Annales/2022 gr2.pdf" target="_blank" rel="noopener">Groupe 2</a>
+                <div class="crpe-annales-doc-themes"><span class="crpe-theme-tag-empty">Thèmes à venir</span></div>
+              </div>
+              <div class="crpe-annales-doc">
+                <a class="crpe-annales-doc-link" href="Annales/2022 gr3.pdf" target="_blank" rel="noopener">Groupe 3</a>
+                <div class="crpe-annales-doc-themes"><span class="crpe-theme-tag-empty">Thèmes à venir</span></div>
+              </div>
             </div>
           </div>
 
           <div class="crpe-annales-year">
             <h3>2021</h3>
             <div class="crpe-annales-links">
-              <a class="crpe-annales-link" href="Annales/2021 gr1.pdf" target="_blank" rel="noopener">Groupe 1</a>
-              <a class="crpe-annales-link" href="Annales/2021 gr2.pdf" target="_blank" rel="noopener">Groupe 2</a>
-              <a class="crpe-annales-link" href="Annales/2021 gr3.pdf" target="_blank" rel="noopener">Groupe 3</a>
-              <a class="crpe-annales-link" href="Annales/2021 supp.pdf" target="_blank" rel="noopener">Supplémentaire</a>
+              <div class="crpe-annales-doc">
+                <a class="crpe-annales-doc-link" href="Annales/2021 gr1.pdf" target="_blank" rel="noopener">Groupe 1</a>
+                <div class="crpe-annales-doc-themes"><span class="crpe-theme-tag-empty">Thèmes à venir</span></div>
+              </div>
+              <div class="crpe-annales-doc">
+                <a class="crpe-annales-doc-link" href="Annales/2021 gr2.pdf" target="_blank" rel="noopener">Groupe 2</a>
+                <div class="crpe-annales-doc-themes"><span class="crpe-theme-tag-empty">Thèmes à venir</span></div>
+              </div>
+              <div class="crpe-annales-doc">
+                <a class="crpe-annales-doc-link" href="Annales/2021 gr3.pdf" target="_blank" rel="noopener">Groupe 3</a>
+                <div class="crpe-annales-doc-themes"><span class="crpe-theme-tag-empty">Thèmes à venir</span></div>
+              </div>
+              <div class="crpe-annales-doc">
+                <a class="crpe-annales-doc-link" href="Annales/2021 supp.pdf" target="_blank" rel="noopener">Supplémentaire</a>
+                <div class="crpe-annales-doc-themes"><span class="crpe-theme-tag-empty">Thèmes à venir</span></div>
+              </div>
             </div>
           </div>
 
           <div class="crpe-annales-year">
             <h3>2020</h3>
             <div class="crpe-annales-links">
-              <a class="crpe-annales-link" href="Annales/2020 gr1.pdf" target="_blank" rel="noopener">Groupe 1</a>
-              <a class="crpe-annales-link" href="Annales/2020 gr2.pdf" target="_blank" rel="noopener">Groupe 2</a>
-              <a class="crpe-annales-link" href="Annales/2020 gr3.pdf" target="_blank" rel="noopener">Groupe 3</a>
-              <a class="crpe-annales-link" href="Annales/2020 gr4.pdf" target="_blank" rel="noopener">Groupe 4</a>
-              <a class="crpe-annales-link" href="Annales/2020 gr5.pdf" target="_blank" rel="noopener">Groupe 5</a>
-              <a class="crpe-annales-link" href="Annales/2020 gr6.pdf" target="_blank" rel="noopener">Groupe 6</a>
-              <a class="crpe-annales-link" href="Annales/2020 gr7.pdf" target="_blank" rel="noopener">Groupe 7</a>
+              <div class="crpe-annales-doc">
+                <a class="crpe-annales-doc-link" href="Annales/2020 gr1.pdf" target="_blank" rel="noopener">Groupe 1</a>
+                <div class="crpe-annales-doc-themes"><span class="crpe-theme-tag-empty">Thèmes à venir</span></div>
+              </div>
+              <div class="crpe-annales-doc">
+                <a class="crpe-annales-doc-link" href="Annales/2020 gr2.pdf" target="_blank" rel="noopener">Groupe 2</a>
+                <div class="crpe-annales-doc-themes"><span class="crpe-theme-tag-empty">Thèmes à venir</span></div>
+              </div>
+              <div class="crpe-annales-doc">
+                <a class="crpe-annales-doc-link" href="Annales/2020 gr3.pdf" target="_blank" rel="noopener">Groupe 3</a>
+                <div class="crpe-annales-doc-themes"><span class="crpe-theme-tag-empty">Thèmes à venir</span></div>
+              </div>
+              <div class="crpe-annales-doc">
+                <a class="crpe-annales-doc-link" href="Annales/2020 gr4.pdf" target="_blank" rel="noopener">Groupe 4</a>
+                <div class="crpe-annales-doc-themes"><span class="crpe-theme-tag-empty">Thèmes à venir</span></div>
+              </div>
+              <div class="crpe-annales-doc">
+                <a class="crpe-annales-doc-link" href="Annales/2020 gr5.pdf" target="_blank" rel="noopener">Groupe 5</a>
+                <div class="crpe-annales-doc-themes"><span class="crpe-theme-tag-empty">Thèmes à venir</span></div>
+              </div>
+              <div class="crpe-annales-doc">
+                <a class="crpe-annales-doc-link" href="Annales/2020 gr6.pdf" target="_blank" rel="noopener">Groupe 6</a>
+                <div class="crpe-annales-doc-themes"><span class="crpe-theme-tag-empty">Thèmes à venir</span></div>
+              </div>
+              <div class="crpe-annales-doc">
+                <a class="crpe-annales-doc-link" href="Annales/2020 gr7.pdf" target="_blank" rel="noopener">Groupe 7</a>
+                <div class="crpe-annales-doc-themes"><span class="crpe-theme-tag-empty">Thèmes à venir</span></div>
+              </div>
             </div>
           </div>
 
