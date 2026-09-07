@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<title>CRPE | M. Brahim</title>
+<link rel="icon" type="image/png" href="images/logo.png"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<style>
+
+/* ============================================================
+   VARIABLES — palette rose
+   ============================================================ */
+:root{
+  --bg:        #1A0E14;
+  --bg-panel:  #23131C;
+  --bg-panel-2:#2E1826;
+  --accent:    #E8598A;
+  --accent-dim:#E8598A33;
+  --white:     #FDEEF3;
+  --grey:      #C9A3B4;
+  --grey-dim:  #8A6273;
+  --line:      #3A1F2C;
+  --radius-lg: 28px;
+  --radius-md: 16px;
+}
+
+*{ box-sizing:border-box; }
+
+html{ scroll-behavior:smooth; }
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--white);
+  font-family:-apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+a{ color:inherit; }
+
+/* ============================================================
+   FOND — halo discret, façon keynote produit
+   ============================================================ */
+body::before{
+  content:"";
+  position:fixed;
+  top:0; left:0; right:0; bottom:0;
+  width:100%; height:100%;
+  background:
+    radial-gradient(circle at 30% 0%, rgba(232,89,138,0.18), transparent 60%),
+    radial-gradient(circle at 75% -5%, rgba(232,89,138,0.12), transparent 55%),
+    var(--bg);
+  pointer-events:none;
+  z-index:0;
+}
+
+/* ============================================================
+   NAVBAR
+   ============================================================ */
+#nav{
+  position:fixed;
+  top:0; left:0; right:0;
+  z-index:1000;
+  height:64px;
+  background:rgba(20,10,15,0.72);
+  backdrop-filter:blur(16px) saturate(160%);
+  -webkit-backdrop-filter:blur(16px) saturate(160%);
+  border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  gap:18px;
+  padding:0 26px;
+  transition:transform 0.35s ease, background 0.4s ease;
+}
+#nav.hide{ transform:translateY(-100%); }
+
+.nav-brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  text-decoration:none;
+  flex-shrink:0;
+}
+.nav-brand-icon{
+  width:34px; height:34px;
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0;
+}
+.nav-brand-icon img{
+  width:100%; height:100%;
+  object-fit:contain;
+  display:block;
+  border:none;
+  outline:none;
+  border-radius:0;
+  background:none;
+}
+.nav-brand-text{ display:flex; flex-direction:column; line-height:1.1; }
+.nav-brand-title{ font-size:0.92rem; font-weight:700; color:var(--white); white-space:nowrap; }
+.nav-brand-subtitle{
+  font-size:0.6rem; font-weight:600; letter-spacing:0.14em;
+  color:var(--accent); text-transform:uppercase; white-space:nowrap;
+}
+@media (max-width:700px){ .nav-brand-text{ display:none; } }
+
+.nav-center{
+  display:flex; align-items:center; gap:22px;
+  margin-left:8px; min-width:0;
+}
+.nav-section-links{
+  display:flex; align-items:center; gap:22px;
+  overflow-x:auto; scrollbar-width:none; max-width:100%;
+}
+.nav-section-links::-webkit-scrollbar{ display:none; }
+
+.nav-seclink{
+  position:relative;
+  height:64px; display:inline-flex; align-items:center;
+  color:var(--grey);
+  text-decoration:none;
+  font-size:0.8rem; font-weight:600; letter-spacing:0.01em;
+  white-space:nowrap;
+  transition:color 0.25s;
+}
+.nav-seclink::after{
+  content:"";
+  position:absolute; left:0; right:0; bottom:20px;
+  height:2px; border-radius:2px;
+  background:var(--accent);
+  transform:scaleX(0); transform-origin:left;
+  transition:transform 0.25s ease;
+}
+.nav-seclink:hover{ color:var(--white); }
+.nav-seclink:hover::after, .nav-seclink.is-active::after{ transform:scaleX(1); }
+.nav-seclink.is-active{ color:var(--white); }
+
+@media (max-width:640px){ .nav-section-links{ display:none; } }
+
+.nav-side{ display:flex; align-items:center; gap:4px; margin-left:auto; }
+.nav-grades{
+  background:rgba(232,89,138,0.08);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:4px;
+}
+.nav-link{
+  display:inline-flex; align-items:center; justify-content:center;
+  height:28px; padding:0 12px;
+  font-size:0.72rem; font-weight:700; letter-spacing:0.02em;
+  border-radius:8px; text-decoration:none;
+  color:var(--grey);
+  transition:background 0.25s, color 0.25s;
+}
+.nav-link:hover{ background:rgba(232,89,138,0.14); color:var(--white); }
+.nav-link-active{
+  background:var(--accent);
+  color:#2a0d18;
+}
+.nav-link-active:hover{ background:var(--accent); }
+
+/* ============================================================
+   OUTIL FLOTTANT
+   ============================================================ */
+#floating-toolbar{
+  position:fixed;
+  right:20px; bottom:20px;
+  z-index:1000;
+  display:flex; flex-direction:column; gap:8px;
+  padding:6px;
+  border-radius:14px;
+  background:rgba(26,10,17,0.85);
+  backdrop-filter:blur(14px);
+  border:1px solid var(--line);
+  box-shadow:0 10px 30px rgba(0,0,0,0.45);
+}
+#floating-toolbar .nav-btn{
+  width:34px; height:34px;
+  border-radius:9px;
+  background:rgba(232,89,138,0.10);
+  border:1px solid transparent;
+  color:var(--white);
+  font-size:0.9rem;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer;
+  transition:background 0.25s, border-color 0.25s;
+}
+#floating-toolbar .nav-btn:hover{
+  background:rgba(232,89,138,0.22);
+  border-color:var(--accent);
+}
+@media (max-width:600px){
+  #floating-toolbar{ right:14px; bottom:14px; gap:6px; padding:5px; }
+  #floating-toolbar .nav-btn{ width:30px; height:30px; font-size:0.8rem; }
+}
+
+/* Bouton contact + panneau d'icônes */
+#contact-wrap{
+  position:relative;
+}
+#contact-panel{
+  position:absolute;
+  right:calc(100% + 10px);
+  top:50%;
+  transform:translateY(-50%) translateX(8px);
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:6px;
+  border-radius:14px;
+  background:rgba(26,10,17,0.85);
+  backdrop-filter:blur(14px);
+  border:1px solid var(--line);
+  box-shadow:0 10px 30px rgba(0,0,0,0.45);
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transition:opacity 0.22s ease, transform 0.22s ease, visibility 0s linear 0.22s;
+}
+#contact-panel.is-open{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+  transform:translateY(-50%) translateX(0);
+  transition:opacity 0.22s ease, transform 0.22s ease, visibility 0s;
+}
+#contact-panel a{
+  width:34px; height:34px;
+  border-radius:9px;
+  background:rgba(232,89,138,0.10);
+  border:1px solid transparent;
+  color:var(--white);
+  display:flex; align-items:center; justify-content:center;
+  transition:background 0.25s, border-color 0.25s;
+  flex-shrink:0;
+}
+#contact-panel a:hover{
+  background:rgba(232,89,138,0.22);
+  border-color:var(--accent);
+}
+#contact-panel svg{ width:17px; height:17px; }
+#contact-button.is-active{
+  background:rgba(232,89,138,0.22);
+  border-color:var(--accent);
+}
+
+/* ============================================================
+   MAIN / HERO
+   ============================================================ */
+main{
+  position:relative; z-index:1;
+  max-width:1500px;
+  margin:0 auto;
+  padding:0 32px 0;
+}
+
+#hero{
+  width:100vw;
+  position:relative;
+  left:50%;
+  right:50%;
+  margin-left:-50vw;
+  margin-right:-50vw;
+  margin-bottom:0;
+  min-height:440px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  flex-direction:column;
+  background:
+    linear-gradient(180deg, rgba(20,8,14,0.35) 0%, rgba(20,8,14,0.55) 35%, var(--bg) 100%),
+    url('images/hero-bg.jpg') center 30% / cover no-repeat;
+  z-index:1;
+}
+#hero .hero-inner{
+  max-width:1436px;
+  width:100%;
+  margin:0 auto;
+  padding:150px 32px 90px;
+}
+
+h1.hero-title{
+  font-size:clamp(2.6rem, 6vw, 4.6rem);
+  font-weight:700;
+  letter-spacing:-0.02em;
+  line-height:1.03;
+  margin:0;
+  text-shadow:0 4px 30px rgba(0,0,0,0.35);
+}
+
+.year-progress{
+  width:min(420px, 90%);
+  margin:26px auto 0;
+}
+.year-progress-bar{
+  position:relative;
+  height:6px;
+  border-radius:999px;
+  background:rgba(255,255,255,0.16);
+  overflow:hidden;
+  box-shadow:0 1px 3px rgba(0,0,0,0.3) inset;
+}
+.year-progress-fill{
+  position:absolute; left:0; top:0; bottom:0;
+  width:0%;
+  border-radius:999px;
+  background:linear-gradient(90deg, var(--accent), #FFB3D1);
+  box-shadow:0 0 12px 1px rgba(232,89,138,0.55);
+  transition:width 1s ease;
+}
+.year-progress-label{
+  margin-top:10px;
+  font-size:0.74rem;
+  font-weight:600;
+  letter-spacing:0.03em;
+  color:rgba(255,255,255,0.75);
+  text-shadow:0 1px 6px rgba(0,0,0,0.4);
+}
+
+@media (max-width:600px){
+  #hero{ min-height:320px; }
+  #hero .hero-inner{ padding:120px 22px 60px; }
+}
+
+/* ============================================================
+   CRPE — sections "grande carte" par chapitre
+   ============================================================ */
+.snt-section{
+  scroll-margin-top:80px;
+  width:100vw;
+  position:relative;
+  left:50%;
+  right:50%;
+  margin-left:-50vw;
+  margin-right:-50vw;
+  background:linear-gradient(180deg, var(--bg) 0%, var(--bg-panel) 60px, var(--bg-panel) calc(100% - 60px), var(--bg) 100%);
+}
+.snt-section-inner{
+  max-width:1436px;
+  margin:0 auto;
+  padding:56px 32px 64px;
+}
+.snt-chapter-head{
+  display:flex;
+  align-items:baseline;
+  gap:14px;
+  margin-bottom:16px;
+  padding:0 4px;
+}
+.snt-chapter-num{
+  font-size:0.78rem;
+  font-weight:800;
+  color:var(--accent);
+  letter-spacing:0.05em;
+}
+.snt-chapter-head h2{
+  margin:0;
+  font-size:1.4rem;
+  font-weight:800;
+  color:var(--white);
+}
+.snt-big-card{
+  position:relative;
+  width:100%;
+  min-height:200px;
+  background:linear-gradient(160deg, var(--bg-panel), var(--bg-panel-2));
+  border:1px solid var(--line);
+  border-radius:var(--radius-lg);
+  padding:28px;
+  box-shadow:0 20px 50px rgba(0,0,0,0.35);
+}
+.snt-big-card-placeholder{
+  height:100%;
+  min-height:160px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--grey-dim);
+  font-size:0.85rem;
+  border:1.5px dashed var(--line);
+  border-radius:var(--radius-md);
+}
+@media (max-width:700px){
+  .snt-section-inner{ padding:24px 14px; }
+  .snt-big-card{ padding:18px; border-radius:var(--radius-md); }
+}
+
+</style>
+</head>
+
+
+<body>
+
+<nav id="nav">
+  <a class="nav-brand" href="#top">
+    <span class="nav-brand-icon"><img src="images/logo.png" alt="Logo"></span>
+    <span class="nav-brand-text">
+      <span class="nav-brand-title">M. Brahim</span>
+      <span class="nav-brand-subtitle">CRPE</span>
+    </span>
+  </a>
+
+  <div class="nav-center">
+    <div class="nav-section-links">
+      <a class="nav-seclink is-active" href="#chap1">1. Résumé du concours</a>
+      <a class="nav-seclink" href="#chap2">2. Nombres et calculs</a>
+      <a class="nav-seclink" href="#chap3">3. Organisation et gestion de données</a>
+      <a class="nav-seclink" href="#chap4">4. Grandeurs et mesures</a>
+      <a class="nav-seclink" href="#chap5">5. Géométrie</a>
+      <a class="nav-seclink" href="#chap6">6. Algorithmie</a>
+      <a class="nav-seclink" href="#chap7">7. Annales</a>
+      <a class="nav-seclink" href="#chap8">8. Rapports de jury</a>
+    </div>
+  </div>
+
+  <div class="nav-side nav-grades">
+    <div class="nav-link nav-link-active">CRPE</div>
+  </div>
+</nav>
+
+<div id="floating-toolbar">
+  <div id="contact-wrap">
+    <button id="contact-button" class="nav-btn" title="Me contacter" aria-expanded="false">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="m4 6 8 7 8-7"/></svg>
+    </button>
+    <div id="contact-panel">
+      <a href="mailto:contact@professeurbrahim.fr" title="M'envoyer un e-mail" aria-label="E-mail">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="m4 6 8 7 8-7"/></svg>
+      </a>
+      <a href="https://github.com/professeurbrahim" target="_blank" rel="noopener" title="Voir mon GitHub" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.06 11.06 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.76.12 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.7 5.38-5.27 5.67.42.36.78 1.07.78 2.15 0 1.56-.01 2.81-.01 3.19 0 .3.2.66.79.55A11.5 11.5 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z"/></svg>
+      </a>
+    </div>
+  </div>
+  <button id="scrolltop-button" class="nav-btn" title="Haut de page">↑</button>
+</div>
+
+<main id="top">
+
+  <section id="hero">
+    <div class="hero-inner">
+      <h1 class="hero-title">CRPE</h1>
+      <div class="year-progress">
+        <div class="year-progress-bar"><div class="year-progress-fill" id="year-progress-fill"></div></div>
+        <div class="year-progress-label" id="year-progress-label">Année scolaire 2026-2027 · 1% écoulés</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="snt-section" id="chap1">
+    <div class="snt-section-inner">
+      <div class="snt-chapter-head">
+        <span class="snt-chapter-num">01</span>
+        <h2>Résumé du concours</h2>
+      </div>
+      <div class="snt-big-card">
+        <div class="snt-big-card-placeholder">Contenu à venir</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="snt-section" id="chap2">
+    <div class="snt-section-inner">
+      <div class="snt-chapter-head">
+        <span class="snt-chapter-num">02</span>
+        <h2>Nombres et calculs</h2>
+      </div>
+      <div class="snt-big-card">
+        <div class="snt-big-card-placeholder">Contenu à venir</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="snt-section" id="chap3">
+    <div class="snt-section-inner">
+      <div class="snt-chapter-head">
+        <span class="snt-chapter-num">03</span>
+        <h2>Organisation et gestion de données</h2>
+      </div>
+      <div class="snt-big-card">
+        <div class="snt-big-card-placeholder">Contenu à venir</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="snt-section" id="chap4">
+    <div class="snt-section-inner">
+      <div class="snt-chapter-head">
+        <span class="snt-chapter-num">04</span>
+        <h2>Grandeurs et mesures</h2>
+      </div>
+      <div class="snt-big-card">
+        <div class="snt-big-card-placeholder">Contenu à venir</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="snt-section" id="chap5">
+    <div class="snt-section-inner">
+      <div class="snt-chapter-head">
+        <span class="snt-chapter-num">05</span>
+        <h2>Géométrie</h2>
+      </div>
+      <div class="snt-big-card">
+        <div class="snt-big-card-placeholder">Contenu à venir</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="snt-section" id="chap6">
+    <div class="snt-section-inner">
+      <div class="snt-chapter-head">
+        <span class="snt-chapter-num">06</span>
+        <h2>Algorithmie</h2>
+      </div>
+      <div class="snt-big-card">
+        <div class="snt-big-card-placeholder">Contenu à venir</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="snt-section" id="chap7">
+    <div class="snt-section-inner">
+      <div class="snt-chapter-head">
+        <span class="snt-chapter-num">07</span>
+        <h2>Annales</h2>
+      </div>
+      <div class="snt-big-card">
+        <div class="snt-big-card-placeholder">Contenu à venir</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="snt-section" id="chap8">
+    <div class="snt-section-inner">
+      <div class="snt-chapter-head">
+        <span class="snt-chapter-num">08</span>
+        <h2>Rapports de jury</h2>
+      </div>
+      <div class="snt-big-card">
+        <div class="snt-big-card-placeholder">Contenu à venir</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  // Masquer la navbar au scroll vers le bas
+  const nav = document.getElementById('nav');
+  let prevY = 0;
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    nav.classList.toggle('hide', y > prevY && y > 80);
+    prevY = y < 0 ? 0 : y;
+  }, { passive: true });
+
+  // Section active dans la navbar
+  (function () {
+    const seclinks = Array.from(document.querySelectorAll('.nav-seclink'));
+    const targets = seclinks.map(link => {
+      const id = link.getAttribute('href').slice(1);
+      const el = document.getElementById(id);
+      return el ? { link, id, el } : null;
+    }).filter(Boolean);
+
+    function setActive(id) {
+      seclinks.forEach(l => l.classList.toggle('is-active', l.getAttribute('href') === '#' + id));
+    }
+    function update() {
+      const threshold = 120;
+      let current = targets[0]?.id;
+      for (const { id, el } of targets) {
+        if (el.getBoundingClientRect().top - threshold <= 0) current = id; else break;
+      }
+      if (current) setActive(current);
+    }
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+  })();
+
+  // Barre de progression de l'année scolaire (1er septembre → 24 juin)
+  (function () {
+    const fill = document.getElementById('year-progress-fill');
+    const label = document.getElementById('year-progress-label');
+    if (!fill || !label) return;
+
+    const now = new Date();
+    const y = now.getFullYear();
+    const startYear = now.getMonth() >= 7 ? y : y - 1;
+    const start = new Date(startYear, 8, 1);
+    const end = new Date(startYear + 1, 5, 24);
+
+    let percent;
+    if (now < start) percent = 0;
+    else if (now > end) percent = 100;
+    else percent = ((now - start) / (end - start)) * 100;
+
+    const percentTruncated = Math.floor(percent * 10) / 10;
+
+    fill.style.width = percentTruncated + '%';
+    label.textContent = `Année scolaire ${startYear}-${startYear + 1} · ${percentTruncated.toFixed(1)}% écoulés`;
+  })();
+
+  // Bouton "haut de page"
+  document.getElementById('scrolltop-button').addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Panneau de contact
+  (function () {
+    const wrap = document.getElementById('contact-wrap');
+    const btn = document.getElementById('contact-button');
+    const panel = document.getElementById('contact-panel');
+    if (!wrap || !btn || !panel) return;
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const open = panel.classList.toggle('is-open');
+      btn.classList.toggle('is-active', open);
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    document.addEventListener('click', (e) => {
+      if (!wrap.contains(e.target)) {
+        panel.classList.remove('is-open');
+        btn.classList.remove('is-active');
+        btn.setAttribute('aria-expanded', 'false');
+      }
+    });
+  })();
+</script>
+
+</body>
+</html>
