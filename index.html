@@ -492,6 +492,25 @@ h1.hero-title{
   color:var(--white);
   border-top:1px solid var(--line);
 }
+.crpe-jury-pending{
+  position:relative;
+  width:100%;
+  aspect-ratio:210/297;
+  background:linear-gradient(160deg, var(--bg-panel), var(--bg-panel-2));
+  overflow:hidden;
+}
+.crpe-jury-pending::after{
+  content:"À venir";
+  position:absolute;
+  top:50%; left:50%;
+  transform:translate(-50%,-50%) rotate(-30deg);
+  font-size:1.1rem;
+  font-weight:800;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  color:var(--accent);
+  white-space:nowrap;
+}
 
 </style>
 </head>
@@ -667,7 +686,7 @@ h1.hero-title{
       <div class="snt-big-card">
         <div class="crpe-jury-grid">
           <a class="crpe-jury-item" href="Rapports/2026.pdf" target="_blank" rel="noopener">
-            <img src="Rapports/2026.jpg" alt="Rapport de jury 2026">
+            <div class="crpe-jury-pending"></div>
             <span class="crpe-jury-caption">2026</span>
           </a>
           <a class="crpe-jury-item" href="Rapports/2025.pdf" target="_blank" rel="noopener">
