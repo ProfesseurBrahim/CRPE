@@ -600,6 +600,28 @@ h1.hero-title{
   grid-template-columns:repeat(auto-fit, minmax(140px, 1fr));
   gap:10px;
 }
+.crpe-annales-2026-row{
+  display:flex;
+  gap:14px;
+  align-items:stretch;
+}
+.crpe-annales-2026-main{
+  flex:1;
+  grid-template-columns:repeat(4, 1fr);
+}
+.crpe-annales-2026-l3{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  width:180px;
+  flex-shrink:0;
+}
+@media (max-width:900px){
+  .crpe-annales-2026-row{ flex-direction:column; }
+  .crpe-annales-2026-main{ grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); }
+  .crpe-annales-2026-l3{ width:100%; flex-direction:row; flex-wrap:wrap; }
+  .crpe-annales-2026-l3 .crpe-annales-doc{ flex:1; min-width:140px; }
+}
 .crpe-annales-link{
   display:inline-flex;
   align-items:center;
@@ -726,6 +748,14 @@ h1.hero-title{
   background:var(--accent);
   color:#fff;
   border-color:var(--accent);
+}
+.crpe-doc-btn-corrige{
+  background:#FDEEF3;
+  color:#2a0d18;
+  border-color:var(--accent);
+}
+.crpe-doc-btn-corrige:hover{
+  background:#ffffff;
 }
 .crpe-doc-btn-sujet:hover{
   background:#C2366B;
@@ -903,76 +933,74 @@ h1.hero-title{
 
           <div class="crpe-annales-year">
             <h3>2026</h3>
-            <div class="crpe-annales-links">
-              <div class="crpe-annales-doc">
-                <div class="crpe-doc-header">
-                  <span class="crpe-doc-title">Groupe 1 M2</span>
-                  <div class="crpe-doc-btns">
-                    <a class="crpe-doc-btn crpe-doc-btn-sujet" href="Annales/2026 gr1.pdf" target="_blank" rel="noopener">Sujet</a>
-                    <span class="crpe-doc-btn crpe-doc-btn-disabled" title="Corrigé à venir">Corrigé</span>
+            <div class="crpe-annales-2026-row">
+              <div class="crpe-annales-links crpe-annales-2026-main">
+                <div class="crpe-annales-doc">
+                  <div class="crpe-doc-header">
+                    <span class="crpe-doc-title">Groupe 1 M2</span>
+                    <div class="crpe-doc-btns">
+                      <a class="crpe-doc-btn crpe-doc-btn-sujet" href="Annales/2026 gr1.pdf" target="_blank" rel="noopener">Sujet</a>
+                      <span class="crpe-doc-btn crpe-doc-btn-disabled" title="Corrigé à venir">Corrigé</span>
+                    </div>
                   </div>
+                  <div class="crpe-annales-doc-themes"><span class="crpe-theme-tag-empty">Thèmes à venir</span></div>
                 </div>
-                <div class="crpe-annales-doc-themes"><span class="crpe-theme-tag-empty">Thèmes à venir</span></div>
+                <div class="crpe-annales-doc">
+                  <div class="crpe-doc-header">
+                    <span class="crpe-doc-title">Groupe 2 M2</span>
+                    <div class="crpe-doc-btns">
+                      <a class="crpe-doc-btn crpe-doc-btn-sujet" href="Annales/2026 gr2.pdf" target="_blank" rel="noopener">Sujet</a>
+                      <span class="crpe-doc-btn crpe-doc-btn-disabled" title="Corrigé à venir">Corrigé</span>
+                    </div>
+                  </div>
+                  <div class="crpe-annales-doc-themes"><span class="crpe-theme-tag-empty">Thèmes à venir</span></div>
+                </div>
+                <div class="crpe-annales-doc">
+                  <div class="crpe-doc-header">
+                    <span class="crpe-doc-title">Groupe 3 M2</span>
+                    <div class="crpe-doc-btns">
+                      <a class="crpe-doc-btn crpe-doc-btn-sujet" href="Annales/2026 gr3.pdf" target="_blank" rel="noopener">Sujet</a>
+                      <span class="crpe-doc-btn crpe-doc-btn-disabled" title="Corrigé à venir">Corrigé</span>
+                    </div>
+                  </div>
+                  <div class="crpe-annales-doc-themes"><span class="crpe-theme-tag-empty">Thèmes à venir</span></div>
+                </div>
+                <div class="crpe-annales-doc">
+                  <div class="crpe-doc-header">
+                    <span class="crpe-doc-title">Créteil-Versailles</span>
+                    <div class="crpe-doc-btns">
+                      <a class="crpe-doc-btn crpe-doc-btn-sujet" href="Annales/2026 supp.pdf" target="_blank" rel="noopener">Sujet</a>
+                      <span class="crpe-doc-btn crpe-doc-btn-disabled" title="Corrigé à venir">Corrigé</span>
+                    </div>
+                  </div>
+                  <div class="crpe-annales-doc-themes"><span class="crpe-theme-tag-empty">Thèmes à venir</span></div>
+                </div>
               </div>
-              <div class="crpe-annales-doc">
-                <div class="crpe-doc-header">
-                  <span class="crpe-doc-title">Groupe 2 M2</span>
-                  <div class="crpe-doc-btns">
-                    <a class="crpe-doc-btn crpe-doc-btn-sujet" href="Annales/2026 gr2.pdf" target="_blank" rel="noopener">Sujet</a>
-                    <span class="crpe-doc-btn crpe-doc-btn-disabled" title="Corrigé à venir">Corrigé</span>
+              <div class="crpe-annales-2026-l3">
+                <div class="crpe-annales-doc">
+                  <div class="crpe-doc-header">
+                    <span class="crpe-doc-title">Groupe 1 L3</span>
+                    <div class="crpe-doc-btns">
+                      <a class="crpe-doc-btn crpe-doc-btn-sujet" href="Annales/2026 gr1 L3.pdf" target="_blank" rel="noopener">Sujet</a>
+                    </div>
                   </div>
                 </div>
-                <div class="crpe-annales-doc-themes"><span class="crpe-theme-tag-empty">Thèmes à venir</span></div>
-              </div>
-              <div class="crpe-annales-doc">
-                <div class="crpe-doc-header">
-                  <span class="crpe-doc-title">Groupe 3 M2</span>
-                  <div class="crpe-doc-btns">
-                    <a class="crpe-doc-btn crpe-doc-btn-sujet" href="Annales/2026 gr3.pdf" target="_blank" rel="noopener">Sujet</a>
-                    <span class="crpe-doc-btn crpe-doc-btn-disabled" title="Corrigé à venir">Corrigé</span>
+                <div class="crpe-annales-doc">
+                  <div class="crpe-doc-header">
+                    <span class="crpe-doc-title">Groupe 2 L3</span>
+                    <div class="crpe-doc-btns">
+                      <a class="crpe-doc-btn crpe-doc-btn-sujet" href="Annales/2026 gr2 L3.pdf" target="_blank" rel="noopener">Sujet</a>
+                    </div>
                   </div>
                 </div>
-                <div class="crpe-annales-doc-themes"><span class="crpe-theme-tag-empty">Thèmes à venir</span></div>
-              </div>
-              <div class="crpe-annales-doc">
-                <div class="crpe-doc-header">
-                  <span class="crpe-doc-title">Groupe 1 L3</span>
-                  <div class="crpe-doc-btns">
-                    <a class="crpe-doc-btn crpe-doc-btn-sujet" href="Annales/2026 gr1 L3.pdf" target="_blank" rel="noopener">Sujet</a>
-                    <span class="crpe-doc-btn crpe-doc-btn-disabled" title="Corrigé à venir">Corrigé</span>
+                <div class="crpe-annales-doc">
+                  <div class="crpe-doc-header">
+                    <span class="crpe-doc-title">Groupe 3 L3</span>
+                    <div class="crpe-doc-btns">
+                      <a class="crpe-doc-btn crpe-doc-btn-sujet" href="Annales/2026 gr3 L3.pdf" target="_blank" rel="noopener">Sujet</a>
+                    </div>
                   </div>
                 </div>
-                <div class="crpe-annales-doc-themes"><span class="crpe-theme-tag-empty">Thèmes à venir</span></div>
-              </div>
-              <div class="crpe-annales-doc">
-                <div class="crpe-doc-header">
-                  <span class="crpe-doc-title">Groupe 2 L3</span>
-                  <div class="crpe-doc-btns">
-                    <a class="crpe-doc-btn crpe-doc-btn-sujet" href="Annales/2026 gr2 L3.pdf" target="_blank" rel="noopener">Sujet</a>
-                    <span class="crpe-doc-btn crpe-doc-btn-disabled" title="Corrigé à venir">Corrigé</span>
-                  </div>
-                </div>
-                <div class="crpe-annales-doc-themes"><span class="crpe-theme-tag-empty">Thèmes à venir</span></div>
-              </div>
-              <div class="crpe-annales-doc">
-                <div class="crpe-doc-header">
-                  <span class="crpe-doc-title">Groupe 3 L3</span>
-                  <div class="crpe-doc-btns">
-                    <a class="crpe-doc-btn crpe-doc-btn-sujet" href="Annales/2026 gr3 L3.pdf" target="_blank" rel="noopener">Sujet</a>
-                    <span class="crpe-doc-btn crpe-doc-btn-disabled" title="Corrigé à venir">Corrigé</span>
-                  </div>
-                </div>
-                <div class="crpe-annales-doc-themes"><span class="crpe-theme-tag-empty">Thèmes à venir</span></div>
-              </div>
-              <div class="crpe-annales-doc">
-                <div class="crpe-doc-header">
-                  <span class="crpe-doc-title">Créteil-Versailles</span>
-                  <div class="crpe-doc-btns">
-                    <a class="crpe-doc-btn crpe-doc-btn-sujet" href="Annales/2026 supp.pdf" target="_blank" rel="noopener">Sujet</a>
-                    <span class="crpe-doc-btn crpe-doc-btn-disabled" title="Corrigé à venir">Corrigé</span>
-                  </div>
-                </div>
-                <div class="crpe-annales-doc-themes"><span class="crpe-theme-tag-empty">Thèmes à venir</span></div>
               </div>
             </div>
           </div>
@@ -985,7 +1013,7 @@ h1.hero-title{
                   <span class="crpe-doc-title">Groupe 1</span>
                   <div class="crpe-doc-btns">
                     <a class="crpe-doc-btn crpe-doc-btn-sujet" href="Annales/2025 gr1.pdf" target="_blank" rel="noopener">Sujet</a>
-                    <span class="crpe-doc-btn crpe-doc-btn-disabled" title="Corrigé à venir">Corrigé</span>
+                    <a class="crpe-doc-btn crpe-doc-btn-corrige" href="Annales/2025 gr1 corrigé.pdf" target="_blank" rel="noopener">Corrigé</a>
                   </div>
                 </div>
                 <div class="crpe-annales-doc-exercises">
@@ -1044,7 +1072,7 @@ h1.hero-title{
                   <span class="crpe-doc-title">Groupe 2</span>
                   <div class="crpe-doc-btns">
                     <a class="crpe-doc-btn crpe-doc-btn-sujet" href="Annales/2025 gr2.pdf" target="_blank" rel="noopener">Sujet</a>
-                    <span class="crpe-doc-btn crpe-doc-btn-disabled" title="Corrigé à venir">Corrigé</span>
+                    <a class="crpe-doc-btn crpe-doc-btn-corrige" href="Annales/2025 gr2 corrigé.pdf" target="_blank" rel="noopener">Corrigé</a>
                   </div>
                 </div>
                 <div class="crpe-annales-doc-exercises">
@@ -1121,7 +1149,7 @@ h1.hero-title{
                   <span class="crpe-doc-title">Groupe 1</span>
                   <div class="crpe-doc-btns">
                     <a class="crpe-doc-btn crpe-doc-btn-sujet" href="Annales/2024 gr1.pdf" target="_blank" rel="noopener">Sujet</a>
-                    <span class="crpe-doc-btn crpe-doc-btn-disabled" title="Corrigé à venir">Corrigé</span>
+                    <a class="crpe-doc-btn crpe-doc-btn-corrige" href="Annales/2024 gr1 corrigé.pdf" target="_blank" rel="noopener">Corrigé</a>
                   </div>
                 </div>
                 <div class="crpe-annales-doc-exercises">
@@ -1215,7 +1243,7 @@ h1.hero-title{
                   <span class="crpe-doc-title">Groupe 1</span>
                   <div class="crpe-doc-btns">
                     <a class="crpe-doc-btn crpe-doc-btn-sujet" href="Annales/2023 gr1.pdf" target="_blank" rel="noopener">Sujet</a>
-                    <span class="crpe-doc-btn crpe-doc-btn-disabled" title="Corrigé à venir">Corrigé</span>
+                    <a class="crpe-doc-btn crpe-doc-btn-corrige" href="Annales/2023 gr1 corrigé.pdf" target="_blank" rel="noopener">Corrigé</a>
                   </div>
                 </div>
                 <div class="crpe-annales-doc-exercises">
@@ -1270,7 +1298,7 @@ h1.hero-title{
                   <span class="crpe-doc-title">Groupe 2</span>
                   <div class="crpe-doc-btns">
                     <a class="crpe-doc-btn crpe-doc-btn-sujet" href="Annales/2023 gr2.pdf" target="_blank" rel="noopener">Sujet</a>
-                    <span class="crpe-doc-btn crpe-doc-btn-disabled" title="Corrigé à venir">Corrigé</span>
+                    <a class="crpe-doc-btn crpe-doc-btn-corrige" href="Annales/2023 gr2 corrigé.pdf" target="_blank" rel="noopener">Corrigé</a>
                   </div>
                 </div>
                 <div class="crpe-annales-doc-exercises">
@@ -1321,7 +1349,7 @@ h1.hero-title{
                   <span class="crpe-doc-title">Groupe 3</span>
                   <div class="crpe-doc-btns">
                     <a class="crpe-doc-btn crpe-doc-btn-sujet" href="Annales/2023 gr3.pdf" target="_blank" rel="noopener">Sujet</a>
-                    <span class="crpe-doc-btn crpe-doc-btn-disabled" title="Corrigé à venir">Corrigé</span>
+                    <a class="crpe-doc-btn crpe-doc-btn-corrige" href="Annales/2023 gr3 corrigé.pdf" target="_blank" rel="noopener">Corrigé</a>
                   </div>
                 </div>
                 <div class="crpe-annales-doc-exercises">
@@ -1388,7 +1416,7 @@ h1.hero-title{
                   <span class="crpe-doc-title">Groupe 1</span>
                   <div class="crpe-doc-btns">
                     <a class="crpe-doc-btn crpe-doc-btn-sujet" href="Annales/2022 gr1.pdf" target="_blank" rel="noopener">Sujet</a>
-                    <span class="crpe-doc-btn crpe-doc-btn-disabled" title="Corrigé à venir">Corrigé</span>
+                    <a class="crpe-doc-btn crpe-doc-btn-corrige" href="Annales/2022 gr1 corrigé.pdf" target="_blank" rel="noopener">Corrigé</a>
                   </div>
                 </div>
                 <div class="crpe-annales-doc-exercises">
@@ -1433,7 +1461,7 @@ h1.hero-title{
                   <span class="crpe-doc-title">Groupe 2</span>
                   <div class="crpe-doc-btns">
                     <a class="crpe-doc-btn crpe-doc-btn-sujet" href="Annales/2022 gr2.pdf" target="_blank" rel="noopener">Sujet</a>
-                    <span class="crpe-doc-btn crpe-doc-btn-disabled" title="Corrigé à venir">Corrigé</span>
+                    <a class="crpe-doc-btn crpe-doc-btn-corrige" href="Annales/2022 gr2 corrigé.pdf" target="_blank" rel="noopener">Corrigé</a>
                   </div>
                 </div>
                 <div class="crpe-annales-doc-exercises">
