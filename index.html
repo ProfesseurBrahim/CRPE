@@ -577,8 +577,9 @@ h1.hero-title{
 /* Annales : cartes par année */
 .crpe-annales-grid{
   display:flex;
-  flex-direction:column;
-  gap:20px;
+  flex-wrap:wrap;
+  gap:12px;
+  align-items:flex-start;
 }
 .crpe-annales-year{
   display:flex;
@@ -592,6 +593,10 @@ h1.hero-title{
 }
 .crpe-annales-year.is-collapsed{
   border-color:var(--line);
+  flex:1 1 160px;
+}
+.crpe-annales-year:not(.is-collapsed){
+  flex:1 1 100%;
 }
 .crpe-annales-year h3{
   margin:0 0 2px;
@@ -605,7 +610,7 @@ h1.hero-title{
   justify-content:space-between;
   gap:10px;
   width:100%;
-  padding:16px 20px;
+  padding:14px 18px;
   border:none;
   background:#FDF6F9;
   color:#2A1420;
@@ -614,11 +619,28 @@ h1.hero-title{
   text-align:left;
 }
 .crpe-annales-year-toggle h3{ margin:0; font-size:1.02rem; }
+.crpe-annales-year.is-collapsed .crpe-annales-year-toggle h3{
+  font-size:1.6rem;
+  color:#2A1420;
+}
+.crpe-annales-year.is-collapsed .crpe-annales-year-toggle{
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  min-height:200px;
+  padding:32px 16px;
+  text-align:center;
+}
 .crpe-annales-year-toggle-meta{
   display:flex;
   align-items:center;
   gap:10px;
   flex-shrink:0;
+}
+.crpe-annales-year.is-collapsed .crpe-annales-year-toggle-meta{
+  gap:6px;
+  margin-top:10px;
 }
 .crpe-annales-year-count{
   font-size:0.68rem;
@@ -631,12 +653,12 @@ h1.hero-title{
   white-space:nowrap;
 }
 .crpe-annales-year-chevron{
-  width:18px; height:18px;
+  width:16px; height:16px;
   flex-shrink:0;
   color:var(--accent);
   transition:transform 0.25s ease;
 }
-.crpe-annales-year.is-collapsed .crpe-annales-year-chevron{ transform:rotate(-90deg); }
+.crpe-annales-year.is-collapsed .crpe-annales-year-chevron{ display:none; }
 .crpe-annales-year-body{
   display:flex;
   flex-direction:column;
@@ -985,7 +1007,7 @@ h1.hero-title{
             <button type="button" class="crpe-annales-year-toggle" aria-expanded="false">
               <h3>2026</h3>
               <span class="crpe-annales-year-toggle-meta">
-                <span class="crpe-annales-year-count">Voir les sujets</span>
+                <span class="crpe-annales-year-count">Voir les 7 sujets</span>
                 <svg class="crpe-annales-year-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
               </span>
             </button>
@@ -1248,7 +1270,7 @@ h1.hero-title{
             <button type="button" class="crpe-annales-year-toggle" aria-expanded="false">
               <h3>2025</h3>
               <span class="crpe-annales-year-toggle-meta">
-                <span class="crpe-annales-year-count">Voir les sujets</span>
+                <span class="crpe-annales-year-count">Voir les 4 sujets</span>
                 <svg class="crpe-annales-year-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
               </span>
             </button>
@@ -1481,7 +1503,7 @@ h1.hero-title{
             <button type="button" class="crpe-annales-year-toggle" aria-expanded="false">
               <h3>2024</h3>
               <span class="crpe-annales-year-toggle-meta">
-                <span class="crpe-annales-year-count">Voir les sujets</span>
+                <span class="crpe-annales-year-count">Voir les 4 sujets</span>
                 <svg class="crpe-annales-year-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
               </span>
             </button>
@@ -1746,7 +1768,7 @@ h1.hero-title{
             <button type="button" class="crpe-annales-year-toggle" aria-expanded="false">
               <h3>2023</h3>
               <span class="crpe-annales-year-toggle-meta">
-                <span class="crpe-annales-year-count">Voir les sujets</span>
+                <span class="crpe-annales-year-count">Voir les 4 sujets</span>
                 <svg class="crpe-annales-year-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
               </span>
             </button>
@@ -1989,7 +2011,7 @@ h1.hero-title{
             <button type="button" class="crpe-annales-year-toggle" aria-expanded="false">
               <h3>2022</h3>
               <span class="crpe-annales-year-toggle-meta">
-                <span class="crpe-annales-year-count">Voir les sujets</span>
+                <span class="crpe-annales-year-count">Voir les 3 sujets</span>
                 <svg class="crpe-annales-year-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
               </span>
             </button>
@@ -2160,7 +2182,7 @@ h1.hero-title{
             <button type="button" class="crpe-annales-year-toggle" aria-expanded="false">
               <h3>2021</h3>
               <span class="crpe-annales-year-toggle-meta">
-                <span class="crpe-annales-year-count">Voir les sujets</span>
+                <span class="crpe-annales-year-count">Voir les 4 sujets</span>
                 <svg class="crpe-annales-year-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
               </span>
             </button>
@@ -2214,7 +2236,7 @@ h1.hero-title{
             <button type="button" class="crpe-annales-year-toggle" aria-expanded="false">
               <h3>2020</h3>
               <span class="crpe-annales-year-toggle-meta">
-                <span class="crpe-annales-year-count">Voir les sujets</span>
+                <span class="crpe-annales-year-count">Voir les 7 sujets</span>
                 <svg class="crpe-annales-year-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
               </span>
             </button>
