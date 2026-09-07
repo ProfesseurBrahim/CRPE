@@ -449,6 +449,49 @@ h1.hero-title{
 @media (max-width:800px){
   .crpe-info-divider{ display:none; }
 }
+/* Grille de rapports de jury : vignettes A4 par année */
+.crpe-jury-grid{
+  display:grid;
+  grid-template-columns:repeat(5, 1fr);
+  gap:20px;
+  margin-top:4px;
+}
+@media (max-width:1000px){
+  .crpe-jury-grid{ grid-template-columns:repeat(3, 1fr); }
+}
+@media (max-width:640px){
+  .crpe-jury-grid{ grid-template-columns:repeat(2, 1fr); }
+}
+.crpe-jury-item{
+  display:block;
+  border-radius:var(--radius-md);
+  overflow:hidden;
+  border:1px solid var(--line);
+  text-decoration:none;
+  background:rgba(232,89,138,0.05);
+  transition:transform 0.2s, border-color 0.2s;
+}
+.crpe-jury-item:hover{
+  transform:translateY(-3px);
+  border-color:var(--accent);
+}
+.crpe-jury-item img{
+  display:block;
+  width:100%;
+  aspect-ratio:210/297; /* format A4 */
+  object-fit:cover;
+  background:var(--line);
+}
+.crpe-jury-caption{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height:44px;
+  font-size:0.82rem;
+  font-weight:700;
+  color:var(--white);
+  border-top:1px solid var(--line);
+}
 
 </style>
 </head>
@@ -619,10 +662,31 @@ h1.hero-title{
     <div class="snt-section-inner">
       <div class="snt-chapter-head">
         <span class="snt-chapter-num">08</span>
-        <h2>Rapports de jury</h2>
+        <h2>Rapports de jury - Lille</h2>
       </div>
       <div class="snt-big-card">
-        <div class="snt-big-card-placeholder">Contenu à venir</div>
+        <div class="crpe-jury-grid">
+          <a class="crpe-jury-item" href="Rapports/2026.pdf" target="_blank" rel="noopener">
+            <img src="Rapports/2026.jpg" alt="Rapport de jury 2026">
+            <span class="crpe-jury-caption">2026</span>
+          </a>
+          <a class="crpe-jury-item" href="Rapports/2025.pdf" target="_blank" rel="noopener">
+            <img src="Rapports/2025.jpg" alt="Rapport de jury 2025">
+            <span class="crpe-jury-caption">2025</span>
+          </a>
+          <a class="crpe-jury-item" href="Rapports/2024.pdf" target="_blank" rel="noopener">
+            <img src="Rapports/2024.jpg" alt="Rapport de jury 2024">
+            <span class="crpe-jury-caption">2024</span>
+          </a>
+          <a class="crpe-jury-item" href="Rapports/2023.pdf" target="_blank" rel="noopener">
+            <img src="Rapports/2023.jpg" alt="Rapport de jury 2023">
+            <span class="crpe-jury-caption">2023</span>
+          </a>
+          <a class="crpe-jury-item" href="Rapports/2022.pdf" target="_blank" rel="noopener">
+            <img src="Rapports/2022.jpg" alt="Rapport de jury 2022">
+            <span class="crpe-jury-caption">2022</span>
+          </a>
+        </div>
       </div>
     </div>
   </section>
