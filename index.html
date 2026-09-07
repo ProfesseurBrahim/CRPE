@@ -482,6 +482,40 @@ h1.hero-title{
   object-fit:cover;
   background:var(--line);
 }
+.crpe-jury-cover{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  width:100%;
+  aspect-ratio:210/297;
+  background:#FDF6F9;
+  color:#2A1420;
+  text-align:center;
+  padding:16px;
+}
+.crpe-jury-cover-title{
+  font-size:0.95rem;
+  font-weight:800;
+  line-height:1.3;
+}
+.crpe-jury-cover-place{
+  font-size:0.82rem;
+  font-weight:600;
+  color:#7A4A5E;
+}
+.crpe-jury-pending .crpe-jury-cover{
+  position:absolute;
+  inset:0;
+  aspect-ratio:auto;
+}
+.crpe-jury-cover-year{
+  margin-top:8px;
+  font-size:1.6rem;
+  font-weight:800;
+  color:var(--accent);
+}
 .crpe-jury-caption{
   display:flex;
   align-items:center;
@@ -496,7 +530,7 @@ h1.hero-title{
   position:relative;
   width:100%;
   aspect-ratio:210/297;
-  background:linear-gradient(160deg, var(--bg-panel), var(--bg-panel-2));
+  background:#FDF6F9;
   overflow:hidden;
 }
 .crpe-jury-pending::after{
@@ -504,12 +538,41 @@ h1.hero-title{
   position:absolute;
   top:50%; left:50%;
   transform:translate(-50%,-50%) rotate(-30deg);
-  font-size:1.1rem;
+  font-size:1.15rem;
   font-weight:800;
   letter-spacing:0.06em;
   text-transform:uppercase;
-  color:var(--accent);
+  color:#fff;
+  background:var(--accent);
+  padding:6px 22px;
+  border-radius:6px;
   white-space:nowrap;
+  box-shadow:0 6px 16px rgba(0,0,0,0.25);
+  z-index:2;
+}
+.crpe-jury-block{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.crpe-jury-math-link{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:8px 10px;
+  border-radius:10px;
+  border:1px solid var(--line);
+  background:#FDF6F9;
+  color:#C2366B;
+  font-size:0.72rem;
+  font-weight:700;
+  text-decoration:none;
+  transition:background 0.2s, border-color 0.2s;
+}
+.crpe-jury-math-link:hover{
+  background:#FBE4EC;
+  border-color:var(--accent);
 }
 
 </style>
@@ -685,26 +748,58 @@ h1.hero-title{
       </div>
       <div class="snt-big-card">
         <div class="crpe-jury-grid">
-          <a class="crpe-jury-item" href="Rapports/2026.pdf" target="_blank" rel="noopener">
-            <div class="crpe-jury-pending"></div>
-            <span class="crpe-jury-caption">2026</span>
-          </a>
-          <a class="crpe-jury-item" href="Rapports/2025.pdf" target="_blank" rel="noopener">
-            <img src="Rapports/2025.jpg" alt="Rapport de jury 2025">
-            <span class="crpe-jury-caption">2025</span>
-          </a>
-          <a class="crpe-jury-item" href="Rapports/2024.pdf" target="_blank" rel="noopener">
-            <img src="Rapports/2024.jpg" alt="Rapport de jury 2024">
-            <span class="crpe-jury-caption">2024</span>
-          </a>
-          <a class="crpe-jury-item" href="Rapports/2023.pdf" target="_blank" rel="noopener">
-            <img src="Rapports/2023.jpg" alt="Rapport de jury 2023">
-            <span class="crpe-jury-caption">2023</span>
-          </a>
-          <a class="crpe-jury-item" href="Rapports/2022.pdf" target="_blank" rel="noopener">
-            <img src="Rapports/2022.jpg" alt="Rapport de jury 2022">
-            <span class="crpe-jury-caption">2022</span>
-          </a>
+          <div class="crpe-jury-block">
+            <a class="crpe-jury-item" href="Rapports/2026.pdf" target="_blank" rel="noopener">
+              <div class="crpe-jury-pending">
+                <div class="crpe-jury-cover">
+                  <span class="crpe-jury-cover-title">Rapport de jury</span>
+                  <span class="crpe-jury-cover-place">Lille</span>
+                  <span class="crpe-jury-cover-year">2026</span>
+                </div>
+              </div>
+            </a>
+            <a class="crpe-jury-math-link" href="Rapports/2026-maths.pdf" target="_blank" rel="noopener">Partie mathématiques</a>
+          </div>
+          <div class="crpe-jury-block">
+            <a class="crpe-jury-item" href="Rapports/2025.pdf" target="_blank" rel="noopener">
+              <div class="crpe-jury-cover">
+                <span class="crpe-jury-cover-title">Rapport de jury</span>
+                <span class="crpe-jury-cover-place">Lille</span>
+                <span class="crpe-jury-cover-year">2025</span>
+              </div>
+            </a>
+            <a class="crpe-jury-math-link" href="Rapports/2025-maths.pdf" target="_blank" rel="noopener">Partie mathématiques</a>
+          </div>
+          <div class="crpe-jury-block">
+            <a class="crpe-jury-item" href="Rapports/2024.pdf" target="_blank" rel="noopener">
+              <div class="crpe-jury-cover">
+                <span class="crpe-jury-cover-title">Rapport de jury</span>
+                <span class="crpe-jury-cover-place">Lille</span>
+                <span class="crpe-jury-cover-year">2024</span>
+              </div>
+            </a>
+            <a class="crpe-jury-math-link" href="Rapports/2024-maths.pdf" target="_blank" rel="noopener">Partie mathématiques</a>
+          </div>
+          <div class="crpe-jury-block">
+            <a class="crpe-jury-item" href="Rapports/2023.pdf" target="_blank" rel="noopener">
+              <div class="crpe-jury-cover">
+                <span class="crpe-jury-cover-title">Rapport de jury</span>
+                <span class="crpe-jury-cover-place">Lille</span>
+                <span class="crpe-jury-cover-year">2023</span>
+              </div>
+            </a>
+            <a class="crpe-jury-math-link" href="Rapports/2023-maths.pdf" target="_blank" rel="noopener">Partie mathématiques</a>
+          </div>
+          <div class="crpe-jury-block">
+            <a class="crpe-jury-item" href="Rapports/2022.pdf" target="_blank" rel="noopener">
+              <div class="crpe-jury-cover">
+                <span class="crpe-jury-cover-title">Rapport de jury</span>
+                <span class="crpe-jury-cover-place">Lille</span>
+                <span class="crpe-jury-cover-year">2022</span>
+              </div>
+            </a>
+            <a class="crpe-jury-math-link" href="Rapports/2022-maths.pdf" target="_blank" rel="noopener">Partie mathématiques</a>
+          </div>
         </div>
       </div>
     </div>
