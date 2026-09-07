@@ -385,6 +385,70 @@ h1.hero-title{
   .snt-section-inner{ padding:24px 14px; }
   .snt-big-card{ padding:18px; border-radius:var(--radius-md); }
 }
+/* Résumé du concours : deux colonnes d'information */
+.crpe-info-columns{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:24px;
+  align-items:stretch;
+}
+@media (max-width:800px){
+  .crpe-info-columns{ grid-template-columns:1fr; }
+}
+.crpe-info-col{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+.crpe-info-col h3{
+  margin:0;
+  font-size:1rem;
+  font-weight:800;
+  color:var(--white);
+  line-height:1.35;
+}
+.crpe-info-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+.crpe-tag{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:6px 12px;
+  border-radius:999px;
+  background:rgba(232,89,138,0.12);
+  border:1px solid var(--line);
+  color:var(--accent);
+  font-size:0.76rem;
+  font-weight:700;
+}
+.crpe-info-col p{
+  margin:0;
+  font-size:0.86rem;
+  line-height:1.6;
+  color:var(--grey);
+}
+.crpe-info-col ul{
+  margin:0;
+  padding-left:18px;
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.crpe-info-col li{
+  font-size:0.86rem;
+  line-height:1.55;
+  color:var(--grey);
+}
+.crpe-info-divider{
+  width:1px;
+  background:var(--line);
+}
+@media (max-width:800px){
+  .crpe-info-divider{ display:none; }
+}
 
 </style>
 </head>
@@ -397,7 +461,7 @@ h1.hero-title{
     <span class="nav-brand-icon"><img src="images/logo.png" alt="Logo"></span>
     <span class="nav-brand-text">
       <span class="nav-brand-title">M. Brahim</span>
-      <span class="nav-brand-subtitle">CRPE</span>
+      <span class="nav-brand-subtitle">Mathématiques</span>
     </span>
   </a>
 
@@ -443,7 +507,7 @@ h1.hero-title{
       <h1 class="hero-title">CRPE</h1>
       <div class="year-progress">
         <div class="year-progress-bar"><div class="year-progress-fill" id="year-progress-fill"></div></div>
-        <div class="year-progress-label" id="year-progress-label">Année scolaire 2026-2027 · 1% écoulés</div>
+        <div class="year-progress-label" id="year-progress-label">Jours restants avant le concours</div>
       </div>
     </div>
   </section>
@@ -455,7 +519,26 @@ h1.hero-title{
         <h2>Résumé du concours</h2>
       </div>
       <div class="snt-big-card">
-        <div class="snt-big-card-placeholder">Contenu à venir</div>
+        <div class="crpe-info-columns">
+          <div class="crpe-info-col">
+            <h3>1 — Épreuve écrite disciplinaire de mathématiques</h3>
+            <div class="crpe-info-tags">
+              <span class="crpe-tag">Durée : 3 heures</span>
+              <span class="crpe-tag">Coefficient 1</span>
+            </div>
+            <p>L'épreuve est constituée d'un ensemble d'au moins trois exercices indépendants, permettant de vérifier les connaissances du candidat.</p>
+            <p>L'épreuve est notée sur 20. Une note globale égale ou inférieure à 5 est éliminatoire.</p>
+          </div>
+          <div class="crpe-info-col">
+            <h3>2 — Programme de l'épreuve écrite disciplinaire de mathématiques</h3>
+            <p>Le programme de l'épreuve est constitué ainsi pour la session 2027 :</p>
+            <ul>
+              <li>du programme en vigueur à la rentrée scolaire 2025 de mathématiques du cycle 4,</li>
+              <li>de la partie « Nombres et calculs » du programme de mathématiques de seconde générale et technologique.</li>
+            </ul>
+            <p>Les notions traitées dans ces programmes doivent pouvoir être abordées avec le recul nécessaire à l'enseignement des mathématiques aux cycles 1, 2 et 3.</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -580,7 +663,7 @@ h1.hero-title{
     window.addEventListener('scroll', update, { passive: true });
   })();
 
-  // Barre de progression de l'année scolaire (1er septembre → 24 juin)
+  // Compte à rebours jusqu'au 31 mars (concours), avec barre de progression depuis le 1er septembre
   (function () {
     const fill = document.getElementById('year-progress-fill');
     const label = document.getElementById('year-progress-label');
@@ -588,19 +671,22 @@ h1.hero-title{
 
     const now = new Date();
     const y = now.getFullYear();
+    // Année scolaire de référence : commence en septembre
     const startYear = now.getMonth() >= 7 ? y : y - 1;
     const start = new Date(startYear, 8, 1);
-    const end = new Date(startYear + 1, 5, 24);
+    let target = new Date(startYear + 1, 2, 31);
+    if (now > target) target = new Date(startYear + 2, 2, 31);
 
-    let percent;
-    if (now < start) percent = 0;
-    else if (now > end) percent = 100;
-    else percent = ((now - start) / (end - start)) * 100;
+    const msPerDay = 1000 * 60 * 60 * 24;
+    const daysLeft = Math.ceil((target - now) / msPerDay);
 
-    const percentTruncated = Math.floor(percent * 10) / 10;
+    let percent = ((now - start) / (target - start)) * 100;
+    percent = Math.max(0, Math.min(100, percent));
 
-    fill.style.width = percentTruncated + '%';
-    label.textContent = `Année scolaire ${startYear}-${startYear + 1} · ${percentTruncated.toFixed(1)}% écoulés`;
+    fill.style.width = percent + '%';
+    label.textContent = daysLeft > 0
+      ? `Session 2027 - Environ ${daysLeft} jour${daysLeft > 1 ? 's' : ''} restant${daysLeft > 1 ? 's' : ''}`
+      : `Jour J !`;
   })();
 
   // Bouton "haut de page"
