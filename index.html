@@ -576,14 +576,14 @@ h1.hero-title{
 }
 /* Annales : cartes par année */
 .crpe-annales-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill, minmax(200px, 1fr));
+  display:flex;
+  flex-direction:column;
   gap:20px;
 }
 .crpe-annales-year{
   display:flex;
   flex-direction:column;
-  gap:10px;
+  gap:12px;
   padding:18px;
   border:1px solid var(--line);
   border-radius:var(--radius-md);
@@ -596,9 +596,9 @@ h1.hero-title{
   color:#2A1420;
 }
 .crpe-annales-links{
-  display:flex;
-  flex-direction:column;
-  gap:8px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(140px, 1fr));
+  gap:10px;
 }
 .crpe-annales-link{
   display:inline-flex;
@@ -629,6 +629,7 @@ h1.hero-title{
   border:1px solid #F0C7D6;
   background:#FBE4EC;
   transition:background 0.2s, border-color 0.2s;
+  min-width:0;
 }
 .crpe-annales-doc:hover{
   background:#F6CADE;
