@@ -836,6 +836,46 @@ h1.hero-title{
 .crpe-modal-panel.is-active{
   display:block;
 }
+.crpe-competence-list{
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.crpe-competence-list li{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:12px;
+  padding:10px 12px;
+  border:1px solid var(--line, #e3e3e3);
+  border-radius:8px;
+  background:rgba(0,0,0,0.015);
+}
+.crpe-competence-text{
+  flex:1;
+}
+.crpe-level-badges{
+  display:flex;
+  gap:4px;
+  flex-shrink:0;
+  white-space:nowrap;
+}
+.crpe-level-badge{
+  display:inline-block;
+  font-size:0.72rem;
+  font-weight:700;
+  line-height:1;
+  padding:4px 7px;
+  border-radius:999px;
+  color:#fff;
+}
+.crpe-level-badge.crpe-level-5e{ background:#4c9f70; }
+.crpe-level-badge.crpe-level-4e{ background:#3d7fbf; }
+.crpe-level-badge.crpe-level-3e{ background:#a0509b; }
+.crpe-level-badge.crpe-level-2nde{ background:#d98a2b; }
 @media (max-width:700px){
   .crpe-modal{ height:92vh; padding:18px; }
   .crpe-modal-title{ font-size:1.05rem; }
@@ -1092,8 +1132,8 @@ h1.hero-title{
             <h3>2 — Programme de l'épreuve écrite disciplinaire de mathématiques</h3>
             <p>Le programme de l'épreuve est constitué ainsi pour la session 2027 :</p>
             <ul>
-              <li>du programme en vigueur à la rentrée scolaire 2025 de mathématiques du cycle 4,</li>
-              <li>de la partie « Nombres et calculs » du programme de mathématiques de seconde générale et technologique.</li>
+              <li>du <a href="Annexes/programmes cycle 4.pdf" target="_blank" rel="noopener">programme en vigueur à la rentrée scolaire 2025 de mathématiques du cycle 4</a>,</li>
+              <li>de la partie « Nombres et calculs » du <a href="Annexes/programmes seconde.pdf" target="_blank" rel="noopener">programme de mathématiques de seconde générale et technologique</a>.</li>
             </ul>
             <p>Les notions traitées dans ces programmes doivent pouvoir être abordées avec le recul nécessaire à l'enseignement des mathématiques aux cycles 1, 2 et 3.</p>
           </div>
@@ -2773,7 +2813,272 @@ h1.hero-title{
     const closeBtn = document.getElementById('crpe-modal-close');
     const tabs = document.querySelectorAll('.crpe-modal-tab');
     const panels = document.querySelectorAll('.crpe-modal-panel');
+    const competencesPanel = document.querySelector('.crpe-modal-panel[data-panel="competences"]');
+    const DEFAULT_COMPETENCES_HTML = '<p>Compétences à venir.</p>';
     if (!overlay || !titleEl || !closeBtn) return;
+
+    // Compétences associées, extraites mot pour mot du programme de mathématiques du
+    // cycle 4 (BOEN n°31 du 30 juillet 2020), réparties par sous-thème correspondant.
+    // Chaque compétence est associée aux classes (5e/4e/3e) où elle est travaillée,
+    // d'après les Repères annuels de progression pour le cycle 4 (Annexe 26).
+    const crpeCompetencesCycle4 = {
+      "Nombres rationnels": [
+        { text: "Utiliser diverses représentations d'un même nombre (écriture décimale ou fractionnaire, notation scientifique, repérage sur une droite graduée).", levels: ["4e", "3e"] },
+        { text: "Passer d'une représentation d'un nombre à une autre.", levels: ["4e", "3e"] },
+        { text: "Comparer, ranger, encadrer des nombres rationnels en écriture décimale, fractionnaire ou scientifique.", levels: ["5e", "4e"] },
+        { text: "Repérer et placer un nombre rationnel sur une droite graduée.", levels: ["5e", "4e"] },
+        { text: "Associer à des objets des ordres de grandeur (par exemple taille d'un atome, d'une bactérie, d'une alvéole pulmonaire, longueur de l'intestin, capacité de stockage d'un disque dur, vitesses du son et de la lumière, populations française et mondiale, distance Terre-Lune, distance du Soleil à l'étoile la plus proche, etc.).", levels: ["4e"] },
+        { text: "Présenter les fractions sous forme irréductible.", levels: ["2nde"] },
+        { text: "Effectuer des opérations et des comparaisons entre des fractions simples.", levels: ["2nde"] }
+      ],
+      "Nombres irrationnels": [
+        { text: "Donner un encadrement, d'amplitude donnée, d'un nombre réel par des décimaux.", levels: ["2nde"] },
+        { text: "Dans le cadre de la résolution de problèmes, arrondir en donnant le nombre de chiffres significatifs adapté à la situation étudiée.", levels: ["2nde"] }
+      ],
+      "Nombres réels": [
+        { text: "Lire l'abscisse d'un nombre réel sur une droite graduée et placer un nombre réel d'abscisse donnée.", levels: ["2nde"] },
+        { text: "Représenter un intervalle de la droite numérique. Déterminer si un nombre réel appartient à un intervalle donné.", levels: ["2nde"] },
+        { text: "Donner un encadrement, d'amplitude donnée, d'un nombre réel par des décimaux.", levels: ["2nde"] },
+        { text: "Dans le cadre de la résolution de problèmes, arrondir en donnant le nombre de chiffres significatifs adapté à la situation étudiée.", levels: ["2nde"] }
+      ],
+      "Opérations": [
+        { text: "Calculer avec des nombres relatifs, des fractions, des nombres décimaux.", levels: ["5e", "4e", "3e"] },
+        { text: "Vérifier la vraisemblance d'un résultat, notamment en estimant son ordre de grandeur.", levels: ["5e", "4e", "3e"] },
+        { text: "Effectuer des calculs numériques simples impliquant des puissances, notamment en utilisant la notation scientifique.", levels: ["4e", "3e"] },
+        { text: "Utiliser la racine carrée pour résoudre des problèmes, notamment géométriques.", levels: ["4e", "3e"] },
+        { text: "Effectuer des calculs et des comparaisons pour traiter des problèmes.", levels: ["5e", "4e", "3e"] },
+        { text: "Comparer deux nombres directement ou par calcul de leur différence, ou, s'ils sont strictement positifs, de leur quotient.", levels: ["2nde"] },
+        { text: "Effectuer des opérations et des comparaisons entre des fractions simples.", levels: ["2nde"] },
+        { text: "Effectuer des opérations sur les puissances.", levels: ["2nde"] },
+        { text: "Passer d'une écriture d'un nombre à une autre (décimale, fractionnaire, pourcentage).", levels: ["2nde"] },
+        { text: "Estimer un ordre de grandeur.", levels: ["2nde"] },
+        { text: "S'assurer de la vraisemblance, de la cohérence d'un résultat.", levels: ["2nde"] },
+        { text: "Effectuer des calculs numériques ou littéraux mettant en jeu des puissances, des racines carrées, des écritures fractionnaires.", levels: ["2nde"] }
+      ],
+      "Modes de calcul": [
+        { text: "Calculer avec des nombres relatifs, des fractions, des nombres décimaux.", levels: ["5e", "4e", "3e"] },
+        { text: "Vérifier la vraisemblance d'un résultat, notamment en estimant son ordre de grandeur.", levels: ["5e", "4e", "3e"] },
+        { text: "Effectuer des calculs numériques simples impliquant des puissances, notamment en utilisant la notation scientifique.", levels: ["4e", "3e"] },
+        { text: "Utiliser la racine carrée pour résoudre des problèmes, notamment géométriques.", levels: ["4e", "3e"] },
+        { text: "Effectuer des calculs et des comparaisons pour traiter des problèmes.", levels: ["5e", "4e", "3e"] },
+        { text: "Effectuer des calculs numériques ou littéraux mettant en jeu des puissances, des racines carrées, des écritures fractionnaires.", levels: ["2nde"] },
+        { text: "Effectuer une application numérique d'une formule (notamment pour les formules utilisées dans les autres disciplines).", levels: ["2nde"] }
+      ],
+      "Multiples et diviseurs": [
+        { text: "Déterminer si un entier est ou n'est pas multiple ou diviseur d'un autre entier.", levels: ["5e"] },
+        { text: "Déterminer les nombres premiers inférieurs ou égaux à 100.", levels: ["4e"] },
+        { text: "Utiliser les critères de divisibilité par 2, 3, 5, 9, 10.", levels: ["5e"] },
+        { text: "Déterminer les diviseurs d'un nombre à la main, à l'aide d'un tableur, d'une calculatrice.", levels: ["3e"] },
+        { text: "Décomposer un nombre entier en produit de facteurs premiers (à la main ou à l'aide d'un logiciel).", levels: ["5e", "4e"] },
+        { text: "Simplifier une fraction pour la rendre irréductible.", levels: ["4e", "3e"] },
+        { text: "Modéliser et résoudre des problèmes mettant en jeu la divisibilité (engrenages, conjonction de phénomènes, etc.).", levels: ["5e", "4e", "3e"] },
+        { text: "Modéliser et résoudre des problèmes mobilisant les notions de multiple, de diviseur, de nombre pair, de nombre impair.", levels: ["2nde"] },
+        { text: "Présenter les fractions sous forme irréductible.", levels: ["2nde"] }
+      ],
+      "Calcul algébrique": [
+        { text: "Développer, factoriser, réduire des expressions algébriques dans des cas très simples.", levels: ["4e", "3e"] },
+        { text: "Utiliser le calcul littéral pour traduire une propriété générale (par exemple la distributivité simple), pour démontrer un résultat général (par exemple que la somme de trois entiers consécutifs est un multiple de trois), pour valider ou réfuter une conjecture, pour modéliser une situation.", levels: ["5e", "4e", "3e"] },
+        { text: "Mettre un problème en équation en vue de sa résolution.", levels: ["4e"] },
+        { text: "Résoudre algébriquement des équations du premier degré ou s'y ramenant (équations produits), en particulier des équations du type x² = a.", levels: ["4e", "3e"] },
+        { text: "Effectuer un calcul littéral élémentaire (expressions additives, expressions multiplicatives).", levels: ["2nde"] },
+        { text: "Développer, factoriser, réduire une expression algébrique simple (identités (a + b)², (a – b)², (a + b)(a – b) ; factorisation de ax² + bx, ax + bx).", levels: ["2nde"] },
+        { text: "Choisir la forme la plus adaptée (factorisée, développée réduite) d'une expression en vue de la résolution d'un problème.", levels: ["2nde"] },
+        { text: "Sur des cas simples de relations entre variables (par exemple U = RI, d = vt, S = πr², V = abc, V = πr²h), exprimer une variable en fonction des autres.", levels: ["2nde"] },
+        { text: "Isoler une variable dans une égalité qui en comporte plusieurs, sur des exemples internes aux mathématiques ou issus des autres disciplines.", levels: ["2nde"] }
+      ],
+      "Équations": [
+        { text: "Développer, factoriser, réduire des expressions algébriques dans des cas très simples.", levels: ["4e", "3e"] },
+        { text: "Utiliser le calcul littéral pour traduire une propriété générale (par exemple la distributivité simple), pour démontrer un résultat général (par exemple que la somme de trois entiers consécutifs est un multiple de trois), pour valider ou réfuter une conjecture, pour modéliser une situation.", levels: ["5e", "4e", "3e"] },
+        { text: "Mettre un problème en équation en vue de sa résolution.", levels: ["4e"] },
+        { text: "Résoudre algébriquement des équations du premier degré ou s'y ramenant (équations produits), en particulier des équations du type x² = a.", levels: ["4e", "3e"] },
+        { text: "Résoudre une équation du type x² = a, ax + b = cx + d ou a/x = b.", levels: ["2nde"] },
+        { text: "Donner l'ensemble des solutions d'une équation du premier degré du type ax = b, a + x = b, ax + b = cx + d, d'une équation du type x² = a.", levels: ["2nde"] }
+      ],
+      "Inéquations du premier degré": [
+        { text: "Résoudre une inéquation du premier degré.", levels: ["2nde"] },
+        { text: "Modéliser un problème par une inéquation.", levels: ["2nde"] },
+        { text: "Donner l'ensemble des solutions d'une inéquation du premier degré du type a ⩾ b, a + x ⩾ b, ax + b ⩾ cx + d.", levels: ["2nde"] }
+      ],
+      "Mise en équation de problèmes": [
+        { text: "Utiliser le calcul littéral pour traduire une propriété générale (par exemple la distributivité simple), pour démontrer un résultat général (par exemple que la somme de trois entiers consécutifs est un multiple de trois), pour valider ou réfuter une conjecture, pour modéliser une situation.", levels: ["5e", "4e", "3e"] },
+        { text: "Mettre un problème en équation en vue de sa résolution.", levels: ["4e"] },
+        { text: "Résoudre algébriquement des équations du premier degré ou s'y ramenant (équations produits), en particulier des équations du type x² = a.", levels: ["4e", "3e"] },
+        { text: "Modéliser un problème par une inéquation.", levels: ["2nde"] },
+        { text: "Résoudre des problèmes modélisés par des équations ou des inéquations se ramenant au premier degré.", levels: ["2nde"] },
+        { text: "Isoler une variable dans une égalité qui en comporte plusieurs, sur des exemples internes aux mathématiques ou issus des autres disciplines.", levels: ["2nde"] }
+      ],
+      "Fonctions numériques": [
+        { text: "Passer d'un mode de représentation d'une fonction à un autre.", levels: ["4e", "3e"] },
+        { text: "Déterminer, à partir d'un mode de représentation, l'image ou un antécédent d'un nombre par une fonction.", levels: ["4e", "3e"] },
+        { text: "Représenter graphiquement une fonction linéaire, une fonction affine.", levels: ["3e"] },
+        { text: "Modéliser un phénomène continu par une fonction.", levels: ["3e"] },
+        { text: "Modéliser une situation de proportionnalité à l'aide d'une fonction linéaire.", levels: ["3e"] },
+        { text: "Résoudre des problèmes modélisés par des fonctions.", levels: ["3e"] }
+      ],
+      "Fonctions usuelles (affines, linéaires...)": [
+        { text: "Passer d'un mode de représentation d'une fonction à un autre.", levels: ["4e", "3e"] },
+        { text: "Déterminer, à partir d'un mode de représentation, l'image ou un antécédent d'un nombre par une fonction.", levels: ["4e", "3e"] },
+        { text: "Représenter graphiquement une fonction linéaire, une fonction affine.", levels: ["3e"] },
+        { text: "Modéliser un phénomène continu par une fonction.", levels: ["3e"] },
+        { text: "Modéliser une situation de proportionnalité à l'aide d'une fonction linéaire.", levels: ["3e"] },
+        { text: "Résoudre des problèmes modélisés par des fonctions.", levels: ["3e"] }
+      ],
+      "Proportionnalité simple": [
+        { text: "Reconnaître une situation de proportionnalité ou de non-proportionnalité.", levels: ["5e", "4e", "3e"] },
+        { text: "Calculer une quatrième proportionnelle.", levels: ["4e"] },
+        { text: "Utiliser une formule liant deux grandeurs dans une situation de proportionnalité (par exemple la longueur d'un cercle en fonction de son rayon, la loi d'Ohm exprimant la tension en fonction de l'intensité, la distance parcourue en fonction du temps à vitesse constante, etc.).", levels: ["4e", "3e"] },
+        { text: "Résoudre des problèmes utilisant la proportionnalité (pourcentages, échelles, agrandissement réduction).", levels: ["5e", "4e", "3e"] }
+      ],
+      "Problèmes de proportionnalité": [
+        { text: "Reconnaître une situation de proportionnalité ou de non-proportionnalité.", levels: ["5e", "4e", "3e"] },
+        { text: "Calculer une quatrième proportionnelle.", levels: ["4e"] },
+        { text: "Utiliser une formule liant deux grandeurs dans une situation de proportionnalité (par exemple la longueur d'un cercle en fonction de son rayon, la loi d'Ohm exprimant la tension en fonction de l'intensité, la distance parcourue en fonction du temps à vitesse constante, etc.).", levels: ["4e", "3e"] },
+        { text: "Résoudre des problèmes utilisant la proportionnalité (pourcentages, échelles, agrandissement réduction).", levels: ["5e", "4e", "3e"] }
+      ],
+      "Proportionnalité multiple, partages": [
+        { text: "Reconnaître une situation de proportionnalité ou de non-proportionnalité.", levels: ["5e", "4e", "3e"] },
+        { text: "Calculer une quatrième proportionnelle.", levels: ["4e"] },
+        { text: "Partager une quantité (par exemple une somme d'argent) en deux ou trois parts selon un ratio donné.", levels: ["5e", "4e", "3e"] },
+        { text: "Résoudre des problèmes utilisant la proportionnalité (pourcentages, échelles, agrandissement réduction).", levels: ["5e", "4e", "3e"] }
+      ],
+      "Série statistique et paramètres": [
+        { text: "Recueillir des données, les organiser.", levels: ["5e"] },
+        { text: "Lire et interpréter des données sous forme de données brutes, de tableau, de diagramme (diagramme en bâtons, diagramme circulaire, histogramme).", levels: ["5e", "4e", "3e"] },
+        { text: "Utiliser un tableur-grapheur pour présenter des données sous la forme d'un tableau ou d'un diagramme.", levels: ["5e", "4e", "3e"] },
+        { text: "Calculer des effectifs, des fréquences.", levels: ["5e", "4e", "3e"] },
+        { text: "Calculer et interpréter des indicateurs de position ou de dispersion d'une série statistique.", levels: ["5e", "4e", "3e"] }
+      ],
+      "Représentations graphiques": [
+        { text: "Recueillir des données, les organiser.", levels: ["5e"] },
+        { text: "Lire et interpréter des données sous forme de données brutes, de tableau, de diagramme (diagramme en bâtons, diagramme circulaire, histogramme).", levels: ["5e", "4e", "3e"] },
+        { text: "Utiliser un tableur-grapheur pour présenter des données sous la forme d'un tableau ou d'un diagramme.", levels: ["5e", "4e", "3e"] }
+      ],
+      "Applications": [
+        { text: "Calculer des effectifs, des fréquences.", levels: ["5e", "4e", "3e"] },
+        { text: "Calculer et interpréter des indicateurs de position ou de dispersion d'une série statistique.", levels: ["5e", "4e", "3e"] }
+      ],
+      "Vocabulaire des probabilités": [
+        { text: "Aborder les questions relatives au hasard à partir de problèmes simples.", levels: ["5e"] },
+        { text: "Exprimer des probabilités sous diverses formes (décimale, fractionnaire, pourcentage).", levels: ["5e"] }
+      ],
+      "Propriétés des probabilités": [
+        { text: "Aborder les questions relatives au hasard à partir de problèmes simples.", levels: ["5e"] },
+        { text: "Calculer des probabilités dans des cas simples (par exemple évaluation des chances de gain dans un jeu).", levels: ["5e", "4e"] },
+        { text: "Faire le lien entre fréquence et probabilité.", levels: ["3e"] }
+      ],
+      "Calcul d'une probabilité simple": [
+        { text: "Calculer des probabilités dans des cas simples (par exemple évaluation des chances de gain dans un jeu).", levels: ["5e", "4e", "3e"] },
+        { text: "Exprimer des probabilités sous diverses formes (décimale, fractionnaire, pourcentage).", levels: ["5e"] },
+        { text: "Faire le lien entre fréquence et probabilité.", levels: ["3e"] }
+      ],
+      "Grandeurs fondamentales": [
+        { text: "Mener des calculs impliquant des grandeurs mesurables, notamment des grandeurs composées, exprimer les résultats dans les unités adaptées.", levels: ["5e", "4e", "3e"] },
+        { text: "Vérifier la cohérence des résultats du point de vue des unités.", levels: ["5e", "4e"] },
+        { text: "Effectuer des conversions d'unités.", levels: ["4e", "3e"] }
+      ],
+      "Mesurer une grandeur": [
+        { text: "Mener des calculs impliquant des grandeurs mesurables, notamment des grandeurs composées, exprimer les résultats dans les unités adaptées.", levels: ["5e", "4e", "3e"] },
+        { text: "Vérifier la cohérence des résultats du point de vue des unités.", levels: ["5e", "4e"] },
+        { text: "Effectuer des conversions d'unités.", levels: ["4e", "3e"] }
+      ],
+      "Grandeurs simples": [
+        { text: "Mener des calculs impliquant des grandeurs mesurables, exprimer les résultats dans les unités adaptées.", levels: ["5e"] },
+        { text: "Vérifier la cohérence des résultats du point de vue des unités.", levels: ["5e"] },
+        { text: "Effectuer des conversions d'unités.", levels: ["5e"] }
+      ],
+      "Grandeurs composées": [
+        { text: "Mener des calculs impliquant des grandeurs mesurables, notamment des grandeurs composées, exprimer les résultats dans les unités adaptées.", levels: ["4e"] },
+        { text: "Vérifier la cohérence des résultats du point de vue des unités.", levels: ["4e"] }
+      ],
+      "Notation scientifique": [
+        { text: "Utiliser diverses représentations d'un même nombre (écriture décimale ou fractionnaire, notation scientifique, repérage sur une droite graduée).", levels: ["4e"] },
+        { text: "Passer d'une représentation d'un nombre à une autre.", levels: ["4e"] },
+        { text: "Effectuer des calculs numériques simples impliquant des puissances, notamment en utilisant la notation scientifique.", levels: ["4e", "3e"] }
+      ],
+      "Scratch": [
+        { text: "Écrire, mettre au point (tester, corriger) et exécuter un programme en réponse à un problème donné.", levels: ["5e", "4e", "3e"] }
+      ],
+      "Tableur": [
+        { text: "Utiliser un tableur-grapheur pour présenter des données sous la forme d'un tableau ou d'un diagramme.", levels: ["5e", "4e", "3e"] },
+        { text: "Déterminer les diviseurs d'un nombre à la main, à l'aide d'un tableur, d'une calculatrice.", levels: ["3e"] }
+      ],
+      "Premiers éléments de géométrie plane": [
+        { text: "Mettre en œuvre ou écrire un protocole de construction d'une figure géométrique.", levels: ["5e", "4e"] },
+        { text: "Mobiliser les connaissances des figures, des configurations et des transformations au programme pour déterminer des grandeurs géométriques.", levels: ["4e", "3e"] },
+        { text: "Mener des raisonnements et s'initier à la démonstration en utilisant les propriétés des figures, des configurations et des transformations.", levels: ["5e", "4e", "3e"] }
+      ],
+      "Les angles": [
+        { text: "Mettre en œuvre ou écrire un protocole de construction d'une figure géométrique.", levels: ["5e"] },
+        { text: "Mener des raisonnements et s'initier à la démonstration en utilisant les propriétés des figures, des configurations et des transformations.", levels: ["5e", "4e"] }
+      ],
+      "Angles et droites parallèles": [
+        { text: "Mener des raisonnements et s'initier à la démonstration en utilisant les propriétés des figures, des configurations et des transformations.", levels: ["5e", "3e"] }
+      ],
+      "Tracés à la règle et au compas": [
+        { text: "Mettre en œuvre ou écrire un protocole de construction d'une figure géométrique.", levels: ["5e"] },
+        { text: "Faire le lien entre les cas d'égalité des triangles et la construction d'un triangle à partir de la donnée de longueurs des côtés et/ou de mesures d'angles.", levels: ["4e"] }
+      ],
+      "Propriété de Thalès": [
+        { text: "Mobiliser les connaissances des figures, des configurations et des transformations au programme pour déterminer des grandeurs géométriques.", levels: ["4e", "3e"] },
+        { text: "Mener des raisonnements et s'initier à la démonstration en utilisant les propriétés des figures, des configurations et des transformations.", levels: ["4e", "3e"] }
+      ],
+      "Les triangles": [
+        { text: "Faire le lien entre les cas d'égalité des triangles et la construction d'un triangle à partir de la donnée de longueurs des côtés et/ou de mesures d'angles.", levels: ["4e"] },
+        { text: "Mobiliser les connaissances des figures, des configurations et des transformations au programme pour déterminer des grandeurs géométriques.", levels: ["4e", "3e"] },
+        { text: "Mener des raisonnements et s'initier à la démonstration en utilisant les propriétés des figures, des configurations et des transformations.", levels: ["5e", "4e", "3e"] }
+      ],
+      "Les quadrilatères": [
+        { text: "Mobiliser les connaissances des figures, des configurations et des transformations au programme pour déterminer des grandeurs géométriques.", levels: ["5e"] },
+        { text: "Mener des raisonnements et s'initier à la démonstration en utilisant les propriétés des figures, des configurations et des transformations.", levels: ["5e"] }
+      ],
+      "Espace et plan": [
+        { text: "(Se) repérer sur une droite graduée, dans le plan muni d'un repère orthogonal, dans un parallélépipède rectangle, sur une sphère.", levels: ["5e", "4e", "3e"] },
+        { text: "Reconnaître des solides (pavé droit, cube, prisme, cylindre, pyramide, cône, boule).", levels: ["5e"] },
+        { text: "Construire et mettre en relation des représentations de ces solides (vues en perspective cavalière, de face, de dessus, sections planes, patrons, etc.).", levels: ["5e", "4e", "3e"] },
+        { text: "Utiliser un logiciel de géométrie dynamique pour représenter des solides.", levels: ["5e", "3e"] }
+      ],
+      "Les polyèdres": [
+        { text: "Reconnaître des solides (pavé droit, cube, prisme, cylindre, pyramide, cône, boule).", levels: ["5e"] },
+        { text: "Construire et mettre en relation des représentations de ces solides (vues en perspective cavalière, de face, de dessus, sections planes, patrons, etc.).", levels: ["5e", "4e"] }
+      ],
+      "Les patrons de polyèdres": [
+        { text: "Construire et mettre en relation des représentations de ces solides (vues en perspective cavalière, de face, de dessus, sections planes, patrons, etc.).", levels: ["5e", "4e", "3e"] },
+        { text: "Utiliser un logiciel de géométrie dynamique pour représenter des solides.", levels: ["3e"] }
+      ],
+      "Les transformations planes": [
+        { text: "Comprendre l'effet d'une translation, d'une symétrie (axiale et centrale), d'une rotation, d'une homothétie sur une figure.", levels: ["5e", "4e", "3e"] },
+        { text: "Mobiliser les connaissances des figures, des configurations et des transformations au programme pour déterminer des grandeurs géométriques.", levels: ["3e"] },
+        { text: "Utiliser un rapport de réduction ou d'agrandissement (architecture, maquettes) pour calculer des longueurs, des aires, des volumes.", levels: ["4e"] },
+        { text: "Utiliser des transformations pour calculer des grandeurs géométriques.", levels: ["4e", "3e"] },
+        { text: "Faire le lien entre la proportionnalité et certaines configurations ou transformations géométriques (agrandissement réduction, triangles semblables, homothéties).", levels: ["4e", "3e"] }
+      ],
+      "Translations": [
+        { text: "Comprendre l'effet d'une translation, d'une symétrie (axiale et centrale), d'une rotation, d'une homothétie sur une figure.", levels: ["4e"] }
+      ],
+      "Rotations": [
+        { text: "Comprendre l'effet d'une translation, d'une symétrie (axiale et centrale), d'une rotation, d'une homothétie sur une figure.", levels: ["3e"] }
+      ],
+      "Symétries centrales": [
+        { text: "Comprendre l'effet d'une translation, d'une symétrie (axiale et centrale), d'une rotation, d'une homothétie sur une figure.", levels: ["5e"] }
+      ],
+      "Symétrie axiale, réflexion": [
+        { text: "Comprendre l'effet d'une translation, d'une symétrie (axiale et centrale), d'une rotation, d'une homothétie sur une figure.", levels: ["5e"] }
+      ],
+      "Composition de transformations": [
+        { text: "Comprendre l'effet d'une translation, d'une symétrie (axiale et centrale), d'une rotation, d'une homothétie sur une figure.", levels: ["3e"] },
+        { text: "Mobiliser les connaissances des figures, des configurations et des transformations au programme pour déterminer des grandeurs géométriques.", levels: ["3e"] }
+      ]
+    };
+
+    function competencesHtmlFor(title) {
+      const list = crpeCompetencesCycle4[title];
+      if (!list) return DEFAULT_COMPETENCES_HTML;
+      const items = list.map((c) => {
+        const badges = c.levels.map((lvl) => `<span class="crpe-level-badge crpe-level-${lvl}">${lvl}</span>`).join('');
+        return `<li><span class="crpe-competence-text">${c.text}</span><span class="crpe-level-badges">${badges}</span></li>`;
+      }).join('');
+      return `<p><em>Compétences associées, programme de mathématiques du cycle 4 (BOEN n°31 du 30 juillet 2020) et, pour la partie « Nombres et calculs, algèbre », programme de seconde générale et technologique, avec la ou les classes (5e/4e/3e/2nde) où elles sont travaillées.</em></p><ul class="crpe-competence-list">${items}</ul>`;
+    }
 
     function activateTab(tabName) {
       tabs.forEach((t) => t.classList.toggle('is-active', t.getAttribute('data-tab') === tabName));
@@ -2782,6 +3087,7 @@ h1.hero-title{
 
     function openModal(title) {
       titleEl.textContent = title;
+      if (competencesPanel) competencesPanel.innerHTML = competencesHtmlFor(title);
       activateTab('contenu');
       overlay.classList.add('is-open');
     }
