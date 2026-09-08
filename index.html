@@ -672,6 +672,129 @@ h1.hero-title{
   grid-template-columns:repeat(auto-fit, minmax(140px, 1fr));
   gap:10px;
 }
+/* Ressources par grand thème : carrousel horizontal de cartes roses, une par thème */
+.crpe-theme-pink-grid{
+  display:flex;
+  flex-wrap:nowrap;
+  gap:18px;
+  overflow-x:auto;
+  overflow-y:hidden;
+  padding:6px 6px 18px;
+  scroll-snap-type:x proximity;
+  scrollbar-width:thin;
+  scrollbar-color:var(--accent) transparent;
+}
+.crpe-theme-pink-grid::-webkit-scrollbar{ height:8px; }
+.crpe-theme-pink-grid::-webkit-scrollbar-thumb{ background:var(--accent); border-radius:999px; }
+.crpe-theme-pink-grid::-webkit-scrollbar-track{ background:transparent; }
+.crpe-theme-pink-card{
+  position:relative;
+  flex:0 0 auto;
+  width:auto;
+  scroll-snap-align:start;
+  background:#FDF6F9;
+  border:1px solid var(--line);
+  border-radius:var(--radius-lg);
+  padding:22px;
+}
+.crpe-theme-pink-card-title{
+  margin:0 0 16px;
+  font-size:1.05rem;
+  font-weight:800;
+  color:#2A1420;
+}
+.crpe-subtheme-grid{
+  display:grid;
+  grid-auto-flow:column;
+  grid-template-rows:repeat(2, auto);
+  grid-auto-columns:170px;
+  gap:10px;
+}
+.crpe-subtheme-btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  min-height:52px;
+  padding:10px 12px;
+  border:1px solid var(--line);
+  border-radius:var(--radius-md);
+  background:#FFFFFF;
+  color:#8A2450;
+  font-family:inherit;
+  font-size:0.78rem;
+  font-weight:700;
+  line-height:1.3;
+  cursor:pointer;
+  transition:border-color 0.2s, background 0.2s;
+}
+.crpe-subtheme-btn:hover{
+  border-color:var(--accent);
+  background:#FDF6F9;
+}
+@media (max-width:700px){
+  .crpe-subtheme-grid{ grid-auto-columns:130px; }
+}
+/* Modal de ressources par sous-thème */
+.crpe-modal-overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(20,8,14,0.6);
+  z-index:1000;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+.crpe-modal-overlay.is-open{ display:flex; }
+.crpe-modal{
+  width:100%;
+  max-width:640px;
+  max-height:80vh;
+  overflow-y:auto;
+  background:var(--bg-panel, #1A0E14);
+  border:1px solid var(--line);
+  border-radius:var(--radius-lg);
+  padding:26px;
+  box-shadow:0 30px 70px rgba(0,0,0,0.5);
+}
+.crpe-modal-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:14px;
+  margin-bottom:18px;
+}
+.crpe-modal-title{
+  margin:0;
+  font-size:1.15rem;
+  font-weight:800;
+  color:#FFFFFF;
+}
+.crpe-modal-close{
+  flex-shrink:0;
+  width:32px;
+  height:32px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid var(--line);
+  border-radius:999px;
+  background:transparent;
+  color:var(--grey-dim);
+  cursor:pointer;
+  font-size:1rem;
+  line-height:1;
+}
+.crpe-modal-close:hover{
+  border-color:var(--accent);
+  color:var(--accent);
+}
+.crpe-modal-body{
+  color:var(--grey-dim);
+  font-size:0.85rem;
+  line-height:1.5;
+}
 .crpe-annales-2026-row{
   display:flex;
   gap:14px;
@@ -861,11 +984,10 @@ h1.hero-title{
       <a class="nav-seclink is-active" href="#chap1">1. Résumé du concours</a>
       <a class="nav-seclink" href="#chap2">2. Nombres et calculs</a>
       <a class="nav-seclink" href="#chap3">3. Organisation et gestion de données</a>
-      <a class="nav-seclink" href="#chap4">4. Grandeurs et mesures</a>
+      <a class="nav-seclink" href="#chap4">4. Grandeurs et mesures, Algorithmie</a>
       <a class="nav-seclink" href="#chap5">5. Géométrie</a>
-      <a class="nav-seclink" href="#chap6">6. Algorithmie</a>
-      <a class="nav-seclink" href="#chap7">7. Annales</a>
-      <a class="nav-seclink" href="#chap8">8. Rapports de jury</a>
+      <a class="nav-seclink" href="#chap7">6. Annales</a>
+      <a class="nav-seclink" href="#chap8">7. Rapports de jury</a>
     </div>
   </div>
 
@@ -940,8 +1062,50 @@ h1.hero-title{
         <span class="snt-chapter-num">02</span>
         <h2>Nombres et calculs</h2>
       </div>
-      <div class="snt-big-card">
-        <div class="snt-big-card-placeholder">Contenu à venir</div>
+      <div class="crpe-theme-pink-grid">
+        <div class="crpe-theme-pink-card">
+          <h3 class="crpe-theme-pink-card-title">Les nombres</h3>
+          <div class="crpe-subtheme-grid">
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Entiers naturels">Entiers naturels</button>
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Nombres rationnels">Nombres rationnels</button>
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Nombres irrationnels">Nombres irrationnels</button>
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Nombres réels">Nombres réels</button>
+          </div>
+        </div>
+        <div class="crpe-theme-pink-card">
+          <h3 class="crpe-theme-pink-card-title">Arithmétique</h3>
+          <div class="crpe-subtheme-grid">
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Opérations">Opérations</button>
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Modes de calcul">Modes de calcul</button>
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Multiples et diviseurs">Multiples et diviseurs</button>
+          </div>
+        </div>
+        <div class="crpe-theme-pink-card">
+          <h3 class="crpe-theme-pink-card-title">Calcul algébrique, équations et inéquations</h3>
+          <div class="crpe-subtheme-grid">
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Calcul algébrique">Calcul algébrique</button>
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Équations">Équations</button>
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Inéquations du premier degré">Inéquations du premier degré</button>
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Systèmes de deux équations">Systèmes de deux équations</button>
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Mise en équation de problèmes">Mise en équation de problèmes</button>
+          </div>
+        </div>
+        <div class="crpe-theme-pink-card">
+          <h3 class="crpe-theme-pink-card-title">Fonctions et suites</h3>
+          <div class="crpe-subtheme-grid">
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Fonctions numériques">Fonctions numériques</button>
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Fonctions usuelles (affines, linéaires...)">Fonctions usuelles (affines, linéaires...)</button>
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Suites numériques">Suites numériques</button>
+          </div>
+        </div>
+        <div class="crpe-theme-pink-card">
+          <h3 class="crpe-theme-pink-card-title">Proportionnalité</h3>
+          <div class="crpe-subtheme-grid">
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Proportionnalité simple">Proportionnalité simple</button>
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Problèmes de proportionnalité">Problèmes de proportionnalité</button>
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Proportionnalité multiple, partages">Proportionnalité multiple, partages</button>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -952,8 +1116,28 @@ h1.hero-title{
         <span class="snt-chapter-num">03</span>
         <h2>Organisation et gestion de données</h2>
       </div>
-      <div class="snt-big-card">
-        <div class="snt-big-card-placeholder">Contenu à venir</div>
+      <div class="crpe-theme-pink-grid">
+        <div class="crpe-theme-pink-card">
+          <h3 class="crpe-theme-pink-card-title">Statistiques</h3>
+          <div class="crpe-subtheme-grid">
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Vocabulaire">Vocabulaire</button>
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Série statistique et paramètres">Série statistique et paramètres</button>
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Représentations graphiques">Représentations graphiques</button>
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Applications">Applications</button>
+          </div>
+        </div>
+        <div class="crpe-theme-pink-card">
+          <h3 class="crpe-theme-pink-card-title">Probabilités</h3>
+          <div class="crpe-subtheme-grid">
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Vocabulaire des probabilités">Vocabulaire des probabilités</button>
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Propriétés des probabilités">Propriétés des probabilités</button>
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Calcul d'une probabilité simple">Calcul d'une probabilité simple</button>
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Dénombrement">Dénombrement</button>
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Formules de dénombrement">Formules de dénombrement</button>
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Événements indépendants">Événements indépendants</button>
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Probabilité conditionnelle">Probabilité conditionnelle</button>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -962,10 +1146,26 @@ h1.hero-title{
     <div class="snt-section-inner">
       <div class="snt-chapter-head">
         <span class="snt-chapter-num">04</span>
-        <h2>Grandeurs et mesures</h2>
+        <h2>Grandeurs et mesures, Algorithmie</h2>
       </div>
-      <div class="snt-big-card">
-        <div class="snt-big-card-placeholder">Contenu à venir</div>
+      <div class="crpe-theme-pink-grid">
+        <div class="crpe-theme-pink-card">
+          <h3 class="crpe-theme-pink-card-title">Grandeurs et mesures</h3>
+          <div class="crpe-subtheme-grid">
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Grandeurs fondamentales">Grandeurs fondamentales</button>
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Mesurer une grandeur">Mesurer une grandeur</button>
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Grandeurs simples">Grandeurs simples</button>
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Grandeurs composées">Grandeurs composées</button>
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Notation scientifique">Notation scientifique</button>
+          </div>
+        </div>
+        <div class="crpe-theme-pink-card">
+          <h3 class="crpe-theme-pink-card-title">Scratch et tableur</h3>
+          <div class="crpe-subtheme-grid">
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Scratch">Scratch</button>
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Tableur">Tableur</button>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -976,20 +1176,47 @@ h1.hero-title{
         <span class="snt-chapter-num">05</span>
         <h2>Géométrie</h2>
       </div>
-      <div class="snt-big-card">
-        <div class="snt-big-card-placeholder">Contenu à venir</div>
-      </div>
-    </div>
-  </section>
-
-  <section class="snt-section" id="chap6">
-    <div class="snt-section-inner">
-      <div class="snt-chapter-head">
-        <span class="snt-chapter-num">06</span>
-        <h2>Algorithmie</h2>
-      </div>
-      <div class="snt-big-card">
-        <div class="snt-big-card-placeholder">Contenu à venir</div>
+      <div class="crpe-theme-pink-grid">
+        <div class="crpe-theme-pink-card">
+          <h3 class="crpe-theme-pink-card-title">Géométrie plane</h3>
+          <div class="crpe-subtheme-grid">
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Premiers éléments de géométrie plane">Premiers éléments de géométrie plane</button>
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Les angles">Les angles</button>
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Angles et droites parallèles">Angles et droites parallèles</button>
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Tracés à la règle et au compas">Tracés à la règle et au compas</button>
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Propriété de Thalès">Propriété de Thalès</button>
+          </div>
+        </div>
+        <div class="crpe-theme-pink-card">
+          <h3 class="crpe-theme-pink-card-title">Triangles, cercles et polygones</h3>
+          <div class="crpe-subtheme-grid">
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Le cercle">Le cercle</button>
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Les triangles">Les triangles</button>
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Les polygones">Les polygones</button>
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Les quadrilatères">Les quadrilatères</button>
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Les polygones réguliers">Les polygones réguliers</button>
+          </div>
+        </div>
+        <div class="crpe-theme-pink-card">
+          <h3 class="crpe-theme-pink-card-title">Volumes et patrons</h3>
+          <div class="crpe-subtheme-grid">
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Espace et plan">Espace et plan</button>
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Les polyèdres">Les polyèdres</button>
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Les patrons de polyèdres">Les patrons de polyèdres</button>
+          </div>
+        </div>
+        <div class="crpe-theme-pink-card">
+          <h3 class="crpe-theme-pink-card-title">Transformations planes</h3>
+          <div class="crpe-subtheme-grid">
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Les transformations planes">Les transformations planes</button>
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Modèles mathématiques">Modèles mathématiques</button>
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Translations">Translations</button>
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Rotations">Rotations</button>
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Symétries centrales">Symétries centrales</button>
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Symétrie axiale, réflexion">Symétrie axiale, réflexion</button>
+              <button type="button" class="crpe-subtheme-btn" data-modal-title="Composition de transformations">Composition de transformations</button>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -997,7 +1224,7 @@ h1.hero-title{
   <section class="snt-section" id="chap7">
     <div class="snt-section-inner">
       <div class="snt-chapter-head">
-        <span class="snt-chapter-num">07</span>
+        <span class="snt-chapter-num">06</span>
         <h2>Annales</h2>
       </div>
       <div class="snt-big-card">
@@ -2324,7 +2551,7 @@ h1.hero-title{
   <section class="snt-section" id="chap8">
     <div class="snt-section-inner">
       <div class="snt-chapter-head">
-        <span class="snt-chapter-num">08</span>
+        <span class="snt-chapter-num">07</span>
         <h2>Rapports de jury - Lille</h2>
       </div>
       <div class="snt-big-card">
@@ -2387,6 +2614,18 @@ h1.hero-title{
   </section>
 
 </main>
+
+<div class="crpe-modal-overlay" id="crpe-modal-overlay">
+  <div class="crpe-modal" role="dialog" aria-modal="true">
+    <div class="crpe-modal-head">
+      <h3 class="crpe-modal-title" id="crpe-modal-title"></h3>
+      <button type="button" class="crpe-modal-close" id="crpe-modal-close" aria-label="Fermer">✕</button>
+    </div>
+    <div class="crpe-modal-body" id="crpe-modal-body">
+      <p>Ressources à venir.</p>
+    </div>
+  </div>
+</div>
 
 <script>
   // Masquer la navbar au scroll vers le bas
@@ -2457,6 +2696,36 @@ h1.hero-title{
         const collapsed = wrap.classList.toggle('is-collapsed');
         btn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
       });
+    });
+  })();
+
+  // Modal de ressources par sous-thème
+  (function () {
+    const overlay = document.getElementById('crpe-modal-overlay');
+    const titleEl = document.getElementById('crpe-modal-title');
+    const closeBtn = document.getElementById('crpe-modal-close');
+    if (!overlay || !titleEl || !closeBtn) return;
+
+    function openModal(title) {
+      titleEl.textContent = title;
+      overlay.classList.add('is-open');
+    }
+    function closeModal() {
+      overlay.classList.remove('is-open');
+    }
+
+    document.querySelectorAll('.crpe-subtheme-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        openModal(btn.getAttribute('data-modal-title') || btn.textContent.trim());
+      });
+    });
+
+    closeBtn.addEventListener('click', closeModal);
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
     });
   })();
 
