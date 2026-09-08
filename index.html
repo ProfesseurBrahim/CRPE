@@ -749,9 +749,11 @@ h1.hero-title{
 .crpe-modal-overlay.is-open{ display:flex; }
 .crpe-modal{
   width:100%;
-  max-width:640px;
-  max-height:80vh;
-  overflow-y:auto;
+  max-width:1100px;
+  height:88vh;
+  max-height:900px;
+  display:flex;
+  flex-direction:column;
   background:var(--bg-panel, #1A0E14);
   border:1px solid var(--line);
   border-radius:var(--radius-lg);
@@ -764,17 +766,18 @@ h1.hero-title{
   justify-content:space-between;
   gap:14px;
   margin-bottom:18px;
+  flex-shrink:0;
 }
 .crpe-modal-title{
   margin:0;
-  font-size:1.15rem;
+  font-size:1.3rem;
   font-weight:800;
   color:#FFFFFF;
 }
 .crpe-modal-close{
   flex-shrink:0;
-  width:32px;
-  height:32px;
+  width:36px;
+  height:36px;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -783,17 +786,60 @@ h1.hero-title{
   background:transparent;
   color:var(--grey-dim);
   cursor:pointer;
-  font-size:1rem;
+  font-size:1.1rem;
   line-height:1;
 }
 .crpe-modal-close:hover{
   border-color:var(--accent);
   color:var(--accent);
 }
-.crpe-modal-body{
+.crpe-modal-tabs{
+  display:flex;
+  gap:6px;
+  padding:5px;
+  background:rgba(255,255,255,0.06);
+  border-radius:var(--radius-md);
+  margin-bottom:22px;
+  flex-shrink:0;
+}
+.crpe-modal-tab{
+  flex:1;
+  padding:12px 14px;
+  border:none;
+  border-radius:calc(var(--radius-md) - 4px);
+  background:transparent;
   color:var(--grey-dim);
-  font-size:0.85rem;
-  line-height:1.5;
+  font-family:inherit;
+  font-size:0.92rem;
+  font-weight:700;
+  text-align:center;
+  cursor:pointer;
+  transition:color 0.2s, background 0.2s;
+}
+.crpe-modal-tab:hover{
+  color:#FFFFFF;
+}
+.crpe-modal-tab.is-active{
+  color:#8A2450;
+  background:#FFFFFF;
+}
+.crpe-modal-panels{
+  flex:1;
+  overflow-y:auto;
+}
+.crpe-modal-panel{
+  display:none;
+  color:var(--grey-dim);
+  font-size:0.9rem;
+  line-height:1.6;
+}
+.crpe-modal-panel.is-active{
+  display:block;
+}
+@media (max-width:700px){
+  .crpe-modal{ height:92vh; padding:18px; }
+  .crpe-modal-title{ font-size:1.05rem; }
+  .crpe-modal-tab{ padding:9px 12px; font-size:0.78rem; }
 }
 .crpe-annales-2026-row{
   display:flex;
@@ -2621,8 +2667,29 @@ h1.hero-title{
       <h3 class="crpe-modal-title" id="crpe-modal-title"></h3>
       <button type="button" class="crpe-modal-close" id="crpe-modal-close" aria-label="Fermer">✕</button>
     </div>
-    <div class="crpe-modal-body" id="crpe-modal-body">
-      <p>Ressources à venir.</p>
+    <div class="crpe-modal-tabs" role="tablist">
+      <button type="button" class="crpe-modal-tab is-active" data-tab="contenu">Contenu</button>
+      <button type="button" class="crpe-modal-tab" data-tab="competences">Compétences</button>
+      <button type="button" class="crpe-modal-tab" data-tab="cours">Cours</button>
+      <button type="button" class="crpe-modal-tab" data-tab="exercices">Exercices</button>
+      <button type="button" class="crpe-modal-tab" data-tab="annales">Annales</button>
+    </div>
+    <div class="crpe-modal-panels">
+      <div class="crpe-modal-panel is-active" data-panel="contenu">
+        <p>Contenu à venir.</p>
+      </div>
+      <div class="crpe-modal-panel" data-panel="competences">
+        <p>Compétences à venir.</p>
+      </div>
+      <div class="crpe-modal-panel" data-panel="cours">
+        <p>Cours à venir.</p>
+      </div>
+      <div class="crpe-modal-panel" data-panel="exercices">
+        <p>Exercices à venir.</p>
+      </div>
+      <div class="crpe-modal-panel" data-panel="annales">
+        <p>Annales à venir.</p>
+      </div>
     </div>
   </div>
 </div>
@@ -2704,10 +2771,18 @@ h1.hero-title{
     const overlay = document.getElementById('crpe-modal-overlay');
     const titleEl = document.getElementById('crpe-modal-title');
     const closeBtn = document.getElementById('crpe-modal-close');
+    const tabs = document.querySelectorAll('.crpe-modal-tab');
+    const panels = document.querySelectorAll('.crpe-modal-panel');
     if (!overlay || !titleEl || !closeBtn) return;
+
+    function activateTab(tabName) {
+      tabs.forEach((t) => t.classList.toggle('is-active', t.getAttribute('data-tab') === tabName));
+      panels.forEach((p) => p.classList.toggle('is-active', p.getAttribute('data-panel') === tabName));
+    }
 
     function openModal(title) {
       titleEl.textContent = title;
+      activateTab('contenu');
       overlay.classList.add('is-open');
     }
     function closeModal() {
@@ -2718,6 +2793,10 @@ h1.hero-title{
       btn.addEventListener('click', () => {
         openModal(btn.getAttribute('data-modal-title') || btn.textContent.trim());
       });
+    });
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => activateTab(tab.getAttribute('data-tab')));
     });
 
     closeBtn.addEventListener('click', closeModal);
