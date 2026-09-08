@@ -159,6 +159,59 @@ body::before{
 }
 .nav-link-active:hover{ background:var(--accent); }
 
+.nav-grade-dropdown{ position:relative; }
+.nav-grade-dropdown > .nav-link{ cursor:pointer; }
+/* comble l'espace entre le bouton et le menu pour ne pas perdre le hover */
+.nav-grade-dropdown::after{
+  content:"";
+  position:absolute;
+  top:100%;
+  left:0;
+  right:0;
+  height:18px;
+}
+.nav-grade-menu{
+  position:absolute;
+  top:calc(100% + 8px);
+  right:0;
+  min-width:150px;
+  display:flex; flex-direction:column;
+  padding:6px;
+  border-radius:12px;
+  background:rgba(26,10,17,0.92);
+  backdrop-filter:blur(14px);
+  border:1px solid var(--line);
+  box-shadow:0 10px 30px rgba(0,0,0,0.45);
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(4px);
+  pointer-events:none;
+  /* léger délai avant la fermeture, pour laisser le temps de glisser la souris jusqu'au sous-menu */
+  transition:opacity 0.15s ease 0.05s, transform 0.15s ease 0.05s, visibility 0s linear 0.2s;
+  z-index:1001;
+}
+.nav-grade-dropdown:hover .nav-grade-menu,
+.nav-grade-dropdown:focus-within .nav-grade-menu{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+  transform:translateY(0);
+  transition:opacity 0.18s ease, transform 0.18s ease, visibility 0s;
+}
+.nav-grade-menu a{
+  display:flex; align-items:center;
+  height:30px; padding:0 12px;
+  font-size:0.75rem; font-weight:600;
+  border-radius:8px;
+  color:var(--grey);
+  text-decoration:none;
+  white-space:nowrap;
+  transition:background 0.2s, color 0.2s;
+}
+.nav-grade-menu a:hover{ background:rgba(232,89,138,0.14); color:var(--white); }
+.nav-grade-menu a.is-active{ background:var(--accent); color:#2a0d18; }
+@media (max-width:900px){ .nav-grades{ display:none; } }
+
 /* ============================================================
    OUTIL FLOTTANT
    ============================================================ */
@@ -1078,7 +1131,44 @@ h1.hero-title{
   </div>
 
   <div class="nav-side nav-grades">
-    <div class="nav-link nav-link-active">CRPE</div>
+    <div class="nav-grade-dropdown">
+      <a class="nav-link" href="https://professeurbrahim.github.io/Accueil/" title="Espace collège">Collège</a>
+      <div class="nav-grade-menu">
+        <a href="https://professeurbrahim.github.io/6eme/">6e</a>
+        <a href="https://professeurbrahim.github.io/5eme/">5e</a>
+        <a href="https://professeurbrahim.github.io/4eme/">4e</a>
+        <a href="https://professeurbrahim.github.io/3eme/">3e</a>
+      </div>
+    </div>
+    <div class="nav-grade-dropdown">
+      <a class="nav-link" href="https://professeurbrahim.github.io/2nde/">2nde</a>
+      <div class="nav-grade-menu">
+        <a href="https://professeurbrahim.github.io/2nde/">2nde</a>
+        <a href="https://professeurbrahim.github.io/SNT/">SNT</a>
+      </div>
+    </div>
+    <div class="nav-grade-dropdown">
+      <a class="nav-link" href="#">1ère</a>
+      <div class="nav-grade-menu">
+        <a href="#">1ère Ens. Sci.</a>
+        <a href="#">1ère Spé</a>
+        <a href="#">1ère Techno</a>
+      </div>
+    </div>
+    <div class="nav-grade-dropdown">
+      <a class="nav-link" href="#">Term</a>
+      <div class="nav-grade-menu">
+        <a href="#">Term Ens. Sci.</a>
+        <a href="#">Term Spé</a>
+        <a href="#">Term Techno</a>
+      </div>
+    </div>
+    <div class="nav-grade-dropdown">
+      <a class="nav-link nav-link-active" href="#" title="Espace supérieur">Supérieur</a>
+      <div class="nav-grade-menu">
+        <a class="is-active" href="https://professeurbrahim.github.io/CRPE/">CRPE</a>
+      </div>
+    </div>
   </div>
 </nav>
 
