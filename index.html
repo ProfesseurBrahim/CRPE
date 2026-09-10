@@ -1115,6 +1115,130 @@ h1.hero-title{
 .subtheme-level-badge[data-level="n2"]{ background:#2E7FB8; }
 .subtheme-level-badge[data-level="n3"]{ background:#1B5A8C; }
 .subtheme-level-badge[data-level="note"]{ background:#D98A2B; }
+.subtheme-level-badge[data-level="2nde"]{ background:linear-gradient(135deg,#4FB08A,#2C8C68); }
+
+.subtheme-annales-item{
+  flex-wrap:wrap;
+  row-gap:6px;
+}
+.subtheme-annales-year{
+  flex-shrink:0;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:44px;
+  height:22px;
+  padding:0 9px;
+  border-radius:999px;
+  font-size:0.68rem;
+  font-weight:800;
+  letter-spacing:0.02em;
+  color:#fff;
+  background:linear-gradient(135deg, var(--accent), #B8386A);
+  white-space:nowrap;
+}
+.subtheme-annales-doc{
+  flex-shrink:0;
+  display:inline-flex;
+  align-items:center;
+  height:22px;
+  padding:0 9px;
+  border-radius:8px;
+  font-size:0.68rem;
+  font-weight:600;
+  color:var(--grey);
+  background:rgba(232,89,138,0.08);
+  border:1px solid var(--line);
+  white-space:nowrap;
+}
+.subtheme-annales-ex{
+  flex-shrink:0;
+  display:inline-flex;
+  align-items:center;
+  height:22px;
+  font-size:0.72rem;
+  font-weight:800;
+  letter-spacing:0.01em;
+  color:var(--accent);
+  white-space:nowrap;
+}
+.subtheme-annales-title{
+  flex:1;
+  min-width:140px;
+  color:var(--white);
+}
+
+/* Groupement par année dans l'onglet Annales */
+.subtheme-annales-year-block{ margin:0 0 20px; }
+.subtheme-annales-year-block:last-child{ margin-bottom:0; }
+.subtheme-annales-year-row{
+  display:flex;
+  align-items:flex-start;
+  gap:14px;
+}
+.subtheme-annales-year-badge{
+  flex-shrink:0;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:56px;
+  height:30px;
+  padding:0 14px;
+  margin-top:1px;
+  border-radius:999px;
+  font-size:0.82rem;
+  font-weight:800;
+  letter-spacing:0.02em;
+  color:#fff;
+  background:linear-gradient(135deg,#8A7FE0,#5F52B8);
+}
+.subtheme-annales-chips{
+  flex:1;
+  min-width:0;
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+.subtheme-annales-chip{
+  display:inline-flex;
+  align-items:center;
+  max-width:100%;
+  padding:2px 0;
+}
+.subtheme-annales-capsule{
+  flex-shrink:0;
+  display:inline-flex;
+  align-items:stretch;
+  min-height:28px;
+  border-radius:8px;
+  overflow:hidden;
+  max-width:100%;
+}
+.subtheme-annales-capsule-doc{
+  display:inline-flex;
+  align-items:center;
+  padding:0 11px;
+  font-size:0.74rem;
+  font-weight:700;
+  color:#BFE3F5;
+  background:#1B3A52;
+  white-space:nowrap;
+}
+.subtheme-annales-capsule-ex{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  padding:0 12px;
+  font-size:0.78rem;
+  font-weight:600;
+  color:#fff;
+  background:#2E7FB8;
+  white-space:normal;
+}
+.subtheme-annales-capsule-ex b{
+  font-weight:800;
+  letter-spacing:0.01em;
+}
 .subtheme-modal-list li span.subtheme-modal-item-text{ flex:1; }
 
 body.modal-open{ overflow:hidden; }
@@ -1291,13 +1415,12 @@ body.modal-open{ overflow:hidden; }
         <div class="crpe-theme-pink-card">
           <h3 class="crpe-theme-pink-card-title">Nombres et calculs — Programme de seconde</h3>
           <div class="crpe-subtheme-grid">
-              <span class="crpe-subtheme-btn">Ensembles de nombres (N, Z, D, Q, R)</span>
-              <span class="crpe-subtheme-btn">Intervalles de R</span>
-              <span class="crpe-subtheme-btn">Puissances entières et rationnelles, racines n-ièmes</span>
+              <span class="crpe-subtheme-btn">Arithmétique (multiples, diviseurs, parité)</span>
+              <span class="crpe-subtheme-btn">Ensembles de nombres (ℝ, 𝔻, ℚ) et irrationnels</span>
+              <span class="crpe-subtheme-btn">Intervalles de ℝ</span>
+              <span class="crpe-subtheme-btn">Puissances entières, racines carrées</span>
               <span class="crpe-subtheme-btn">Calcul littéral avancé, identités remarquables</span>
               <span class="crpe-subtheme-btn">Équations, inéquations (1er et 2nd degré simples)</span>
-              <span class="crpe-subtheme-btn">Systèmes d'équations linéaires (2 inconnues)</span>
-              <span class="crpe-subtheme-btn">Notion de fonction (généralités, vocabulaire)</span>
           </div>
         </div>
       </div>
@@ -2907,6 +3030,114 @@ body.modal-open{ overflow:hidden; }
   // Clé = texte exact du bouton. Complète cet objet au fil du temps ;
   // tout sous-thème absent affiche un contenu "à venir" par défaut.
   const subthemeData = {
+    // Nombres et calculs — Programme de seconde
+    "Arithmétique (multiples, diviseurs, parité)": {
+      competences: [
+        "2nde — Notations ℕ et ℤ ; définitions de multiple, de diviseur, de nombre pair, de nombre impair (a est multiple de b s'il existe un entier k tel que a = kb)",
+        "2nde — Modéliser et résoudre des problèmes mobilisant multiple, diviseur, parité ; démonstrations : la somme de deux multiples de a est multiple de a, le carré d'un nombre impair est impair",
+        "2nde — Présenter les fractions sous forme irréductible",
+        "2nde — Algorithmes : déterminer si un entier naturel a est multiple d'un entier naturel b ; déterminer le plus grand multiple de a inférieur ou égal à b"
+      ],
+      annales: [
+        "2026 — Groupe 1 M2 — Ex.4 — Vrai ou faux",
+        "2026 — Groupe 2 M2 — Ex.3 — Les dés",
+        "2026 — Groupe 3 M2 — Ex.2 — La régate",
+        "2026 — Créteil-Versailles — Ex.2 — Vrai ou faux",
+        "2026 — Créteil-Versailles — Ex.3 — Le siège d'Alésia",
+        "2025 — Groupe 2 — Ex.1 — Six affirmations",
+        "2025 — Groupe 3 — Ex.2 — L'énigme numérique",
+        "2024 — Groupe 1 — Ex.2 — Cinq affirmations",
+        "2024 — Groupe 2 — Ex.1 — Le tournoi sportif",
+        "2024 — Groupe 3 — Ex.1 — Les cartes et les boules",
+        "2024 — Créteil-Versailles — Ex.1 — Vrai ou faux",
+        "2023 — Groupe 3 — Ex.1 — Cinq exercices indépendants",
+        "2023 — Créteil-Versailles — Ex.6 — Nombre et son retourné"
+      ]
+    },
+    "Ensembles de nombres (ℝ, 𝔻, ℚ) et irrationnels": {
+      competences: [
+        "2nde — Ensemble ℝ des nombres réels, droite numérique ; ensemble 𝔻 des décimaux avec encadrement décimal à 10⁻ⁿ près ; ensemble ℚ des rationnels et nombres irrationnels (ex. √2, π)",
+        "2nde — Démonstrations : le nombre rationnel 1/3 n'est pas décimal ; le nombre réel √2 est irrationnel"
+      ],
+      annales: [
+        "2026 — Créteil-Versailles — Ex.2 — Vrai ou faux",
+        "2025 — Groupe 1 — Ex.4 — Nombres entiers, décimaux, rationnels",
+        "2025 — Groupe 2 — Ex.1 — Six affirmations",
+        "2024 — Groupe 1 — Ex.2 — Cinq affirmations",
+        "2024 — Groupe 2 — Ex.5 — Vrai ou faux et QCM",
+        "2023 — Groupe 3 — Ex.5 — Dix affirmations",
+        "2022 — Groupe 3 — Ex.1 — QCM"
+      ]
+    },
+    "Intervalles de ℝ": {
+      competences: [
+        "2nde — Intervalles de ℝ : représentation graphique, notations du type [a, +∞[, ] −∞, a], [a, b]",
+        "2nde — Notation en valeur absolue |a| pour la distance de a à 0, distance entre deux nombres réels ; inéquation du type |x − a| ⩽ r, intervalle solution [a − r, a + r]",
+        "2nde — Lire l'abscisse d'un nombre réel sur une droite graduée et placer un réel d'abscisse donnée ; déterminer si un nombre réel appartient à un intervalle donné",
+        "2nde — Donner un encadrement d'amplitude donnée d'un nombre réel par des décimaux ; arrondir en donnant le nombre de chiffres significatifs adapté à la situation étudiée"
+      ],
+      annales: [
+        "2024 — Groupe 2 — Ex.5 — Vrai ou faux et QCM"
+      ]
+    },
+    "Puissances entières, racines carrées": {
+      competences: [
+        "2nde — Règles de calcul sur les puissances entières relatives, sur les racines carrées ; relation √a² = |a|",
+        "2nde — Démonstration : quels que soient les réels positifs a et b, √(ab) = √a × √b",
+        "2nde — Algorithme : déterminer par balayage un encadrement de √2 d'amplitude inférieure ou égale à 10⁻ⁿ",
+        "2nde — Effectuer des calculs numériques ou littéraux mettant en jeu des puissances, des racines carrées, des écritures fractionnaires"
+      ]
+    },
+    "Calcul littéral avancé, identités remarquables": {
+      competences: [
+        "2nde — Exemples de calcul sur des expressions algébriques, en particulier des expressions fractionnaires ; choisir la forme la plus adaptée (factorisée, développée réduite) selon le problème",
+        "2nde — Sur des relations entre variables (ex. U = RI, d = vt, S = πr², V = abc, V = πr²h), exprimer une variable en fonction des autres ; cas d'une relation du premier degré ax + by = c",
+        "2nde — Approfondissements possibles : développement de (a + b + c)² et de (a + b)³"
+      ],
+      annales: [
+        "2026 — Groupe 1 M2 — Ex.1 — La visite au musée",
+        "2026 — Groupe 1 M2 — Ex.4 — Vrai ou faux",
+        "2026 — Groupe 2 M2 — Ex.1 — La cour d'école végétalisée",
+        "2025 — Créteil-Versailles — Ex.5 — Vrai ou faux",
+        "2024 — Groupe 1 — Ex.5 — Les géoplans",
+        "2024 — Groupe 2 — Ex.3 — Programme de calcul et Scratch",
+        "2024 — Groupe 3 — Ex.5 — Programmes de calcul",
+        "2023 — Groupe 2 — Ex.5 — La température",
+        "2023 — Groupe 2 — Ex.6 — Doigts et orteils",
+        "2023 — Créteil-Versailles — Ex.6 — Nombre et son retourné",
+        "2022 — Groupe 2 — Ex.5 — Fahrenheit et Celsius",
+        "2022 — Groupe 2 — Ex.6 — Multiplier avec les doigts"
+      ]
+    },
+    "Équations, inéquations (1er et 2nd degré simples)": {
+      competences: [
+        "2nde — Ensemble des solutions des équations du type ax + b = 0 et des inéquations de la forme ax + b > 0 ; équation produit nul A(x)B(x) = 0 ; équation quotient A(x)/B(x) = k, en lien avec l'ensemble de définition d'une expression",
+        "2nde — Donner l'ensemble des solutions d'une équation du premier degré (ax = b, a + x = b, ax + b = cx + d…), d'une inéquation du premier degré, ou d'une équation du type x² = a",
+        "2nde — Somme d'inégalités, produit d'une inégalité par un réel positif ou négatif (en lien avec le sens de variation d'une fonction affine) ; comparaison additive (par différence) et comparaison multiplicative (par rapport)",
+        "2nde — Modéliser un problème par une équation ou par une inéquation"
+      ],
+      annales: [
+        "2026 — Groupe 1 M2 — Ex.1 — La visite au musée",
+        "2026 — Groupe 2 M2 — Ex.1 — La cour d'école végétalisée",
+        "2026 — Groupe 2 M2 — Ex.5 — Vrai ou faux",
+        "2025 — Groupe 1 — Ex.1 — La sortie scolaire",
+        "2025 — Groupe 2 — Ex.4 — Alice et Bob et le pont",
+        "2024 — Groupe 2 — Ex.3 — Les fournisseurs de résine",
+        "2024 — Groupe 2 — Ex.3 — Programme de calcul et Scratch",
+        "2024 — Groupe 2 — Ex.5 — Vrai ou faux et QCM",
+        "2024 — Groupe 3 — Ex.2 — Les offres de téléchargement",
+        "2024 — Groupe 3 — Ex.5 — Programmes de calcul",
+        "2023 — Groupe 2 — Ex.3 — Deux programmes de calculs",
+        "2023 — Groupe 2 — Ex.5 — La température",
+        "2023 — Groupe 3 — Ex.5 — Dix affirmations",
+        "2023 — Créteil-Versailles — Ex.1 — Sortie scolaire à La Rochelle",
+        "2022 — Groupe 1 — Ex.3 — Les billes vertes, rouges et bleues",
+        "2022 — Groupe 2 — Ex.3 — Deux programmes de calculs",
+        "2022 — Groupe 2 — Ex.5 — Fahrenheit et Celsius",
+        "2022 — Groupe 3 — Ex.3 — Le potager de l'école"
+      ]
+    },
+
     // Thème A — Nombres et calculs
     "Entiers, décimaux, rationnels": {
       competences: [
@@ -2915,6 +3146,24 @@ body.modal-open{ overflow:hidden; }
         "4e — Le nombre rationnel est défini comme quotient d'un entier relatif par un entier relatif non nul ; la notion d'inverse est introduite",
         "4e — Les opérations entre fractions sont étendues à la multiplication et à la division ; comparer des rationnels et passer d'une représentation à l'autre",
         "3e — La notion de fraction irréductible est abordée, en lien avec multiples et diviseurs"
+      ],
+      annales: [
+        "2026 — Groupe 1 M2 — Ex.4 — Vrai ou faux",
+        "2026 — Groupe 2 M2 — Ex.5 — Vrai ou faux",
+        "2026 — Groupe 3 M2 — Ex.3 — Vrai ou faux",
+        "2026 — Créteil-Versailles — Ex.2 — Vrai ou faux",
+        "2025 — Groupe 1 — Ex.4 — Nombres entiers, décimaux, rationnels",
+        "2025 — Groupe 2 — Ex.1 — Six affirmations",
+        "2025 — Groupe 3 — Ex.4 — Les deux dés",
+        "2025 — Créteil-Versailles — Ex.5 — Vrai ou faux",
+        "2024 — Groupe 1 — Ex.2 — Cinq affirmations",
+        "2024 — Groupe 2 — Ex.5 — Vrai ou faux et QCM",
+        "2024 — Groupe 3 — Ex.3 — Vrai ou faux",
+        "2024 — Créteil-Versailles — Ex.1 — Vrai ou faux",
+        "2023 — Groupe 1 — Ex.2 — Le partage",
+        "2023 — Groupe 3 — Ex.5 — Dix affirmations",
+        "2023 — Créteil-Versailles — Ex.6 — Nombre et son retourné",
+        "2022 — Groupe 3 — Ex.1 — QCM"
       ]
     },
     "Nombres relatifs": {
@@ -2922,12 +3171,31 @@ body.modal-open{ overflow:hidden; }
         "5e — Construction des nombres relatifs (entiers puis décimaux), notion d'opposé ; addition et soustraction étendues aux relatifs",
         "4e — Produit et quotient de décimaux relatifs",
         "3e — Consolidation notamment lors de la résolution de problèmes"
+      ],
+      annales: [
+        "2024 — Groupe 3 — Ex.3 — Vrai ou faux"
       ]
     },
     "Écritures fractionnaire, décimale, %": {
       competences: [
         "4e — Le quotient de deux nombres décimaux peut ne pas être un nombre décimal",
         "4e — Comparer des nombres rationnels, en utiliser différentes représentations et passer de l'une à l'autre"
+      ],
+      annales: [
+        "2026 — Groupe 1 M2 — Ex.4 — Vrai ou faux",
+        "2026 — Groupe 2 M2 — Ex.5 — Vrai ou faux",
+        "2026 — Créteil-Versailles — Ex.2 — Vrai ou faux",
+        "2025 — Groupe 1 — Ex.4 — Nombres entiers, décimaux, rationnels",
+        "2025 — Groupe 2 — Ex.1 — Six affirmations",
+        "2025 — Groupe 3 — Ex.4 — Les deux dés",
+        "2025 — Créteil-Versailles — Ex.5 — Vrai ou faux",
+        "2024 — Groupe 1 — Ex.2 — Cinq affirmations",
+        "2024 — Groupe 2 — Ex.5 — Vrai ou faux et QCM",
+        "2024 — Groupe 3 — Ex.3 — Vrai ou faux",
+        "2024 — Créteil-Versailles — Ex.1 — Vrai ou faux",
+        "2023 — Groupe 1 — Ex.2 — Le partage",
+        "2023 — Groupe 3 — Ex.5 — Dix affirmations",
+        "2022 — Groupe 3 — Ex.1 — QCM"
       ]
     },
     "Divisibilité, nombres premiers, PGCD": {
@@ -2936,6 +3204,21 @@ body.modal-open{ overflow:hidden; }
         "5e — Travail sur multiples/diviseurs poursuivi (déjà vu au cycle 3) ; notion de nombre premier ; liste des nombres premiers ≤ 30",
         "4e — Détermination de la liste des nombres premiers ≤ 100, utilisée pour décomposer en facteurs premiers, reconnaître/produire des fractions égales, simplifier des fractions",
         "3e — La notion de fraction irréductible est introduite ; utilisation d'un tableur, d'un logiciel de programmation ou d'une calculatrice pour la décomposition"
+      ],
+      annales: [
+        "2026 — Groupe 1 M2 — Ex.4 — Vrai ou faux",
+        "2026 — Groupe 2 M2 — Ex.3 — Les dés",
+        "2026 — Groupe 3 M2 — Ex.2 — La régate",
+        "2026 — Créteil-Versailles — Ex.2 — Vrai ou faux",
+        "2026 — Créteil-Versailles — Ex.3 — Le siège d'Alésia",
+        "2025 — Groupe 2 — Ex.1 — Six affirmations",
+        "2025 — Groupe 3 — Ex.2 — L'énigme numérique",
+        "2024 — Groupe 1 — Ex.2 — Cinq affirmations",
+        "2024 — Groupe 2 — Ex.1 — Le tournoi sportif",
+        "2024 — Groupe 3 — Ex.1 — Les cartes et les boules",
+        "2024 — Créteil-Versailles — Ex.1 — Vrai ou faux",
+        "2023 — Groupe 3 — Ex.1 — Cinq exercices indépendants",
+        "2023 — Créteil-Versailles — Ex.6 — Nombre et son retourné"
       ]
     },
     "Décomposition en facteurs premiers": {
@@ -2943,6 +3226,10 @@ body.modal-open{ overflow:hidden; }
         "5e — Les nombres premiers ≤ 30 sont utilisés pour la décomposition en produit de facteurs premiers, en vue de reconnaître des fractions égales",
         "4e — Décomposer des nombres en facteurs premiers (à l'aide des nombres premiers ≤ 100) pour simplifier des fractions",
         "3e — Un tableur, un logiciel de programmation ou une calculatrice permettent d'étendre la procédure de décomposition"
+      ],
+      annales: [
+        "2026 — Créteil-Versailles — Ex.3 — Le siège d'Alésia",
+        "2024 — Groupe 2 — Ex.1 — Le tournoi sportif"
       ]
     },
     "Puissances, notation scientifique": {
@@ -2961,6 +3248,20 @@ body.modal-open{ overflow:hidden; }
       competences: [
         "5e — Addition et soustraction étendues aux nombres décimaux relatifs ; addition/soustraction de fractions de dénominateurs égaux ou multiples",
         "4e — Produit et quotient de décimaux relatifs ; multiplication et division étendues aux fractions"
+      ],
+      annales: [
+        "2026 — Groupe 1 M2 — Ex.4 — Vrai ou faux",
+        "2026 — Groupe 2 M2 — Ex.5 — Vrai ou faux",
+        "2026 — Groupe 3 M2 — Ex.3 — Vrai ou faux",
+        "2025 — Groupe 1 — Ex.4 — Nombres entiers, décimaux, rationnels",
+        "2025 — Groupe 2 — Ex.1 — Six affirmations",
+        "2025 — Groupe 3 — Ex.4 — Les deux dés",
+        "2025 — Créteil-Versailles — Ex.5 — Vrai ou faux",
+        "2024 — Groupe 3 — Ex.3 — Vrai ou faux",
+        "2024 — Créteil-Versailles — Ex.1 — Vrai ou faux",
+        "2023 — Groupe 1 — Ex.2 — Le partage",
+        "2023 — Groupe 3 — Ex.5 — Dix affirmations",
+        "2022 — Groupe 3 — Ex.1 — QCM"
       ]
     },
     "Priorités opératoires": {
@@ -2986,12 +3287,32 @@ body.modal-open{ overflow:hidden; }
         "5e — La distributivité simple est utilisée tôt dans l'année pour réduire une expression du type ax + bx",
         "4e — Travail sur les formules poursuivi, notion d'identité présentée ; la structure d'une expression (somme/produit) est étudiée, distributivité simple formalisée pour développer/factoriser/réduire",
         "3e — Travail consolidé avec transformations d'expressions, programmes de calcul, mises en équation, fonctions ; double distributivité abordée"
+      ],
+      annales: [
+        "2026 — Groupe 1 M2 — Ex.1 — La visite au musée",
+        "2026 — Groupe 1 M2 — Ex.4 — Vrai ou faux",
+        "2026 — Groupe 2 M2 — Ex.1 — La cour d'école végétalisée",
+        "2025 — Groupe 1 — Ex.1 — La sortie scolaire",
+        "2025 — Créteil-Versailles — Ex.5 — Vrai ou faux",
+        "2024 — Groupe 1 — Ex.5 — Les géoplans",
+        "2024 — Groupe 2 — Ex.3 — Programme de calcul et Scratch",
+        "2024 — Groupe 3 — Ex.5 — Programmes de calcul",
+        "2023 — Groupe 2 — Ex.3 — Deux programmes de calculs",
+        "2023 — Groupe 2 — Ex.5 — La température",
+        "2023 — Groupe 2 — Ex.6 — Doigts et orteils",
+        "2023 — Créteil-Versailles — Ex.6 — Nombre et son retourné",
+        "2022 — Groupe 2 — Ex.3 — Deux programmes de calculs",
+        "2022 — Groupe 2 — Ex.5 — Fahrenheit et Celsius",
+        "2022 — Groupe 2 — Ex.6 — Multiplier avec les doigts"
       ]
     },
     "Identités remarquables": {
       competences: [
         "3e — La double distributivité est abordée ; il est possible de démontrer (a+b)(c+d) = ac+ad+bc+bd en posant k = a+b",
         "3e — La factorisation de a² − b² permet de résoudre des équations produits, notamment du type x² = a"
+      ],
+      annales: [
+        "2024 — Groupe 2 — Ex.3 — Programme de calcul et Scratch"
       ]
     },
     "Équations et inéquations du premier degré": {
@@ -2999,29 +3320,124 @@ body.modal-open{ overflow:hidden; }
         "5e — Tester par essais-erreurs des valeurs numériques dans des expressions littérales : première approche de la notion de solution, sans formalisation",
         "4e — Les notions d'inconnue et de solution d'une équation sont abordées ; mise en équation d'un problème et résolution algébrique d'une équation du premier degré (coefficients choisis progressivement)",
         "3e — La factorisation de a² − b² permet de résoudre des équations produits se ramenant au premier degré, notamment du type x² = a"
+      ],
+      annales: [
+        "2026 — Groupe 1 M2 — Ex.1 — La visite au musée",
+        "2026 — Groupe 2 M2 — Ex.1 — La cour d'école végétalisée",
+        "2026 — Groupe 2 M2 — Ex.5 — Vrai ou faux",
+        "2025 — Groupe 1 — Ex.1 — La sortie scolaire",
+        "2025 — Groupe 2 — Ex.4 — Alice et Bob et le pont",
+        "2024 — Groupe 2 — Ex.3 — Les fournisseurs de résine",
+        "2024 — Groupe 2 — Ex.3 — Programme de calcul et Scratch",
+        "2024 — Groupe 2 — Ex.5 — Vrai ou faux et QCM",
+        "2024 — Groupe 3 — Ex.2 — Les offres de téléchargement",
+        "2024 — Groupe 3 — Ex.5 — Programmes de calcul",
+        "2023 — Groupe 2 — Ex.3 — Deux programmes de calculs",
+        "2023 — Groupe 2 — Ex.5 — La température",
+        "2023 — Groupe 3 — Ex.5 — Dix affirmations",
+        "2023 — Créteil-Versailles — Ex.7 — Le problème des glaces (TIMSS)",
+        "2022 — Groupe 1 — Ex.3 — Les billes vertes, rouges et bleues",
+        "2022 — Groupe 2 — Ex.3 — Deux programmes de calculs",
+        "2022 — Groupe 2 — Ex.5 — Fahrenheit et Celsius"
       ]
     },
     "Résolution de problèmes (mise en équation)": {
       competences: [
         "4e — Aborder la mise en équation d'un problème et la résolution algébrique d'une équation du premier degré",
         "3e — Résoudre des équations produits issues d'une factorisation pour traiter un problème"
+      ],
+      annales: [
+        "2025 — Groupe 1 — Ex.1 — La sortie scolaire",
+        "2024 — Groupe 2 — Ex.3 — Programme de calcul et Scratch",
+        "2024 — Groupe 3 — Ex.5 — Programmes de calcul",
+        "2023 — Groupe 2 — Ex.3 — Deux programmes de calculs",
+        "2023 — Créteil-Versailles — Ex.7 — Le problème des glaces (TIMSS)",
+        "2022 — Groupe 2 — Ex.3 — Deux programmes de calculs"
       ]
     },
     "Reconnaître une situation de proportionnalité": {
       competences: [
         "5e — Les élèves sont confrontés à des situations relevant ou non de la proportionnalité (linéarité, passage par l'unité, coefficient de proportionnalité, déjà vus au cycle 3)"
+      ],
+      annales: [
+        "2026 — Groupe 1 M2 — Ex.1 — La visite au musée",
+        "2026 — Groupe 2 M2 — Ex.1 — La cour d'école végétalisée",
+        "2026 — Groupe 3 M2 — Ex.1 — Médailles de natation",
+        "2026 — Groupe 3 M2 — Ex.4 — Rallye vélo",
+        "2026 — Créteil-Versailles — Ex.1 — La sortie scolaire",
+        "2025 — Groupe 2 — Ex.2 — Du lait et du beurre",
+        "2025 — Groupe 3 — Ex.1 — Vrai ou faux",
+        "2025 — Groupe 3 — Ex.3 — Les déchets ménagers",
+        "2024 — Groupe 3 — Ex.1 — Les cartes et les boules",
+        "2024 — Groupe 3 — Ex.6 — Les saupoudreurs de stevia",
+        "2024 — Créteil-Versailles — Ex.4 — La dalle de terrasse",
+        "2023 — Groupe 1 — Ex.4 — Les fraises",
+        "2023 — Créteil-Versailles — Ex.2 — Les appuis de la cour d'école",
+        "2022 — Groupe 3 — Ex.3 — Le potager de l'école"
       ]
     },
     "Coefficient, produit en croix, règle de trois": {
       competences: [
         "5e — Procédures variées pour résoudre des problèmes de proportionnalité (linéarité, passage par l'unité, coefficient)",
         "4e — Le calcul d'une quatrième proportionnelle est systématisé, avec diversification des points de vue (représentations graphiques, calcul littéral, géométrie)"
+      ],
+      annales: [
+        "2026 — Groupe 1 M2 — Ex.1 — La visite au musée",
+        "2026 — Groupe 2 M2 — Ex.1 — La cour d'école végétalisée",
+        "2026 — Groupe 3 M2 — Ex.1 — Médailles de natation",
+        "2026 — Groupe 3 M2 — Ex.4 — Rallye vélo",
+        "2026 — Créteil-Versailles — Ex.1 — La sortie scolaire",
+        "2025 — Groupe 2 — Ex.2 — Du lait et du beurre",
+        "2025 — Groupe 3 — Ex.1 — Vrai ou faux",
+        "2025 — Groupe 3 — Ex.3 — Les déchets ménagers",
+        "2024 — Groupe 3 — Ex.1 — Les cartes et les boules",
+        "2024 — Groupe 3 — Ex.6 — Les saupoudreurs de stevia",
+        "2024 — Créteil-Versailles — Ex.4 — La dalle de terrasse",
+        "2023 — Groupe 1 — Ex.4 — Les fraises",
+        "2023 — Créteil-Versailles — Ex.2 — Les appuis de la cour d'école",
+        "2022 — Groupe 3 — Ex.3 — Le potager de l'école"
       ]
     },
     "Pourcentages, échelles, vitesses, évolutions": {
       competences: [
         "4e — Problèmes de géométrie relevant de la proportionnalité (configuration de Thalès, agrandissement/réduction)",
         "3e — Lien entre taux d'évolution et coefficient multiplicateur, et entre proportionnalité et fonctions linéaires ; champ élargi aux homothéties, triangles semblables, configurations de Thalès"
+      ],
+      annales: [
+        "2026 — Groupe 1 M2 — Ex.1 — La visite au musée",
+        "2026 — Groupe 1 M2 — Ex.4 — Vrai ou faux",
+        "2026 — Groupe 2 M2 — Ex.1 — La cour d'école végétalisée",
+        "2026 — Groupe 2 M2 — Ex.2 — La course longue",
+        "2026 — Groupe 3 M2 — Ex.1 — Médailles de natation",
+        "2026 — Groupe 3 M2 — Ex.2 — La régate",
+        "2026 — Créteil-Versailles — Ex.1 — La sortie scolaire",
+        "2025 — Groupe 1 — Ex.3 — La fosse, la piscine et les longueurs",
+        "2025 — Groupe 2 — Ex.2 — Du lait et du beurre",
+        "2025 — Groupe 2 — Ex.4 — Alice et Bob et le pont",
+        "2025 — Groupe 3 — Ex.1 — Vrai ou faux",
+        "2025 — Groupe 3 — Ex.3 — Les déchets ménagers",
+        "2025 — Créteil-Versailles — Ex.1 — La zone de jeu et le relais",
+        "2025 — Créteil-Versailles — Ex.2 — Le test physique",
+        "2025 — Créteil-Versailles — Ex.5 — Vrai ou faux",
+        "2024 — Groupe 1 — Ex.4 — La course à pied",
+        "2024 — Groupe 2 — Ex.1 — Le tournoi sportif",
+        "2024 — Groupe 2 — Ex.2 — La cour d'école",
+        "2024 — Groupe 2 — Ex.4 — Le cuisinier et les gâteaux",
+        "2024 — Groupe 3 — Ex.2 — Les offres de téléchargement",
+        "2024 — Groupe 3 — Ex.3 — Vrai ou faux",
+        "2024 — Créteil-Versailles — Ex.4 — La dalle de terrasse",
+        "2023 — Groupe 1 — Ex.1 — La randonnée à vélo",
+        "2023 — Groupe 1 — Ex.4 — Les fraises",
+        "2023 — Groupe 2 — Ex.1 — La course solidaire d'action contre la faim",
+        "2023 — Groupe 3 — Ex.2 — Le cross de l'école",
+        "2023 — Groupe 3 — Ex.5 — Dix affirmations",
+        "2023 — Créteil-Versailles — Ex.1 — Sortie scolaire à La Rochelle",
+        "2023 — Créteil-Versailles — Ex.5 — Salaires d'une entreprise",
+        "2022 — Groupe 1 — Ex.1 — Un biathlon à l'école primaire",
+        "2022 — Groupe 2 — Ex.1 — La course solidaire",
+        "2022 — Groupe 3 — Ex.1 — QCM",
+        "2022 — Groupe 3 — Ex.2 — L'entraînement de Célia",
+        "2022 — Groupe 3 — Ex.3 — Le potager de l'école"
       ]
     },
 
@@ -3029,12 +3445,34 @@ body.modal-open{ overflow:hidden; }
     "Vocabulaire : population, caractère, effectif, fréquence": {
       competences: [
         "5e — Le traitement de données statistiques se prête à des calculs d'effectifs, de fréquences et de moyennes"
+      ],
+      annales: [
+        "2022 — Groupe 2 — Ex.1 — La course solidaire"
       ]
     },
     "Tableaux, diagrammes en bâtons, histogrammes": {
       competences: [
         "5e — Représentation de données sous forme de tableaux, diagrammes ou graphiques, à la main ou au tableur-grapheur",
         "3e — Un nouveau type de diagramme est introduit : les histogrammes pour des classes de même amplitude"
+      ],
+      annales: [
+        "2026 — Groupe 1 M2 — Ex.1 — La visite au musée",
+        "2026 — Groupe 2 M2 — Ex.2 — La course longue",
+        "2026 — Groupe 3 M2 — Ex.1 — Médailles de natation",
+        "2025 — Groupe 1 — Ex.3 — La fosse, la piscine et les longueurs",
+        "2025 — Groupe 2 — Ex.2 — Du lait et du beurre",
+        "2025 — Groupe 3 — Ex.5 — Les bougies",
+        "2025 — Créteil-Versailles — Ex.1 — La zone de jeu et le relais",
+        "2024 — Groupe 1 — Ex.4 — La course à pied",
+        "2024 — Groupe 2 — Ex.3 — Les fournisseurs de résine",
+        "2024 — Groupe 3 — Ex.2 — Les offres de téléchargement",
+        "2024 — Créteil-Versailles — Ex.4 — La dalle de terrasse",
+        "2023 — Groupe 2 — Ex.3 — Deux programmes de calculs",
+        "2023 — Groupe 3 — Ex.1 — Cinq exercices indépendants",
+        "2023 — Créteil-Versailles — Ex.5 — Salaires d'une entreprise",
+        "2022 — Groupe 1 — Ex.1 — Un biathlon à l'école primaire",
+        "2022 — Groupe 2 — Ex.1 — La course solidaire",
+        "2022 — Groupe 2 — Ex.3 — Deux programmes de calculs"
       ]
     },
     "Diagrammes circulaires": {
@@ -3047,22 +3485,68 @@ body.modal-open{ overflow:hidden; }
         "5e — Calculs d'effectifs, de fréquences et de moyennes",
         "4e — Un nouvel indicateur de position est introduit : la médiane",
         "3e — Le travail sur le calcul et l'interprétation des indicateurs de position est consolidé"
+      ],
+      annales: [
+        "2026 — Groupe 1 M2 — Ex.2 — La tombola",
+        "2026 — Groupe 2 M2 — Ex.2 — La course longue",
+        "2026 — Groupe 3 M2 — Ex.4 — Rallye vélo",
+        "2025 — Groupe 1 — Ex.3 — La fosse, la piscine et les longueurs",
+        "2025 — Groupe 3 — Ex.1 — Vrai ou faux",
+        "2025 — Groupe 3 — Ex.3 — Les déchets ménagers",
+        "2025 — Créteil-Versailles — Ex.2 — Le test physique",
+        "2024 — Groupe 1 — Ex.1 — Les pluviomètres",
+        "2024 — Groupe 1 — Ex.4 — La course à pied",
+        "2024 — Groupe 2 — Ex.1 — Le tournoi sportif",
+        "2024 — Créteil-Versailles — Ex.1 — Vrai ou faux",
+        "2023 — Créteil-Versailles — Ex.5 — Salaires d'une entreprise",
+        "2022 — Groupe 3 — Ex.2 — L'entraînement de Célia"
       ]
     },
     "Étendue, quartiles": {
       competences: [
         "3e — Un indicateur de dispersion est introduit : l'étendue"
+      ],
+      annales: [
+        "2025 — Créteil-Versailles — Ex.2 — Le test physique",
+        "2024 — Groupe 1 — Ex.1 — Les pluviomètres",
+        "2023 — Créteil-Versailles — Ex.5 — Salaires d'une entreprise",
+        "2022 — Groupe 3 — Ex.2 — L'entraînement de Célia"
       ]
     },
     "Vocabulaire : expérience aléatoire, issue, événement": {
       competences: [
         "5e — Le hasard est appréhendé à travers des expériences concrètes (pile ou face, dé, roue de loterie, urne...) ; le vocabulaire des probabilités (expérience aléatoire, issue, événement, probabilité) est utilisé"
+      ],
+      annales: [
+        "2025 — Groupe 2 — Ex.3 — Le saut en longueur",
+        "2024 — Groupe 1 — Ex.3 — Les dés"
       ]
     },
     "Probabilité (approche fréquentiste et théorique)": {
       competences: [
         "5e — Placement d'un événement sur une échelle de probabilités ; formulations du type « 2 chances sur 5 » acceptées",
         "3e — Le constat de la stabilisation des fréquences s'appuie sur la simulation d'expériences aléatoires (tableur ou logiciel de programmation)"
+      ],
+      annales: [
+        "2026 — Groupe 1 M2 — Ex.2 — La tombola",
+        "2026 — Groupe 2 M2 — Ex.3 — Les dés",
+        "2026 — Groupe 3 M2 — Ex.1 — Médailles de natation",
+        "2026 — Groupe 3 M2 — Ex.3 — Vrai ou faux",
+        "2026 — Créteil-Versailles — Ex.4 — Jeu de dés",
+        "2025 — Groupe 1 — Ex.2 — Expérience aléatoire à trois épreuves",
+        "2025 — Groupe 2 — Ex.3 — Le saut en longueur",
+        "2025 — Groupe 3 — Ex.4 — Les deux dés",
+        "2025 — Créteil-Versailles — Ex.4 — Les deux dés",
+        "2024 — Groupe 1 — Ex.3 — Les dés",
+        "2024 — Groupe 2 — Ex.1 — Le tournoi sportif",
+        "2024 — Groupe 3 — Ex.1 — Les cartes et les boules",
+        "2024 — Créteil-Versailles — Ex.2 — Le jeu de dés",
+        "2023 — Groupe 1 — Ex.6 — Les musiciens à l'école",
+        "2023 — Groupe 2 — Ex.4 — Touché coulé",
+        "2023 — Groupe 3 — Ex.4 — Lancers de dés en grande section",
+        "2023 — Créteil-Versailles — Ex.3 — Le jeu de 52 cartes",
+        "2022 — Groupe 1 — Ex.2 — Les dés lancés sur le tapis",
+        "2022 — Groupe 2 — Ex.4 — Toucher / Couler"
       ]
     },
     "Calcul de probabilités simples (équiprobabilité)": {
@@ -3070,11 +3554,33 @@ body.modal-open{ overflow:hidden; }
         "5e — Détermination de probabilités dans des situations très simples d'équiprobabilité",
         "4e — Les calculs de probabilités concernent des situations simples, ne relevant pas nécessairement du modèle équiprobable",
         "3e — Calculs de probabilités à partir de dénombrements (tableaux à double entrée ; la notion d'arbre ne figure pas au programme)"
+      ],
+      annales: [
+        "2026 — Groupe 1 M2 — Ex.2 — La tombola",
+        "2026 — Groupe 2 M2 — Ex.3 — Les dés",
+        "2026 — Groupe 3 M2 — Ex.1 — Médailles de natation",
+        "2026 — Groupe 3 M2 — Ex.3 — Vrai ou faux",
+        "2026 — Créteil-Versailles — Ex.4 — Jeu de dés",
+        "2025 — Groupe 1 — Ex.2 — Expérience aléatoire à trois épreuves",
+        "2025 — Groupe 3 — Ex.4 — Les deux dés",
+        "2025 — Créteil-Versailles — Ex.4 — Les deux dés",
+        "2024 — Groupe 2 — Ex.1 — Le tournoi sportif",
+        "2024 — Groupe 3 — Ex.1 — Les cartes et les boules",
+        "2024 — Créteil-Versailles — Ex.2 — Le jeu de dés",
+        "2023 — Groupe 1 — Ex.6 — Les musiciens à l'école",
+        "2023 — Groupe 2 — Ex.4 — Touché coulé",
+        "2023 — Groupe 3 — Ex.4 — Lancers de dés en grande section",
+        "2023 — Créteil-Versailles — Ex.3 — Le jeu de 52 cartes",
+        "2022 — Groupe 1 — Ex.2 — Les dés lancés sur le tapis",
+        "2022 — Groupe 2 — Ex.4 — Toucher / Couler"
       ]
     },
     "Événements incompatibles, contraires": {
       competences: [
         "4e — Le lien est fait entre les probabilités de deux événements contraires"
+      ],
+      annales: [
+        "2023 — Créteil-Versailles — Ex.3 — Le jeu de 52 cartes"
       ]
     },
     "Fonctions linéaires et affines": {
@@ -3082,33 +3588,105 @@ body.modal-open{ overflow:hidden; }
         "5e — La dépendance de deux grandeurs est traduite par un tableau de valeurs ou une formule",
         "4e — La dépendance est aussi traduite par un graphique ; notation et vocabulaire fonctionnels non formalisés en 4e",
         "3e — Les notions de variable, fonction, antécédent, image sont formalisées ; fonctions affines et linéaires présentées par expressions algébriques et représentations graphiques"
+      ],
+      annales: [
+        "2026 — Groupe 2 M2 — Ex.5 — Vrai ou faux",
+        "2026 — Groupe 3 M2 — Ex.3 — Vrai ou faux",
+        "2025 — Groupe 1 — Ex.1 — La sortie scolaire",
+        "2025 — Créteil-Versailles — Ex.5 — Vrai ou faux",
+        "2024 — Groupe 1 — Ex.2 — Cinq affirmations",
+        "2024 — Groupe 2 — Ex.2 — La cour d'école",
+        "2024 — Groupe 2 — Ex.3 — Les fournisseurs de résine",
+        "2024 — Groupe 3 — Ex.2 — Les offres de téléchargement",
+        "2024 — Créteil-Versailles — Ex.1 — Vrai ou faux"
       ]
     },
     "Représentation graphique, coefficient directeur": {
       competences: [
         "4e — Les représentations graphiques permettent de déterminer des images et des antécédents, interprétés selon le contexte",
         "3e — Travail sur le passage d'un mode de représentation d'une fonction (graphique, symbolique, tableau) à un autre"
+      ],
+      annales: [
+        "2024 — Groupe 2 — Ex.2 — La cour d'école",
+        "2024 — Groupe 2 — Ex.3 — Les fournisseurs de résine",
+        "2024 — Groupe 3 — Ex.2 — Les offres de téléchargement",
+        "2023 — Groupe 3 — Ex.2 — Le cross de l'école",
+        "2023 — Créteil-Versailles — Ex.1 — Sortie scolaire à La Rochelle",
+        "2022 — Groupe 3 — Ex.3 — Le potager de l'école"
       ]
     },
     "Lecture et interprétation de graphiques": {
       competences: [
         "4e — Déterminer des images et des antécédents à partir d'une représentation graphique et les interpréter selon le contexte"
+      ],
+      annales: [
+        "2024 — Groupe 2 — Ex.2 — La cour d'école",
+        "2023 — Groupe 3 — Ex.2 — Le cross de l'école",
+        "2023 — Créteil-Versailles — Ex.1 — Sortie scolaire à La Rochelle",
+        "2022 — Groupe 3 — Ex.3 — Le potager de l'école"
       ]
     },
     "Résolution graphique d'équations et inéquations": {
       competences: [
         "3e — Les fonctions sont utilisées pour modéliser des phénomènes continus et résoudre des problèmes"
+      ],
+      annales: [
+        "2025 — Groupe 1 — Ex.1 — La sortie scolaire",
+        "2024 — Groupe 2 — Ex.2 — La cour d'école",
+        "2024 — Groupe 2 — Ex.3 — Les fournisseurs de résine",
+        "2024 — Groupe 2 — Ex.5 — Vrai ou faux et QCM",
+        "2024 — Groupe 3 — Ex.2 — Les offres de téléchargement",
+        "2023 — Groupe 3 — Ex.2 — Le cross de l'école",
+        "2023 — Créteil-Versailles — Ex.1 — Sortie scolaire à La Rochelle",
+        "2022 — Groupe 3 — Ex.3 — Le potager de l'école"
       ]
     },
     "Lecture de tableaux et graphiques de la vie courante": {
       competences: [
         "Tout le cycle — Lire et interpréter des données de la vie courante sous forme de tableaux ou de diagrammes"
+      ],
+      annales: [
+        "2026 — Groupe 1 M2 — Ex.1 — La visite au musée",
+        "2026 — Groupe 2 M2 — Ex.2 — La course longue",
+        "2026 — Groupe 3 M2 — Ex.1 — Médailles de natation",
+        "2025 — Groupe 1 — Ex.3 — La fosse, la piscine et les longueurs",
+        "2025 — Groupe 2 — Ex.2 — Du lait et du beurre",
+        "2025 — Groupe 3 — Ex.5 — Les bougies",
+        "2025 — Créteil-Versailles — Ex.1 — La zone de jeu et le relais",
+        "2024 — Groupe 1 — Ex.4 — La course à pied",
+        "2024 — Groupe 2 — Ex.3 — Les fournisseurs de résine",
+        "2024 — Groupe 3 — Ex.2 — Les offres de téléchargement",
+        "2024 — Créteil-Versailles — Ex.4 — La dalle de terrasse",
+        "2023 — Groupe 2 — Ex.3 — Deux programmes de calculs",
+        "2023 — Groupe 3 — Ex.1 — Cinq exercices indépendants",
+        "2023 — Créteil-Versailles — Ex.5 — Salaires d'une entreprise",
+        "2022 — Groupe 1 — Ex.1 — Un biathlon à l'école primaire",
+        "2022 — Groupe 2 — Ex.1 — La course solidaire",
+        "2022 — Groupe 2 — Ex.3 — Deux programmes de calculs"
       ]
     },
     "Utilisation d'un tableur (formules, graphiques)": {
       competences: [
         "5e — Représentation de données au tableur-grapheur (tableaux, diagrammes)",
         "3e — Simulation d'expériences aléatoires et dénombrements à l'aide d'un tableur ou d'un logiciel de programmation"
+      ],
+      annales: [
+        "2026 — Groupe 1 M2 — Ex.1 — La visite au musée",
+        "2026 — Groupe 2 M2 — Ex.2 — La course longue",
+        "2026 — Groupe 3 M2 — Ex.1 — Médailles de natation",
+        "2025 — Groupe 1 — Ex.3 — La fosse, la piscine et les longueurs",
+        "2025 — Groupe 2 — Ex.2 — Du lait et du beurre",
+        "2025 — Groupe 3 — Ex.5 — Les bougies",
+        "2025 — Créteil-Versailles — Ex.1 — La zone de jeu et le relais",
+        "2024 — Groupe 1 — Ex.4 — La course à pied",
+        "2024 — Groupe 2 — Ex.3 — Les fournisseurs de résine",
+        "2024 — Groupe 3 — Ex.2 — Les offres de téléchargement",
+        "2024 — Créteil-Versailles — Ex.4 — La dalle de terrasse",
+        "2023 — Groupe 2 — Ex.3 — Deux programmes de calculs",
+        "2023 — Groupe 3 — Ex.1 — Cinq exercices indépendants",
+        "2023 — Créteil-Versailles — Ex.5 — Salaires d'une entreprise",
+        "2022 — Groupe 1 — Ex.1 — Un biathlon à l'école primaire",
+        "2022 — Groupe 2 — Ex.3 — Deux programmes de calculs"
       ]
     },
 
@@ -3117,16 +3695,52 @@ body.modal-open{ overflow:hidden; }
       competences: [
         "4e — Les conversions d'unités sont travaillées, notamment pour les grandeurs composées",
         "3e — Réinvestissement du calcul avec les puissances de 10 pour les conversions d'unités (ex. 1 m³ = 10⁶ cm³)"
+      ],
+      annales: [
+        "2026 — Groupe 2 M2 — Ex.2 — La course longue",
+        "2026 — Groupe 3 M2 — Ex.2 — La régate",
+        "2026 — Groupe 3 M2 — Ex.4 — Rallye vélo",
+        "2025 — Groupe 3 — Ex.3 — Les déchets ménagers",
+        "2024 — Groupe 2 — Ex.4 — Le cuisinier et les gâteaux",
+        "2023 — Créteil-Versailles — Ex.1 — Sortie scolaire à La Rochelle",
+        "2023 — Créteil-Versailles — Ex.2 — Les appuis de la cour d'école"
       ]
     },
     "Périmètres des figures usuelles": {
       competences: [
         "Tout le cycle — Mener des calculs de longueurs et exprimer les résultats dans les unités adaptées"
+      ],
+      annales: [
+        "2026 — Créteil-Versailles — Ex.3 — Le siège d'Alésia",
+        "2025 — Groupe 1 — Ex.5 — Aire et périmètre",
+        "2024 — Groupe 1 — Ex.1 — Les pluviomètres",
+        "2024 — Groupe 1 — Ex.4 — La course à pied",
+        "2024 — Groupe 1 — Ex.5 — Les géoplans",
+        "2023 — Groupe 1 — Ex.5 — La frise historique",
+        "2023 — Créteil-Versailles — Ex.1 — Sortie scolaire à La Rochelle",
+        "2022 — Groupe 2 — Ex.1 — La course solidaire",
+        "2022 — Groupe 3 — Ex.2 — L'entraînement de Célia"
       ]
     },
     "Aires : carré, rectangle, triangle, disque, trapèze": {
       competences: [
         "5e — Les formules d'aires du rectangle, du triangle et du disque sont entretenues ; enrichies par l'aire du parallélogramme"
+      ],
+      annales: [
+        "2026 — Groupe 2 M2 — Ex.1 — La cour d'école végétalisée",
+        "2026 — Groupe 3 M2 — Ex.4 — Rallye vélo",
+        "2026 — Créteil-Versailles — Ex.3 — Le siège d'Alésia",
+        "2025 — Groupe 1 — Ex.5 — Aire et périmètre",
+        "2025 — Groupe 2 — Ex.1 — Six affirmations",
+        "2025 — Créteil-Versailles — Ex.1 — La zone de jeu et le relais",
+        "2024 — Groupe 1 — Ex.5 — Les géoplans",
+        "2024 — Groupe 2 — Ex.2 — La cour d'école",
+        "2024 — Créteil-Versailles — Ex.4 — La dalle de terrasse",
+        "2023 — Groupe 1 — Ex.4 — Les fraises",
+        "2023 — Créteil-Versailles — Ex.2 — Les appuis de la cour d'école",
+        "2022 — Groupe 1 — Ex.5 — Le ballon-sonde",
+        "2022 — Groupe 2 — Ex.2 — Le rectangle",
+        "2022 — Groupe 3 — Ex.3 — Le potager de l'école"
       ]
     },
     "Volumes : cube, pavé, cylindre, prisme, pyramide, cône, sphère": {
@@ -3134,26 +3748,76 @@ body.modal-open{ overflow:hidden; }
         "5e — Le volume du pavé droit est entretenu, enrichi par le volume du prisme et du cylindre ; correspondance entre unités de volume et de contenance",
         "4e — Le lexique s'étend au volume de la pyramide et du cône (lien avec le prisme/cylindre de même base et hauteur)",
         "3e — La formule du volume d'une boule est utilisée"
+      ],
+      annales: [
+        "2026 — Groupe 1 M2 — Ex.3 — Le cross dans le parc",
+        "2026 — Groupe 2 M2 — Ex.1 — La cour d'école végétalisée",
+        "2026 — Groupe 3 M2 — Ex.4 — Rallye vélo",
+        "2026 — Créteil-Versailles — Ex.5 — Cubes unités",
+        "2025 — Groupe 1 — Ex.3 — La fosse, la piscine et les longueurs",
+        "2025 — Groupe 2 — Ex.2 — Du lait et du beurre",
+        "2025 — Groupe 3 — Ex.5 — Les bougies",
+        "2025 — Créteil-Versailles — Ex.1 — La zone de jeu et le relais",
+        "2024 — Groupe 1 — Ex.1 — Les pluviomètres",
+        "2024 — Groupe 2 — Ex.4 — Le cuisinier et les gâteaux",
+        "2024 — Groupe 3 — Ex.6 — Les saupoudreurs de stevia",
+        "2024 — Créteil-Versailles — Ex.4 — La dalle de terrasse",
+        "2023 — Groupe 1 — Ex.5 — La frise historique",
+        "2023 — Créteil-Versailles — Ex.2 — Les appuis de la cour d'école",
+        "2022 — Groupe 1 — Ex.5 — Le ballon-sonde",
+        "2022 — Groupe 3 — Ex.1 — QCM",
+        "2022 — Groupe 3 — Ex.3 — Le potager de l'école"
       ]
     },
     "Effet d'un agrandissement réduction": {
       competences: [
         "4e — Les élèves connaissent et utilisent l'effet d'un agrandissement ou d'une réduction sur les longueurs, les aires et les volumes, en lien avec la proportionnalité"
+      ],
+      annales: [
+        "2025 — Créteil-Versailles — Ex.1 — La zone de jeu et le relais",
+        "2024 — Groupe 3 — Ex.4 — Scratch et figure de base"
       ]
     },
     "Vitesse, débit, densité": {
       competences: [
         "4e — Des grandeurs produits (trafic, énergie) et des grandeurs quotients (vitesse, débit, concentration, masse volumique) sont introduites à travers la résolution de problèmes"
+      ],
+      annales: [
+        "2026 — Groupe 1 M2 — Ex.1 — La visite au musée",
+        "2026 — Groupe 1 M2 — Ex.3 — Le cross dans le parc",
+        "2026 — Groupe 2 M2 — Ex.2 — La course longue",
+        "2026 — Groupe 3 M2 — Ex.2 — La régate",
+        "2025 — Groupe 2 — Ex.4 — Alice et Bob et le pont",
+        "2025 — Groupe 3 — Ex.1 — Vrai ou faux",
+        "2025 — Créteil-Versailles — Ex.1 — La zone de jeu et le relais",
+        "2024 — Groupe 1 — Ex.4 — La course à pied",
+        "2023 — Groupe 1 — Ex.1 — La randonnée à vélo",
+        "2023 — Groupe 3 — Ex.2 — Le cross de l'école",
+        "2023 — Créteil-Versailles — Ex.1 — Sortie scolaire à La Rochelle",
+        "2022 — Groupe 1 — Ex.1 — Un biathlon à l'école primaire",
+        "2022 — Groupe 2 — Ex.1 — La course solidaire",
+        "2022 — Groupe 3 — Ex.2 — L'entraînement de Célia"
       ]
     },
     "Masse volumique": {
       competences: [
         "4e — Grandeur quotient introduite à travers la résolution de problèmes, avec sensibilisation au contrôle de cohérence des unités"
+      ],
+      annales: [
+        "2026 — Groupe 1 M2 — Ex.3 — Le cross dans le parc"
       ]
     },
     "Échelles": {
       competences: [
         "4e — Problèmes de géométrie relevant de la proportionnalité (agrandissement, réduction, configuration de Thalès)"
+      ],
+      annales: [
+        "2026 — Groupe 3 M2 — Ex.2 — La régate",
+        "2024 — Groupe 2 — Ex.2 — La cour d'école",
+        "2023 — Groupe 1 — Ex.4 — Les fraises",
+        "2023 — Groupe 2 — Ex.1 — La course solidaire d'action contre la faim",
+        "2022 — Groupe 2 — Ex.1 — La course solidaire",
+        "2022 — Groupe 3 — Ex.2 — L'entraînement de Célia"
       ]
     },
     "Calculs de durées, conversions horaires": {
@@ -3164,16 +3828,63 @@ body.modal-open{ overflow:hidden; }
     "Mesure des angles, angles remarquables": {
       competences: [
         "5e — La caractérisation angulaire du parallélisme (angles alternes-internes, angles correspondants) est énoncée ; la somme des angles d'un triangle peut être démontrée"
+      ],
+      annales: [
+        "2026 — Groupe 1 M2 — Ex.3 — Le cross dans le parc",
+        "2026 — Groupe 1 M2 — Ex.5 — Scratch et parallélogramme",
+        "2026 — Groupe 2 M2 — Ex.4 — Scratch et polygones",
+        "2024 — Groupe 1 — Ex.5 — Les géoplans",
+        "2024 — Groupe 3 — Ex.6 — Les saupoudreurs de stevia",
+        "2024 — Créteil-Versailles — Ex.5 — Le pavage du Caire"
       ]
     },
     "Pourcentages appliqués (remises, TVA, intérêts)": {
       competences: [
         "3e — Lien entre taux d'évolution et coefficient multiplicateur"
+      ],
+      annales: [
+        "2026 — Groupe 1 M2 — Ex.1 — La visite au musée",
+        "2026 — Groupe 1 M2 — Ex.4 — Vrai ou faux",
+        "2026 — Groupe 2 M2 — Ex.1 — La cour d'école végétalisée",
+        "2026 — Groupe 3 M2 — Ex.1 — Médailles de natation",
+        "2026 — Créteil-Versailles — Ex.1 — La sortie scolaire",
+        "2025 — Groupe 1 — Ex.3 — La fosse, la piscine et les longueurs",
+        "2025 — Groupe 2 — Ex.2 — Du lait et du beurre",
+        "2025 — Groupe 3 — Ex.3 — Les déchets ménagers",
+        "2025 — Créteil-Versailles — Ex.2 — Le test physique",
+        "2025 — Créteil-Versailles — Ex.5 — Vrai ou faux",
+        "2024 — Groupe 2 — Ex.1 — Le tournoi sportif",
+        "2024 — Groupe 2 — Ex.4 — Le cuisinier et les gâteaux",
+        "2024 — Groupe 3 — Ex.2 — Les offres de téléchargement",
+        "2024 — Groupe 3 — Ex.3 — Vrai ou faux",
+        "2024 — Créteil-Versailles — Ex.4 — La dalle de terrasse",
+        "2023 — Groupe 3 — Ex.5 — Dix affirmations",
+        "2023 — Créteil-Versailles — Ex.5 — Salaires d'une entreprise",
+        "2022 — Groupe 3 — Ex.1 — QCM",
+        "2022 — Groupe 3 — Ex.3 — Le potager de l'école"
       ]
     },
     "Proportionnalité appliquée aux grandeurs": {
       competences: [
         "3e — Le champ des problèmes de géométrie relevant de la proportionnalité est élargi (homothéties, triangles semblables, configurations de Thalès)"
+      ],
+      annales: [
+        "2026 — Groupe 1 M2 — Ex.1 — La visite au musée",
+        "2026 — Groupe 3 M2 — Ex.1 — Médailles de natation",
+        "2026 — Groupe 3 M2 — Ex.2 — La régate",
+        "2026 — Groupe 3 M2 — Ex.4 — Rallye vélo",
+        "2026 — Créteil-Versailles — Ex.1 — La sortie scolaire",
+        "2025 — Groupe 2 — Ex.2 — Du lait et du beurre",
+        "2025 — Groupe 3 — Ex.1 — Vrai ou faux",
+        "2025 — Groupe 3 — Ex.3 — Les déchets ménagers",
+        "2024 — Groupe 2 — Ex.2 — La cour d'école",
+        "2024 — Groupe 3 — Ex.6 — Les saupoudreurs de stevia",
+        "2023 — Groupe 1 — Ex.4 — Les fraises",
+        "2023 — Groupe 2 — Ex.1 — La course solidaire d'action contre la faim",
+        "2023 — Créteil-Versailles — Ex.2 — Les appuis de la cour d'école",
+        "2022 — Groupe 2 — Ex.1 — La course solidaire",
+        "2022 — Groupe 3 — Ex.2 — L'entraînement de Célia",
+        "2022 — Groupe 3 — Ex.3 — Le potager de l'école"
       ]
     },
 
@@ -3182,23 +3893,66 @@ body.modal-open{ overflow:hidden; }
       competences: [
         "5e — Somme des angles d'un triangle, inégalité triangulaire énoncées ; constructions de triangles à partir de longueurs/angles",
         "5e — Le parallélogramme est défini à partir d'une propriété, l'autre étant démontrée et devenant caractéristique"
+      ],
+      annales: [
+        "2025 — Groupe 2 — Ex.1 — Six affirmations",
+        "2025 — Créteil-Versailles — Ex.5 — Vrai ou faux",
+        "2024 — Groupe 3 — Ex.4 — Scratch et figure de base",
+        "2023 — Groupe 1 — Ex.3 — Des triangles avec Scratch",
+        "2023 — Groupe 2 — Ex.2 — Le rectangle",
+        "2023 — Groupe 3 — Ex.3 — Des polygones avec Scratch",
+        "2022 — Groupe 1 — Ex.4 — Des parallélogrammes avec Scratch",
+        "2022 — Groupe 2 — Ex.2 — Le rectangle"
       ]
     },
     "Propriétés et caractérisations des figures": {
       competences: [
         "5e — Consolidation du travail sur les codages de figures (interprétation, réalisation)",
         "4e — Les cas d'égalité des triangles sont présentés et utilisés pour résoudre des problèmes, en lien avec la construction d'un triangle de mesures données"
+      ],
+      annales: [
+        "2023 — Groupe 2 — Ex.2 — Le rectangle",
+        "2022 — Groupe 1 — Ex.4 — Des parallélogrammes avec Scratch",
+        "2022 — Groupe 2 — Ex.2 — Le rectangle"
       ]
     },
     "Théorème de Pythagore (et réciproque)": {
       competences: [
         "4e — Le théorème de Pythagore (plusieurs démonstrations possibles) et sa réciproque sont énoncés et utilisés"
+      ],
+      annales: [
+        "2026 — Groupe 1 M2 — Ex.3 — Le cross dans le parc",
+        "2026 — Groupe 2 M2 — Ex.5 — Vrai ou faux",
+        "2026 — Groupe 3 M2 — Ex.2 — La régate",
+        "2025 — Groupe 1 — Ex.6 — La pyramide régulière",
+        "2025 — Groupe 2 — Ex.4 — Alice et Bob et le pont",
+        "2025 — Créteil-Versailles — Ex.1 — La zone de jeu et le relais",
+        "2024 — Groupe 1 — Ex.5 — Les géoplans",
+        "2024 — Groupe 2 — Ex.2 — La cour d'école",
+        "2024 — Groupe 3 — Ex.6 — Les saupoudreurs de stevia",
+        "2023 — Groupe 1 — Ex.1 — La randonnée à vélo",
+        "2023 — Groupe 2 — Ex.1 — La course solidaire d'action contre la faim",
+        "2023 — Groupe 3 — Ex.2 — Le cross de l'école",
+        "2023 — Groupe 3 — Ex.5 — Dix affirmations",
+        "2023 — Créteil-Versailles — Ex.1 — Sortie scolaire à La Rochelle",
+        "2022 — Groupe 3 — Ex.1 — QCM",
+        "2022 — Groupe 3 — Ex.3 — Le potager de l'école"
       ]
     },
     "Théorème de Thalès (et réciproque)": {
       competences: [
         "4e — Le théorème de Thalès et sa réciproque dans la configuration des triangles emboîtés sont énoncés et utilisés",
         "3e — Le théorème de Thalès et sa réciproque dans la configuration du papillon sont énoncés et utilisés"
+      ],
+      annales: [
+        "2026 — Groupe 2 M2 — Ex.1 — La cour d'école végétalisée",
+        "2026 — Créteil-Versailles — Ex.2 — Vrai ou faux",
+        "2025 — Groupe 2 — Ex.4 — Alice et Bob et le pont",
+        "2025 — Groupe 3 — Ex.1 — Vrai ou faux",
+        "2025 — Créteil-Versailles — Ex.1 — La zone de jeu et le relais",
+        "2024 — Groupe 1 — Ex.2 — Cinq affirmations",
+        "2024 — Groupe 2 — Ex.2 — La cour d'école",
+        "2023 — Groupe 3 — Ex.2 — Le cross de l'école"
       ]
     },
     "Trigonométrie dans le triangle rectangle": {
@@ -3210,23 +3964,43 @@ body.modal-open{ overflow:hidden; }
     "Cercle : rayon, diamètre, tangente, angles": {
       competences: [
         "Tout le cycle — Mobiliser les connaissances sur le cercle pour déterminer des grandeurs géométriques"
+      ],
+      annales: [
+        "2026 — Créteil-Versailles — Ex.3 — Le siège d'Alésia",
+        "2024 — Groupe 1 — Ex.1 — Les pluviomètres",
+        "2024 — Groupe 1 — Ex.4 — La course à pied",
+        "2023 — Groupe 1 — Ex.4 — Les fraises",
+        "2023 — Créteil-Versailles — Ex.1 — Sortie scolaire à La Rochelle",
+        "2022 — Groupe 3 — Ex.2 — L'entraînement de Célia"
       ]
     },
     "Symétries axiale et centrale": {
       competences: [
         "5e — Effet des symétries axiale et centrale sur les longueurs, les aires, les angles (grandeurs et mesures)",
         "5e — Transformation d'une figure par symétrie centrale ; propriétés (conservation de l'alignement, du parallélisme, des longueurs, des angles) ; lien avec le parallélogramme"
+      ],
+      annales: [
+        "2025 — Créteil-Versailles — Ex.3 — Scratch et le motif",
+        "2024 — Créteil-Versailles — Ex.5 — Le pavage du Caire"
       ]
     },
     "Translations, rotations, homothéties": {
       competences: [
         "4e — Transformer une figure par translation ; identifier des translations dans des frises/pavages ; lien translation-parallélogramme",
         "3e — Transformer une figure par rotation et par homothétie (rapport positif ou négatif) ; lien entre angle et rotation, entre Thalès et les homothéties"
+      ],
+      annales: [
+        "2024 — Créteil-Versailles — Ex.5 — Le pavage du Caire",
+        "2023 — Créteil-Versailles — Ex.4 — Scripts Scratch et carrés",
+        "2022 — Groupe 3 — Ex.4 — Script Scratch"
       ]
     },
     "Constructions géométriques": {
       competences: [
         "5e — Constructions de triangles à partir de la mesure d'une longueur et de deux angles, ou d'un angle et de deux longueurs"
+      ],
+      annales: [
+        "2023 — Groupe 3 — Ex.3 — Des polygones avec Scratch"
       ]
     },
     "Solides usuels (cube, pavé, prisme, cylindre, pyramide, cône, sphère)": {
@@ -3239,6 +4013,10 @@ body.modal-open{ overflow:hidden; }
         "5e — Construire et mettre en relation une représentation en perspective cavalière et un patron d'un pavé droit ou d'un cylindre",
         "4e — Idem pour une pyramide ou un cône",
         "3e — Produire et mettre en relation différentes représentations des solides étudiés (patrons, perspective cavalière, vues de face/dessus, en coupe)"
+      ],
+      annales: [
+        "2025 — Groupe 1 — Ex.6 — La pyramide régulière",
+        "2024 — Groupe 3 — Ex.6 — Les saupoudreurs de stevia"
       ]
     },
     "Sections de solides": {
@@ -3251,28 +4029,48 @@ body.modal-open{ overflow:hidden; }
         "5e — Le repérage se fait sur une droite graduée ou dans le plan muni d'un repère orthogonal",
         "4e — Le repérage se fait dans un pavé droit (abscisse, ordonnée, altitude)",
         "3e — Le repérage s'étend à la sphère (latitude, longitude)"
+      ],
+      annales: [
+        "2026 — Groupe 3 M2 — Ex.3 — Vrai ou faux",
+        "2024 — Créteil-Versailles — Ex.3 — Scratch et enchaînements de touches"
       ]
     },
     "Coordonnées d'un point, distance entre deux points": {
       competences: [
         "5e — Repérage dans le plan muni d'un repère orthogonal",
         "4e — Repérage dans un pavé droit (abscisse, ordonnée, altitude)"
+      ],
+      annales: [
+        "2026 — Groupe 3 M2 — Ex.3 — Vrai ou faux",
+        "2024 — Créteil-Versailles — Ex.3 — Scratch et enchaînements de touches"
       ]
     },
     "Lien avec les fonctions": {
       competences: [
         "3e — Les fonctions affines et linéaires sont présentées par leurs expressions algébriques et leurs représentations graphiques"
+      ],
+      annales: [
+        "2024 — Groupe 1 — Ex.2 — Cinq affirmations",
+        "2024 — Groupe 2 — Ex.2 — La cour d'école",
+        "2024 — Groupe 2 — Ex.3 — Les fournisseurs de résine",
+        "2024 — Groupe 3 — Ex.2 — Les offres de téléchargement"
       ]
     },
     "Vocabulaire de la démonstration": {
       competences: [
         "4e — Une progressivité dans l'apprentissage de la recherche de preuve est aménagée ; aucun formalisme excessif n'est exigé dans la rédaction"
+      ],
+      annales: [
+        "2024 — Groupe 1 — Ex.5 — Les géoplans"
       ]
     },
     "Rédaction d'une démonstration géométrique": {
       competences: [
         "4e — Démonstrations possibles : somme des angles d'un triangle, théorème de Pythagore",
         "3e — Démonstration possible du théorème de Thalès (configuration du papillon) en utilisant une symétrie centrale ; caractérisation angulaire des triangles semblables"
+      ],
+      annales: [
+        "2024 — Groupe 1 — Ex.5 — Les géoplans"
       ]
     },
 
@@ -3282,6 +4080,26 @@ body.modal-open{ overflow:hidden; }
     "Notion d'algorithme, de programme": {
       competences: [
         "Niveau 1 — Mettre en ordre et/ou compléter des blocs Scratch fournis par le professeur pour construire un programme simple"
+      ],
+      annales: [
+        "2026 — Groupe 1 M2 — Ex.5 — Scratch et parallélogramme",
+        "2026 — Groupe 2 M2 — Ex.4 — Scratch et polygones",
+        "2026 — Groupe 3 M2 — Ex.3 — Vrai ou faux",
+        "2026 — Créteil-Versailles — Ex.2 — Vrai ou faux",
+        "2025 — Groupe 1 — Ex.6 — La pyramide régulière",
+        "2025 — Groupe 2 — Ex.5 — Scratch trace des triangles",
+        "2025 — Groupe 3 — Ex.5 — Les bougies",
+        "2025 — Créteil-Versailles — Ex.3 — Scratch et le motif",
+        "2024 — Groupe 1 — Ex.5 — Les géoplans",
+        "2024 — Groupe 2 — Ex.3 — Programme de calcul et Scratch",
+        "2024 — Groupe 3 — Ex.4 — Scratch et figure de base",
+        "2024 — Créteil-Versailles — Ex.3 — Scratch et enchaînements de touches",
+        "2023 — Groupe 1 — Ex.3 — Des triangles avec Scratch",
+        "2023 — Groupe 3 — Ex.3 — Des polygones avec Scratch",
+        "2023 — Créteil-Versailles — Ex.4 — Scripts Scratch et carrés",
+        "2022 — Groupe 1 — Ex.4 — Des parallélogrammes avec Scratch",
+        "2022 — Groupe 2 — Ex.3 — Deux programmes de calculs",
+        "2022 — Groupe 3 — Ex.4 — Script Scratch"
       ]
     },
     "Variables, affectation": {
@@ -3305,6 +4123,23 @@ body.modal-open{ overflow:hidden; }
     "Programmation par blocs (Scratch)": {
       competences: [
         "Niveau 1 — Mettre en ordre et/ou compléter des blocs Scratch fournis par le professeur pour construire un programme simple"
+      ],
+      annales: [
+        "2026 — Groupe 1 M2 — Ex.5 — Scratch et parallélogramme",
+        "2026 — Groupe 2 M2 — Ex.4 — Scratch et polygones",
+        "2026 — Groupe 3 M2 — Ex.3 — Vrai ou faux",
+        "2026 — Créteil-Versailles — Ex.2 — Vrai ou faux",
+        "2025 — Groupe 1 — Ex.6 — La pyramide régulière",
+        "2025 — Groupe 3 — Ex.5 — Les bougies",
+        "2025 — Créteil-Versailles — Ex.3 — Scratch et le motif",
+        "2024 — Groupe 2 — Ex.3 — Programme de calcul et Scratch",
+        "2024 — Groupe 3 — Ex.4 — Scratch et figure de base",
+        "2024 — Créteil-Versailles — Ex.3 — Scratch et enchaînements de touches",
+        "2023 — Groupe 3 — Ex.3 — Des polygones avec Scratch",
+        "2023 — Créteil-Versailles — Ex.4 — Scripts Scratch et carrés",
+        "2022 — Groupe 1 — Ex.4 — Des parallélogrammes avec Scratch",
+        "2022 — Groupe 2 — Ex.3 — Deux programmes de calculs",
+        "2022 — Groupe 3 — Ex.4 — Script Scratch"
       ]
     },
     "Initiation à un langage textuel (Python)": {
@@ -3316,18 +4151,66 @@ body.modal-open{ overflow:hidden; }
       competences: [
         "Niveau 2 — Écriture de programmes déclenchés par des événements extérieurs",
         "Niveau 3 — Écriture de plusieurs scripts fonctionnant en parallèle pour gérer les interactions et créer des jeux"
+      ],
+      annales: [
+        "2026 — Groupe 1 M2 — Ex.5 — Scratch et parallélogramme",
+        "2026 — Groupe 2 M2 — Ex.4 — Scratch et polygones",
+        "2026 — Groupe 3 M2 — Ex.3 — Vrai ou faux",
+        "2026 — Créteil-Versailles — Ex.2 — Vrai ou faux",
+        "2025 — Groupe 1 — Ex.6 — La pyramide régulière",
+        "2025 — Groupe 2 — Ex.5 — Scratch trace des triangles",
+        "2025 — Groupe 3 — Ex.5 — Les bougies",
+        "2025 — Créteil-Versailles — Ex.3 — Scratch et le motif",
+        "2024 — Groupe 1 — Ex.5 — Les géoplans",
+        "2024 — Groupe 2 — Ex.3 — Programme de calcul et Scratch",
+        "2024 — Groupe 3 — Ex.4 — Scratch et figure de base",
+        "2024 — Créteil-Versailles — Ex.3 — Scratch et enchaînements de touches",
+        "2023 — Groupe 1 — Ex.3 — Des triangles avec Scratch",
+        "2023 — Groupe 3 — Ex.3 — Des polygones avec Scratch",
+        "2023 — Créteil-Versailles — Ex.4 — Scripts Scratch et carrés",
+        "2022 — Groupe 1 — Ex.4 — Des parallélogrammes avec Scratch",
+        "2022 — Groupe 2 — Ex.3 — Deux programmes de calculs",
+        "2022 — Groupe 3 — Ex.4 — Script Scratch"
       ]
     },
     "Algorithmes de calcul (moyenne, tri de nombres)": {
       competences: [
         "Niveau 1 — Écriture de scripts de programme de calcul",
         "Niveau 2 — Intégration d'une variable dans un programme de calcul ou de simulation d'une expérience aléatoire"
+      ],
+      annales: [
+        "2026 — Groupe 1 M2 — Ex.5 — Scratch et parallélogramme",
+        "2026 — Groupe 2 M2 — Ex.4 — Scratch et polygones",
+        "2025 — Groupe 1 — Ex.1 — La sortie scolaire",
+        "2025 — Groupe 2 — Ex.5 — Scratch trace des triangles",
+        "2024 — Groupe 1 — Ex.5 — Les géoplans",
+        "2024 — Groupe 2 — Ex.3 — Programme de calcul et Scratch",
+        "2024 — Groupe 3 — Ex.4 — Scratch et figure de base",
+        "2024 — Groupe 3 — Ex.5 — Programmes de calcul",
+        "2024 — Créteil-Versailles — Ex.3 — Scratch et enchaînements de touches",
+        "2023 — Groupe 1 — Ex.3 — Des triangles avec Scratch",
+        "2023 — Groupe 2 — Ex.3 — Deux programmes de calculs",
+        "2023 — Créteil-Versailles — Ex.4 — Scripts Scratch et carrés",
+        "2022 — Groupe 2 — Ex.3 — Deux programmes de calculs",
+        "2022 — Groupe 3 — Ex.4 — Script Scratch"
       ]
     },
     "Algorithmes géométriques (tracé de figures)": {
       competences: [
         "Niveau 1 — Écriture de scripts de construction géométrique",
         "Niveau 2 — Intégration d'une variable dans un programme de construction géométrique"
+      ],
+      annales: [
+        "2026 — Groupe 1 M2 — Ex.5 — Scratch et parallélogramme",
+        "2026 — Groupe 2 M2 — Ex.4 — Scratch et polygones",
+        "2025 — Groupe 2 — Ex.5 — Scratch trace des triangles",
+        "2024 — Groupe 1 — Ex.5 — Les géoplans",
+        "2024 — Groupe 3 — Ex.4 — Scratch et figure de base",
+        "2024 — Créteil-Versailles — Ex.3 — Scratch et enchaînements de touches",
+        "2023 — Groupe 1 — Ex.3 — Des triangles avec Scratch",
+        "2023 — Groupe 3 — Ex.3 — Des polygones avec Scratch",
+        "2023 — Créteil-Versailles — Ex.4 — Scripts Scratch et carrés",
+        "2022 — Groupe 3 — Ex.4 — Script Scratch"
       ]
     },
     "Lien avec la résolution de problèmes": {
@@ -3457,8 +4340,9 @@ body.modal-open{ overflow:hidden; }
       'Niveau 1': { code: 'n1', label: 'Niv. 1', color: '#4FA8DE' },
       'Niveau 2': { code: 'n2', label: 'Niv. 2', color: '#2E7FB8' },
       'Niveau 3': { code: 'n3', label: 'Niv. 3', color: '#1B5A8C' },
+      '2nde': { code: '2nde', label: '2nde', color: '#2C8C68' },
     };
-    const LEVEL_PREFIX_RE = /^(5e|4e|3e|Niveau \d|Tout le cycle)\s*—\s*(.*)$/;
+    const LEVEL_PREFIX_RE = /^(5e|4e|3e|2nde|Niveau \d|Tout le cycle)\s*—\s*(.*)$/;
 
     function parseItem(raw) {
       const m = raw.match(LEVEL_PREFIX_RE);
@@ -3467,10 +4351,55 @@ body.modal-open{ overflow:hidden; }
       return { meta, text: m[2] };
     }
 
+    const ANNALE_RE = /^(.+?)\s*—\s*(.+?)\s*—\s*(Ex\.\d+)\s*—\s*(.+)$/;
+
+    function parseAnnale(raw) {
+      const m = raw.match(ANNALE_RE);
+      if (!m) return null;
+      const [, year, doc, ex, title] = m;
+      return { year, doc, ex, title };
+    }
+
+    function escapeHTML(s) {
+      return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
     function renderPanel(key, items) {
       const el = panels[key];
       if (!items || !items.length) {
         el.innerHTML = '<p class="subtheme-modal-empty">Contenu à venir.</p>';
+        return;
+      }
+      if (key === 'annales') {
+        const years = [];
+        const byYear = new Map();
+        items.forEach(raw => {
+          const parsed = parseAnnale(raw);
+          if (!parsed) return;
+          const { year, doc, ex, title } = parsed;
+          if (!byYear.has(year)) { byYear.set(year, []); years.push(year); }
+          byYear.get(year).push({ doc, ex, title });
+        });
+        if (!years.length) {
+          el.innerHTML = '<p class="subtheme-modal-empty">Contenu à venir.</p>';
+          return;
+        }
+        el.innerHTML = years.map(year => {
+          const chips = byYear.get(year).map(({ doc, ex, title }) => (
+            `<div class="subtheme-annales-chip">` +
+              `<span class="subtheme-annales-capsule">` +
+                `<span class="subtheme-annales-capsule-doc">${escapeHTML(doc)}</span>` +
+                `<span class="subtheme-annales-capsule-ex"><b>${escapeHTML(ex)}</b> ${escapeHTML(title)}</span>` +
+              `</span>` +
+            `</div>`
+          )).join('');
+          return `<div class="subtheme-annales-year-block">` +
+            `<div class="subtheme-annales-year-row">` +
+              `<span class="subtheme-annales-year-badge">${escapeHTML(year)}</span>` +
+              `<div class="subtheme-annales-chips">${chips}</div>` +
+            `</div>` +
+          `</div>`;
+        }).join('');
         return;
       }
       el.innerHTML = '<ul class="subtheme-modal-list">' +
