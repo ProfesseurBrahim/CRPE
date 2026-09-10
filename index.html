@@ -743,7 +743,8 @@ h1.hero-title{
 .crpe-theme-pink-card{
   position:relative;
   flex:0 0 auto;
-  width:auto;
+  width:480px;
+  max-width:88vw;
   scroll-snap-align:start;
   background:#FDF6F9;
   border:1px solid var(--line);
@@ -758,9 +759,7 @@ h1.hero-title{
 }
 .crpe-subtheme-grid{
   display:grid;
-  grid-auto-flow:column;
-  grid-template-rows:repeat(2, auto);
-  grid-auto-columns:170px;
+  grid-template-columns:repeat(3, minmax(140px, 1fr));
   gap:10px;
 }
 .crpe-subtheme-btn{
@@ -769,6 +768,7 @@ h1.hero-title{
   justify-content:center;
   text-align:center;
   min-height:52px;
+  height:100%;
   padding:10px 12px;
   border:1px solid var(--line);
   border-radius:var(--radius-md);
@@ -779,161 +779,23 @@ h1.hero-title{
   font-weight:700;
   line-height:1.3;
   cursor:pointer;
-  transition:border-color 0.2s, background 0.2s;
+  overflow-wrap:break-word;
+  word-break:normal;
+  hyphens:none;
+  transition:transform 0.18s ease, border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
 }
-.crpe-subtheme-btn:hover{
+.crpe-subtheme-btn:hover,
+.crpe-subtheme-btn:focus-visible{
+  background:var(--accent);
   border-color:var(--accent);
-  background:#FDF6F9;
+  color:#FFFFFF;
+  transform:translateY(-2px);
+  box-shadow:0 8px 18px rgba(232,89,138,0.28);
+  outline:none;
 }
 @media (max-width:700px){
-  .crpe-subtheme-grid{ grid-auto-columns:130px; }
-}
-/* Modal de ressources par sous-thème */
-.crpe-modal-overlay{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(20,8,14,0.6);
-  z-index:1000;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-}
-.crpe-modal-overlay.is-open{ display:flex; }
-.crpe-modal{
-  width:100%;
-  max-width:1100px;
-  height:88vh;
-  max-height:900px;
-  display:flex;
-  flex-direction:column;
-  background:var(--bg-panel, #1A0E14);
-  border:1px solid var(--line);
-  border-radius:var(--radius-lg);
-  padding:26px;
-  box-shadow:0 30px 70px rgba(0,0,0,0.5);
-}
-.crpe-modal-head{
-  display:flex;
-  align-items:flex-start;
-  justify-content:space-between;
-  gap:14px;
-  margin-bottom:18px;
-  flex-shrink:0;
-}
-.crpe-modal-title{
-  margin:0;
-  font-size:1.3rem;
-  font-weight:800;
-  color:#FFFFFF;
-}
-.crpe-modal-close{
-  flex-shrink:0;
-  width:36px;
-  height:36px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border:1px solid var(--line);
-  border-radius:999px;
-  background:transparent;
-  color:var(--grey-dim);
-  cursor:pointer;
-  font-size:1.1rem;
-  line-height:1;
-}
-.crpe-modal-close:hover{
-  border-color:var(--accent);
-  color:var(--accent);
-}
-.crpe-modal-tabs{
-  display:flex;
-  gap:6px;
-  padding:5px;
-  background:rgba(255,255,255,0.06);
-  border-radius:var(--radius-md);
-  margin-bottom:22px;
-  flex-shrink:0;
-}
-.crpe-modal-tab{
-  flex:1;
-  padding:12px 14px;
-  border:none;
-  border-radius:calc(var(--radius-md) - 4px);
-  background:transparent;
-  color:var(--grey-dim);
-  font-family:inherit;
-  font-size:0.92rem;
-  font-weight:700;
-  text-align:center;
-  cursor:pointer;
-  transition:color 0.2s, background 0.2s;
-}
-.crpe-modal-tab:hover{
-  color:#FFFFFF;
-}
-.crpe-modal-tab.is-active{
-  color:#8A2450;
-  background:#FFFFFF;
-}
-.crpe-modal-panels{
-  flex:1;
-  overflow-y:auto;
-}
-.crpe-modal-panel{
-  display:none;
-  color:var(--grey-dim);
-  font-size:0.9rem;
-  line-height:1.6;
-}
-.crpe-modal-panel.is-active{
-  display:block;
-}
-.crpe-competence-list{
-  list-style:none;
-  margin:0;
-  padding:0;
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-}
-.crpe-competence-list li{
-  display:flex;
-  align-items:flex-start;
-  justify-content:space-between;
-  gap:12px;
-  padding:10px 12px;
-  border:1px solid var(--line, #e3e3e3);
-  border-radius:8px;
-  background:#FFFFFF;
-}
-.crpe-competence-text{
-  flex:1;
-  color:#1A0E14;
-}
-.crpe-level-badges{
-  display:flex;
-  gap:4px;
-  flex-shrink:0;
-  white-space:nowrap;
-}
-.crpe-level-badge{
-  display:inline-block;
-  font-size:0.72rem;
-  font-weight:700;
-  line-height:1;
-  padding:4px 7px;
-  border-radius:999px;
-  color:#fff;
-}
-.crpe-level-badge.crpe-level-5e{ background:#4c9f70; }
-.crpe-level-badge.crpe-level-4e{ background:#3d7fbf; }
-.crpe-level-badge.crpe-level-3e{ background:#a0509b; }
-.crpe-level-badge.crpe-level-2nde{ background:#d98a2b; }
-@media (max-width:700px){
-  .crpe-modal{ height:92vh; padding:18px; }
-  .crpe-modal-title{ font-size:1.05rem; }
-  .crpe-modal-tab{ padding:9px 12px; font-size:0.78rem; }
+  .crpe-subtheme-grid{ grid-template-columns:repeat(2, minmax(120px, 1fr)); }
+  .crpe-theme-pink-card{ width:340px; }
 }
 .crpe-annales-2026-row{
   display:flex;
@@ -1104,6 +966,158 @@ h1.hero-title{
   cursor:not-allowed;
 }
 
+/* ============================================================
+   MODAL — sous-thème (Compétences / Ressources / Annales)
+   ============================================================ */
+.subtheme-modal-overlay{
+  position:fixed;
+  inset:0;
+  z-index:2000;
+  background:rgba(12,5,9,0.66);
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  opacity:0;
+  visibility:hidden;
+  transition:opacity 0.22s ease, visibility 0s linear 0.22s;
+}
+.subtheme-modal-overlay.is-open{
+  opacity:1;
+  visibility:visible;
+  transition:opacity 0.22s ease, visibility 0s;
+}
+.subtheme-modal{
+  width:100%;
+  max-width:820px;
+  max-height:min(820px, 92vh);
+  display:flex;
+  flex-direction:column;
+  background:#FDF6F9;
+  border:1px solid var(--line);
+  border-radius:var(--radius-lg);
+  box-shadow:0 30px 70px rgba(0,0,0,0.5);
+  transform:translateY(18px) scale(0.98);
+  transition:transform 0.25s cubic-bezier(.2,.9,.3,1.3);
+  overflow:hidden;
+}
+.subtheme-modal-overlay.is-open .subtheme-modal{
+  transform:translateY(0) scale(1);
+}
+.subtheme-modal-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:16px;
+  padding:22px 24px 16px;
+  border-bottom:1px solid var(--line);
+  background:linear-gradient(135deg, rgba(232,89,138,0.14), rgba(232,89,138,0.02));
+  flex-shrink:0;
+}
+.subtheme-modal-titles{ display:flex; flex-direction:column; gap:4px; min-width:0; }
+.subtheme-modal-eyebrow{
+  font-size:0.68rem;
+  font-weight:700;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--accent);
+}
+.subtheme-modal-title{
+  margin:0;
+  font-size:1.15rem;
+  font-weight:800;
+  color:#2A1420;
+  line-height:1.3;
+}
+.subtheme-modal-close{
+  flex-shrink:0;
+  width:32px; height:32px;
+  border-radius:50%;
+  border:1px solid var(--line);
+  background:#FFFFFF;
+  color:#8A2450;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer;
+  transition:background 0.18s ease, color 0.18s ease, transform 0.18s ease;
+}
+.subtheme-modal-close:hover{ background:var(--accent); color:#fff; transform:rotate(90deg); }
+.subtheme-modal-tabs{
+  display:flex;
+  gap:4px;
+  padding:12px 24px 0;
+  flex-shrink:0;
+  border-bottom:1px solid var(--line);
+}
+.subtheme-modal-tab{
+  appearance:none;
+  border:none;
+  background:transparent;
+  font-family:inherit;
+  font-size:0.82rem;
+  font-weight:700;
+  color:#8A6273;
+  padding:10px 14px;
+  border-radius:10px 10px 0 0;
+  cursor:pointer;
+  position:relative;
+  transition:color 0.18s ease;
+}
+.subtheme-modal-tab:hover{ color:#2A1420; }
+.subtheme-modal-tab.is-active{ color:#8A2450; }
+.subtheme-modal-tab.is-active::after{
+  content:"";
+  position:absolute;
+  left:8px; right:8px; bottom:-1px;
+  height:2px;
+  background:var(--accent);
+  border-radius:2px;
+}
+.subtheme-modal-body{
+  padding:20px 24px 26px;
+  overflow-y:auto;
+  color:#3A1F2C;
+  font-size:0.9rem;
+  line-height:1.6;
+}
+.subtheme-modal-panel{ display:none; }
+.subtheme-modal-panel.is-active{ display:block; animation:subtheme-panel-in 0.2s ease; }
+@keyframes subtheme-panel-in{ from{ opacity:0; transform:translateY(4px); } to{ opacity:1; transform:translateY(0); } }
+.subtheme-modal-empty{
+  color:#8A6273;
+  font-style:italic;
+  font-size:0.85rem;
+}
+.subtheme-modal-list{ margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:10px; }
+.subtheme-modal-list li{ margin:0; display:flex; align-items:flex-start; gap:10px; }
+.subtheme-level-badge{
+  flex-shrink:0;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:34px;
+  height:22px;
+  padding:0 8px;
+  border-radius:999px;
+  font-size:0.68rem;
+  font-weight:800;
+  letter-spacing:0.02em;
+  color:#FFFFFF;
+  margin-top:1px;
+  white-space:nowrap;
+}
+.subtheme-level-badge[data-level="5e"]{ background:#3AA1A0; }
+.subtheme-level-badge[data-level="4e"]{ background:#7B6FD1; }
+.subtheme-level-badge[data-level="3e"]{ background:#E8598A; }
+.subtheme-level-badge[data-level="cycle"]{ background:#8A6273; }
+.subtheme-level-badge[data-level="n1"]{ background:#4FA8DE; }
+.subtheme-level-badge[data-level="n2"]{ background:#2E7FB8; }
+.subtheme-level-badge[data-level="n3"]{ background:#1B5A8C; }
+.subtheme-level-badge[data-level="note"]{ background:#D98A2B; }
+.subtheme-modal-list li span.subtheme-modal-item-text{ flex:1; }
+
+body.modal-open{ overflow:hidden; }
 </style>
 </head>
 
@@ -1124,10 +1138,11 @@ h1.hero-title{
       <a class="nav-seclink is-active" href="#chap1">1. Résumé du concours</a>
       <a class="nav-seclink" href="#chap2">2. Nombres et calculs</a>
       <a class="nav-seclink" href="#chap3">3. Organisation et gestion de données</a>
-      <a class="nav-seclink" href="#chap4">4. Grandeurs et mesures, Algorithmie</a>
+      <a class="nav-seclink" href="#chap4">4. Grandeurs et mesures</a>
       <a class="nav-seclink" href="#chap5">5. Géométrie</a>
-      <a class="nav-seclink" href="#chap7">6. Annales</a>
-      <a class="nav-seclink" href="#chap8">7. Rapports de jury</a>
+      <a class="nav-seclink" href="#chap6">6. Algorithmie</a>
+      <a class="nav-seclink" href="#chap7">7. Annales</a>
+      <a class="nav-seclink" href="#chap8">8. Rapports de jury</a>
     </div>
   </div>
 
@@ -1241,46 +1256,48 @@ h1.hero-title{
       </div>
       <div class="crpe-theme-pink-grid">
         <div class="crpe-theme-pink-card">
-          <h3 class="crpe-theme-pink-card-title">Les nombres</h3>
+          <h3 class="crpe-theme-pink-card-title">Nombres et notation</h3>
           <div class="crpe-subtheme-grid">
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Entiers naturels">Entiers naturels</button>
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Nombres rationnels">Nombres rationnels</button>
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Nombres irrationnels">Nombres irrationnels</button>
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Nombres réels">Nombres réels</button>
+              <span class="crpe-subtheme-btn">Entiers, décimaux, rationnels</span>
+              <span class="crpe-subtheme-btn">Nombres relatifs</span>
+              <span class="crpe-subtheme-btn">Écritures fractionnaire, décimale, %</span>
+              <span class="crpe-subtheme-btn">Divisibilité, nombres premiers, PGCD</span>
+              <span class="crpe-subtheme-btn">Décomposition en facteurs premiers</span>
+              <span class="crpe-subtheme-btn">Puissances, notation scientifique</span>
+              <span class="crpe-subtheme-btn">Racines carrées</span>
           </div>
         </div>
         <div class="crpe-theme-pink-card">
-          <h3 class="crpe-theme-pink-card-title">Arithmétique</h3>
+          <h3 class="crpe-theme-pink-card-title">Calcul</h3>
           <div class="crpe-subtheme-grid">
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Opérations">Opérations</button>
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Modes de calcul">Modes de calcul</button>
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Multiples et diviseurs">Multiples et diviseurs</button>
-          </div>
-        </div>
-        <div class="crpe-theme-pink-card">
-          <h3 class="crpe-theme-pink-card-title">Calcul algébrique, équations et inéquations</h3>
-          <div class="crpe-subtheme-grid">
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Calcul algébrique">Calcul algébrique</button>
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Équations">Équations</button>
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Inéquations du premier degré">Inéquations du premier degré</button>
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Systèmes de deux équations">Systèmes de deux équations</button>
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Mise en équation de problèmes">Mise en équation de problèmes</button>
-          </div>
-        </div>
-        <div class="crpe-theme-pink-card">
-          <h3 class="crpe-theme-pink-card-title">Fonctions et suites</h3>
-          <div class="crpe-subtheme-grid">
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Fonctions numériques">Fonctions numériques</button>
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Fonctions usuelles (affines, linéaires...)">Fonctions usuelles (affines, linéaires...)</button>
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Suites numériques">Suites numériques</button>
+              <span class="crpe-subtheme-btn">Opérations sur entiers, décimaux, relatifs, fractions</span>
+              <span class="crpe-subtheme-btn">Priorités opératoires</span>
+              <span class="crpe-subtheme-btn">Calcul mental, en ligne, posé, instrumenté</span>
+              <span class="crpe-subtheme-btn">Ordres de grandeur, encadrements, arrondis</span>
+              <span class="crpe-subtheme-btn">Calcul littéral, développement, factorisation</span>
+              <span class="crpe-subtheme-btn">Identités remarquables</span>
+              <span class="crpe-subtheme-btn">Équations et inéquations du premier degré</span>
+              <span class="crpe-subtheme-btn">Résolution de problèmes (mise en équation)</span>
           </div>
         </div>
         <div class="crpe-theme-pink-card">
           <h3 class="crpe-theme-pink-card-title">Proportionnalité</h3>
           <div class="crpe-subtheme-grid">
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Proportionnalité simple">Proportionnalité simple</button>
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Problèmes de proportionnalité">Problèmes de proportionnalité</button>
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Proportionnalité multiple, partages">Proportionnalité multiple, partages</button>
+              <span class="crpe-subtheme-btn">Reconnaître une situation de proportionnalité</span>
+              <span class="crpe-subtheme-btn">Coefficient, produit en croix, règle de trois</span>
+              <span class="crpe-subtheme-btn">Pourcentages, échelles, vitesses, évolutions</span>
+          </div>
+        </div>
+        <div class="crpe-theme-pink-card">
+          <h3 class="crpe-theme-pink-card-title">Nombres et calculs — Programme de seconde</h3>
+          <div class="crpe-subtheme-grid">
+              <span class="crpe-subtheme-btn">Ensembles de nombres (N, Z, D, Q, R)</span>
+              <span class="crpe-subtheme-btn">Intervalles de R</span>
+              <span class="crpe-subtheme-btn">Puissances entières et rationnelles, racines n-ièmes</span>
+              <span class="crpe-subtheme-btn">Calcul littéral avancé, identités remarquables</span>
+              <span class="crpe-subtheme-btn">Équations, inéquations (1er et 2nd degré simples)</span>
+              <span class="crpe-subtheme-btn">Systèmes d'équations linéaires (2 inconnues)</span>
+              <span class="crpe-subtheme-btn">Notion de fonction (généralités, vocabulaire)</span>
           </div>
         </div>
       </div>
@@ -1297,22 +1314,36 @@ h1.hero-title{
         <div class="crpe-theme-pink-card">
           <h3 class="crpe-theme-pink-card-title">Statistiques</h3>
           <div class="crpe-subtheme-grid">
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Vocabulaire">Vocabulaire</button>
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Série statistique et paramètres">Série statistique et paramètres</button>
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Représentations graphiques">Représentations graphiques</button>
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Applications">Applications</button>
+              <span class="crpe-subtheme-btn">Vocabulaire : population, caractère, effectif, fréquence</span>
+              <span class="crpe-subtheme-btn">Tableaux, diagrammes en bâtons, histogrammes</span>
+              <span class="crpe-subtheme-btn">Diagrammes circulaires</span>
+              <span class="crpe-subtheme-btn">Moyenne (simple et pondérée), médiane</span>
+              <span class="crpe-subtheme-btn">Étendue, quartiles</span>
           </div>
         </div>
         <div class="crpe-theme-pink-card">
           <h3 class="crpe-theme-pink-card-title">Probabilités</h3>
           <div class="crpe-subtheme-grid">
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Vocabulaire des probabilités">Vocabulaire des probabilités</button>
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Propriétés des probabilités">Propriétés des probabilités</button>
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Calcul d'une probabilité simple">Calcul d'une probabilité simple</button>
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Dénombrement">Dénombrement</button>
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Formules de dénombrement">Formules de dénombrement</button>
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Événements indépendants">Événements indépendants</button>
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Probabilité conditionnelle">Probabilité conditionnelle</button>
+              <span class="crpe-subtheme-btn">Vocabulaire : expérience aléatoire, issue, événement</span>
+              <span class="crpe-subtheme-btn">Probabilité (approche fréquentiste et théorique)</span>
+              <span class="crpe-subtheme-btn">Calcul de probabilités simples (équiprobabilité)</span>
+              <span class="crpe-subtheme-btn">Événements incompatibles, contraires</span>
+          </div>
+        </div>
+        <div class="crpe-theme-pink-card">
+          <h3 class="crpe-theme-pink-card-title">Proportionnalité et fonctions</h3>
+          <div class="crpe-subtheme-grid">
+              <span class="crpe-subtheme-btn">Fonctions linéaires et affines</span>
+              <span class="crpe-subtheme-btn">Représentation graphique, coefficient directeur</span>
+              <span class="crpe-subtheme-btn">Lecture et interprétation de graphiques</span>
+              <span class="crpe-subtheme-btn">Résolution graphique d'équations et inéquations</span>
+          </div>
+        </div>
+        <div class="crpe-theme-pink-card">
+          <h3 class="crpe-theme-pink-card-title">Gestion de données pratiques</h3>
+          <div class="crpe-subtheme-grid">
+              <span class="crpe-subtheme-btn">Lecture de tableaux et graphiques de la vie courante</span>
+              <span class="crpe-subtheme-btn">Utilisation d'un tableur (formules, graphiques)</span>
           </div>
         </div>
       </div>
@@ -1323,24 +1354,39 @@ h1.hero-title{
     <div class="snt-section-inner">
       <div class="snt-chapter-head">
         <span class="snt-chapter-num">04</span>
-        <h2>Grandeurs et mesures, Algorithmie</h2>
+        <h2>Grandeurs et mesures</h2>
       </div>
       <div class="crpe-theme-pink-grid">
         <div class="crpe-theme-pink-card">
-          <h3 class="crpe-theme-pink-card-title">Grandeurs et mesures</h3>
+          <h3 class="crpe-theme-pink-card-title">Longueurs, aires, volumes</h3>
           <div class="crpe-subtheme-grid">
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Grandeurs fondamentales">Grandeurs fondamentales</button>
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Mesurer une grandeur">Mesurer une grandeur</button>
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Grandeurs simples">Grandeurs simples</button>
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Grandeurs composées">Grandeurs composées</button>
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Notation scientifique">Notation scientifique</button>
+              <span class="crpe-subtheme-btn">Unités et conversions</span>
+              <span class="crpe-subtheme-btn">Périmètres des figures usuelles</span>
+              <span class="crpe-subtheme-btn">Aires : carré, rectangle, triangle, disque, trapèze</span>
+              <span class="crpe-subtheme-btn">Volumes : cube, pavé, cylindre, prisme, pyramide, cône, sphère</span>
+              <span class="crpe-subtheme-btn">Effet d'un agrandissement réduction</span>
           </div>
         </div>
         <div class="crpe-theme-pink-card">
-          <h3 class="crpe-theme-pink-card-title">Scratch et tableur</h3>
+          <h3 class="crpe-theme-pink-card-title">Grandeurs composées et grandeurs-quotients</h3>
           <div class="crpe-subtheme-grid">
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Scratch">Scratch</button>
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Tableur">Tableur</button>
+              <span class="crpe-subtheme-btn">Vitesse, débit, densité</span>
+              <span class="crpe-subtheme-btn">Masse volumique</span>
+              <span class="crpe-subtheme-btn">Échelles</span>
+          </div>
+        </div>
+        <div class="crpe-theme-pink-card">
+          <h3 class="crpe-theme-pink-card-title">Temps, durées, angles</h3>
+          <div class="crpe-subtheme-grid">
+              <span class="crpe-subtheme-btn">Calculs de durées, conversions horaires</span>
+              <span class="crpe-subtheme-btn">Mesure des angles, angles remarquables</span>
+          </div>
+        </div>
+        <div class="crpe-theme-pink-card">
+          <h3 class="crpe-theme-pink-card-title">Grandeurs économiques</h3>
+          <div class="crpe-subtheme-grid">
+              <span class="crpe-subtheme-btn">Pourcentages appliqués (remises, TVA, intérêts)</span>
+              <span class="crpe-subtheme-btn">Proportionnalité appliquée aux grandeurs</span>
           </div>
         </div>
       </div>
@@ -1357,41 +1403,81 @@ h1.hero-title{
         <div class="crpe-theme-pink-card">
           <h3 class="crpe-theme-pink-card-title">Géométrie plane</h3>
           <div class="crpe-subtheme-grid">
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Premiers éléments de géométrie plane">Premiers éléments de géométrie plane</button>
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Les angles">Les angles</button>
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Angles et droites parallèles">Angles et droites parallèles</button>
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Tracés à la règle et au compas">Tracés à la règle et au compas</button>
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Propriété de Thalès">Propriété de Thalès</button>
+              <span class="crpe-subtheme-btn">Triangles et quadrilatères</span>
+              <span class="crpe-subtheme-btn">Propriétés et caractérisations des figures</span>
+              <span class="crpe-subtheme-btn">Théorème de Pythagore (et réciproque)</span>
+              <span class="crpe-subtheme-btn">Théorème de Thalès (et réciproque)</span>
+              <span class="crpe-subtheme-btn">Trigonométrie dans le triangle rectangle</span>
+              <span class="crpe-subtheme-btn">Cercle : rayon, diamètre, tangente, angles</span>
+              <span class="crpe-subtheme-btn">Symétries axiale et centrale</span>
+              <span class="crpe-subtheme-btn">Translations, rotations, homothéties</span>
+              <span class="crpe-subtheme-btn">Constructions géométriques</span>
           </div>
         </div>
         <div class="crpe-theme-pink-card">
-          <h3 class="crpe-theme-pink-card-title">Triangles, cercles et polygones</h3>
+          <h3 class="crpe-theme-pink-card-title">Géométrie dans l'espace</h3>
           <div class="crpe-subtheme-grid">
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Le cercle">Le cercle</button>
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Les triangles">Les triangles</button>
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Les polygones">Les polygones</button>
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Les quadrilatères">Les quadrilatères</button>
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Les polygones réguliers">Les polygones réguliers</button>
+              <span class="crpe-subtheme-btn">Solides usuels (cube, pavé, prisme, cylindre, pyramide, cône, sphère)</span>
+              <span class="crpe-subtheme-btn">Patrons, représentations en perspective</span>
+              <span class="crpe-subtheme-btn">Sections de solides</span>
           </div>
         </div>
         <div class="crpe-theme-pink-card">
-          <h3 class="crpe-theme-pink-card-title">Volumes et patrons</h3>
+          <h3 class="crpe-theme-pink-card-title">Repérage et coordonnées</h3>
           <div class="crpe-subtheme-grid">
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Espace et plan">Espace et plan</button>
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Les polyèdres">Les polyèdres</button>
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Les patrons de polyèdres">Les patrons de polyèdres</button>
+              <span class="crpe-subtheme-btn">Repérage sur une droite graduée, dans le plan</span>
+              <span class="crpe-subtheme-btn">Coordonnées d'un point, distance entre deux points</span>
+              <span class="crpe-subtheme-btn">Lien avec les fonctions</span>
           </div>
         </div>
         <div class="crpe-theme-pink-card">
-          <h3 class="crpe-theme-pink-card-title">Transformations planes</h3>
+          <h3 class="crpe-theme-pink-card-title">Raisonnement et démonstration</h3>
           <div class="crpe-subtheme-grid">
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Les transformations planes">Les transformations planes</button>
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Modèles mathématiques">Modèles mathématiques</button>
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Translations">Translations</button>
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Rotations">Rotations</button>
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Symétries centrales">Symétries centrales</button>
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Symétrie axiale, réflexion">Symétrie axiale, réflexion</button>
-              <button type="button" class="crpe-subtheme-btn" data-modal-title="Composition de transformations">Composition de transformations</button>
+              <span class="crpe-subtheme-btn">Vocabulaire de la démonstration</span>
+              <span class="crpe-subtheme-btn">Rédaction d'une démonstration géométrique</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="snt-section" id="chap6">
+    <div class="snt-section-inner">
+      <div class="snt-chapter-head">
+        <span class="snt-chapter-num">06</span>
+        <h2>Algorithmie</h2>
+      </div>
+      <div class="crpe-theme-pink-grid">
+        <div class="crpe-theme-pink-card">
+          <h3 class="crpe-theme-pink-card-title">Notions de base (algorithmique)</h3>
+          <div class="crpe-subtheme-grid">
+              <span class="crpe-subtheme-btn">Notion d'algorithme, de programme</span>
+              <span class="crpe-subtheme-btn">Variables, affectation</span>
+              <span class="crpe-subtheme-btn">Structures conditionnelles (si... alors... sinon)</span>
+              <span class="crpe-subtheme-btn">Boucles (pour, tant que)</span>
+          </div>
+        </div>
+        <div class="crpe-theme-pink-card">
+          <h3 class="crpe-theme-pink-card-title">Outils et langages</h3>
+          <div class="crpe-subtheme-grid">
+              <span class="crpe-subtheme-btn">Programmation par blocs (Scratch)</span>
+              <span class="crpe-subtheme-btn">Initiation à un langage textuel (Python)</span>
+              <span class="crpe-subtheme-btn">Lire, modifier, écrire des scripts simples</span>
+          </div>
+        </div>
+        <div class="crpe-theme-pink-card">
+          <h3 class="crpe-theme-pink-card-title">Application aux mathématiques</h3>
+          <div class="crpe-subtheme-grid">
+              <span class="crpe-subtheme-btn">Algorithmes de calcul (moyenne, tri de nombres)</span>
+              <span class="crpe-subtheme-btn">Algorithmes géométriques (tracé de figures)</span>
+              <span class="crpe-subtheme-btn">Lien avec la résolution de problèmes</span>
+          </div>
+        </div>
+        <div class="crpe-theme-pink-card">
+          <h3 class="crpe-theme-pink-card-title">Compétences transversales (spécifique CRPE)</h3>
+          <div class="crpe-subtheme-grid">
+              <span class="crpe-subtheme-btn">Analyser/corriger la production d'un élève</span>
+              <span class="crpe-subtheme-btn">Objectifs d'apprentissage d'une séance d'algo</span>
           </div>
         </div>
       </div>
@@ -1401,7 +1487,7 @@ h1.hero-title{
   <section class="snt-section" id="chap7">
     <div class="snt-section-inner">
       <div class="snt-chapter-head">
-        <span class="snt-chapter-num">06</span>
+        <span class="snt-chapter-num">07</span>
         <h2>Annales</h2>
       </div>
       <div class="snt-big-card">
@@ -2728,7 +2814,7 @@ h1.hero-title{
   <section class="snt-section" id="chap8">
     <div class="snt-section-inner">
       <div class="snt-chapter-head">
-        <span class="snt-chapter-num">07</span>
+        <span class="snt-chapter-num">08</span>
         <h2>Rapports de jury - Lille</h2>
       </div>
       <div class="snt-big-card">
@@ -2792,40 +2878,465 @@ h1.hero-title{
 
 </main>
 
-<div class="crpe-modal-overlay" id="crpe-modal-overlay">
-  <div class="crpe-modal" role="dialog" aria-modal="true">
-    <div class="crpe-modal-head">
-      <h3 class="crpe-modal-title" id="crpe-modal-title"></h3>
-      <button type="button" class="crpe-modal-close" id="crpe-modal-close" aria-label="Fermer">✕</button>
+<div class="subtheme-modal-overlay" id="subtheme-modal-overlay">
+  <div class="subtheme-modal" role="dialog" aria-modal="true" aria-labelledby="subtheme-modal-title">
+    <div class="subtheme-modal-head">
+      <div class="subtheme-modal-titles">
+        <span class="subtheme-modal-eyebrow" id="subtheme-modal-eyebrow">Sous-thème</span>
+        <h3 class="subtheme-modal-title" id="subtheme-modal-title"></h3>
+      </div>
+      <button type="button" class="subtheme-modal-close" id="subtheme-modal-close" aria-label="Fermer">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="4" y1="4" x2="20" y2="20"></line><line x1="20" y1="4" x2="4" y2="20"></line></svg>
+      </button>
     </div>
-    <div class="crpe-modal-tabs" role="tablist">
-      <button type="button" class="crpe-modal-tab is-active" data-tab="contenu">Contenu</button>
-      <button type="button" class="crpe-modal-tab" data-tab="competences">Compétences</button>
-      <button type="button" class="crpe-modal-tab" data-tab="cours">Cours</button>
-      <button type="button" class="crpe-modal-tab" data-tab="exercices">Exercices</button>
-      <button type="button" class="crpe-modal-tab" data-tab="annales">Annales</button>
+    <div class="subtheme-modal-tabs" id="subtheme-modal-tabs">
+      <button type="button" class="subtheme-modal-tab is-active" data-panel="competences">Compétences</button>
+      <button type="button" class="subtheme-modal-tab" data-panel="ressources">Ressources</button>
+      <button type="button" class="subtheme-modal-tab" data-panel="annales">Annales</button>
     </div>
-    <div class="crpe-modal-panels">
-      <div class="crpe-modal-panel is-active" data-panel="contenu">
-        <p>Contenu à venir.</p>
-      </div>
-      <div class="crpe-modal-panel" data-panel="competences">
-        <p>Compétences à venir.</p>
-      </div>
-      <div class="crpe-modal-panel" data-panel="cours">
-        <p>Cours à venir.</p>
-      </div>
-      <div class="crpe-modal-panel" data-panel="exercices">
-        <p>Exercices à venir.</p>
-      </div>
-      <div class="crpe-modal-panel" data-panel="annales">
-        <p>Annales à venir.</p>
-      </div>
+    <div class="subtheme-modal-body">
+      <div class="subtheme-modal-panel is-active" data-panel="competences" id="subtheme-modal-competences"></div>
+      <div class="subtheme-modal-panel" data-panel="ressources" id="subtheme-modal-ressources"></div>
+      <div class="subtheme-modal-panel" data-panel="annales" id="subtheme-modal-annales"></div>
     </div>
   </div>
 </div>
 
 <script>
+  // Données par sous-thème : Compétences / Ressources / Annales.
+  // Clé = texte exact du bouton. Complète cet objet au fil du temps ;
+  // tout sous-thème absent affiche un contenu "à venir" par défaut.
+  const subthemeData = {
+    // Thème A — Nombres et calculs
+    "Entiers, décimaux, rationnels": {
+      competences: [
+        "5e — Les nombres relatifs (entiers puis décimaux) sont construits pour rendre possibles toutes les soustractions ; la notion d'opposé est introduite",
+        "5e — La conception de la fraction comme nombre est consolidée : reconnaître et produire des fractions égales, comparer/additionner/soustraire des fractions de dénominateurs égaux ou multiples",
+        "4e — Le nombre rationnel est défini comme quotient d'un entier relatif par un entier relatif non nul ; la notion d'inverse est introduite",
+        "4e — Les opérations entre fractions sont étendues à la multiplication et à la division ; comparer des rationnels et passer d'une représentation à l'autre",
+        "3e — La notion de fraction irréductible est abordée, en lien avec multiples et diviseurs"
+      ]
+    },
+    "Nombres relatifs": {
+      competences: [
+        "5e — Construction des nombres relatifs (entiers puis décimaux), notion d'opposé ; addition et soustraction étendues aux relatifs",
+        "4e — Produit et quotient de décimaux relatifs",
+        "3e — Consolidation notamment lors de la résolution de problèmes"
+      ]
+    },
+    "Écritures fractionnaire, décimale, %": {
+      competences: [
+        "4e — Le quotient de deux nombres décimaux peut ne pas être un nombre décimal",
+        "4e — Comparer des nombres rationnels, en utiliser différentes représentations et passer de l'une à l'autre"
+      ]
+    },
+    "Divisibilité, nombres premiers, PGCD": {
+      competences: [
+        "Tout le cycle — modéliser et résoudre des problèmes mettant en jeu la divisibilité et les nombres premiers",
+        "5e — Travail sur multiples/diviseurs poursuivi (déjà vu au cycle 3) ; notion de nombre premier ; liste des nombres premiers ≤ 30",
+        "4e — Détermination de la liste des nombres premiers ≤ 100, utilisée pour décomposer en facteurs premiers, reconnaître/produire des fractions égales, simplifier des fractions",
+        "3e — La notion de fraction irréductible est introduite ; utilisation d'un tableur, d'un logiciel de programmation ou d'une calculatrice pour la décomposition"
+      ]
+    },
+    "Décomposition en facteurs premiers": {
+      competences: [
+        "5e — Les nombres premiers ≤ 30 sont utilisés pour la décomposition en produit de facteurs premiers, en vue de reconnaître des fractions égales",
+        "4e — Décomposer des nombres en facteurs premiers (à l'aide des nombres premiers ≤ 100) pour simplifier des fractions",
+        "3e — Un tableur, un logiciel de programmation ou une calculatrice permettent d'étendre la procédure de décomposition"
+      ]
+    },
+    "Puissances, notation scientifique": {
+      competences: [
+        "4e — Puissances de 10 introduites (exposants positifs puis négatifs) pour définir les préfixes de nano à giga et la notation scientifique ; puissances de base quelconque à exposants positifs pour simplifier des produits",
+        "3e — Puissances de base quelconque à exposants négatifs, utilisées pour simplifier des quotients"
+      ]
+    },
+    "Racines carrées": {
+      competences: [
+        "4e — La racine carrée est introduite, en lien avec des situations géométriques (Pythagore, agrandissement des aires) et les carrés parfaits de 1 à 144",
+        "3e — La racine carrée est utilisée dans le cadre de la résolution de problèmes"
+      ]
+    },
+    "Opérations sur entiers, décimaux, relatifs, fractions": {
+      competences: [
+        "5e — Addition et soustraction étendues aux nombres décimaux relatifs ; addition/soustraction de fractions de dénominateurs égaux ou multiples",
+        "4e — Produit et quotient de décimaux relatifs ; multiplication et division étendues aux fractions"
+      ]
+    },
+    "Priorités opératoires": {
+      competences: [
+        "Tout le cycle — Appliquer correctement les règles de priorités opératoires dans un calcul",
+        "Tout le cycle — Vérifier la vraisemblance d'un résultat, notamment en estimant un ordre de grandeur"
+      ]
+    },
+    "Calcul mental, en ligne, posé, instrumenté": {
+      competences: [
+        "Tout le cycle — Pratiquer le calcul exact ou approché, mental, à la main ou instrumenté (calculatrice, logiciel)",
+        "Tout le cycle — Contrôler la vraisemblance de ses résultats, notamment en estimant des ordres de grandeur ou en utilisant des encadrements"
+      ]
+    },
+    "Ordres de grandeur, encadrements, arrondis": {
+      competences: [
+        "4e — La notation scientifique est utilisée pour comparer des nombres et déterminer des ordres de grandeur, en lien avec d'autres disciplines"
+      ]
+    },
+    "Calcul littéral, développement, factorisation": {
+      competences: [
+        "5e — Les expressions littérales sont introduites via des formules (grandeurs, programmes de calcul) ; substituer une valeur numérique à une lettre",
+        "5e — La distributivité simple est utilisée tôt dans l'année pour réduire une expression du type ax + bx",
+        "4e — Travail sur les formules poursuivi, notion d'identité présentée ; la structure d'une expression (somme/produit) est étudiée, distributivité simple formalisée pour développer/factoriser/réduire",
+        "3e — Travail consolidé avec transformations d'expressions, programmes de calcul, mises en équation, fonctions ; double distributivité abordée"
+      ]
+    },
+    "Identités remarquables": {
+      competences: [
+        "3e — La double distributivité est abordée ; il est possible de démontrer (a+b)(c+d) = ac+ad+bc+bd en posant k = a+b",
+        "3e — La factorisation de a² − b² permet de résoudre des équations produits, notamment du type x² = a"
+      ]
+    },
+    "Équations et inéquations du premier degré": {
+      competences: [
+        "5e — Tester par essais-erreurs des valeurs numériques dans des expressions littérales : première approche de la notion de solution, sans formalisation",
+        "4e — Les notions d'inconnue et de solution d'une équation sont abordées ; mise en équation d'un problème et résolution algébrique d'une équation du premier degré (coefficients choisis progressivement)",
+        "3e — La factorisation de a² − b² permet de résoudre des équations produits se ramenant au premier degré, notamment du type x² = a"
+      ]
+    },
+    "Résolution de problèmes (mise en équation)": {
+      competences: [
+        "4e — Aborder la mise en équation d'un problème et la résolution algébrique d'une équation du premier degré",
+        "3e — Résoudre des équations produits issues d'une factorisation pour traiter un problème"
+      ]
+    },
+    "Reconnaître une situation de proportionnalité": {
+      competences: [
+        "5e — Les élèves sont confrontés à des situations relevant ou non de la proportionnalité (linéarité, passage par l'unité, coefficient de proportionnalité, déjà vus au cycle 3)"
+      ]
+    },
+    "Coefficient, produit en croix, règle de trois": {
+      competences: [
+        "5e — Procédures variées pour résoudre des problèmes de proportionnalité (linéarité, passage par l'unité, coefficient)",
+        "4e — Le calcul d'une quatrième proportionnelle est systématisé, avec diversification des points de vue (représentations graphiques, calcul littéral, géométrie)"
+      ]
+    },
+    "Pourcentages, échelles, vitesses, évolutions": {
+      competences: [
+        "4e — Problèmes de géométrie relevant de la proportionnalité (configuration de Thalès, agrandissement/réduction)",
+        "3e — Lien entre taux d'évolution et coefficient multiplicateur, et entre proportionnalité et fonctions linéaires ; champ élargi aux homothéties, triangles semblables, configurations de Thalès"
+      ]
+    },
+
+    // Thème B — Organisation et gestion de données, fonctions
+    "Vocabulaire : population, caractère, effectif, fréquence": {
+      competences: [
+        "5e — Le traitement de données statistiques se prête à des calculs d'effectifs, de fréquences et de moyennes"
+      ]
+    },
+    "Tableaux, diagrammes en bâtons, histogrammes": {
+      competences: [
+        "5e — Représentation de données sous forme de tableaux, diagrammes ou graphiques, à la main ou au tableur-grapheur",
+        "3e — Un nouveau type de diagramme est introduit : les histogrammes pour des classes de même amplitude"
+      ]
+    },
+    "Diagrammes circulaires": {
+      competences: [
+        "5e — Représentation de données sous forme de tableaux, de diagrammes ou de graphiques (à la main ou au tableur-grapheur)"
+      ]
+    },
+    "Moyenne (simple et pondérée), médiane": {
+      competences: [
+        "5e — Calculs d'effectifs, de fréquences et de moyennes",
+        "4e — Un nouvel indicateur de position est introduit : la médiane",
+        "3e — Le travail sur le calcul et l'interprétation des indicateurs de position est consolidé"
+      ]
+    },
+    "Étendue, quartiles": {
+      competences: [
+        "3e — Un indicateur de dispersion est introduit : l'étendue"
+      ]
+    },
+    "Vocabulaire : expérience aléatoire, issue, événement": {
+      competences: [
+        "5e — Le hasard est appréhendé à travers des expériences concrètes (pile ou face, dé, roue de loterie, urne...) ; le vocabulaire des probabilités (expérience aléatoire, issue, événement, probabilité) est utilisé"
+      ]
+    },
+    "Probabilité (approche fréquentiste et théorique)": {
+      competences: [
+        "5e — Placement d'un événement sur une échelle de probabilités ; formulations du type « 2 chances sur 5 » acceptées",
+        "3e — Le constat de la stabilisation des fréquences s'appuie sur la simulation d'expériences aléatoires (tableur ou logiciel de programmation)"
+      ]
+    },
+    "Calcul de probabilités simples (équiprobabilité)": {
+      competences: [
+        "5e — Détermination de probabilités dans des situations très simples d'équiprobabilité",
+        "4e — Les calculs de probabilités concernent des situations simples, ne relevant pas nécessairement du modèle équiprobable",
+        "3e — Calculs de probabilités à partir de dénombrements (tableaux à double entrée ; la notion d'arbre ne figure pas au programme)"
+      ]
+    },
+    "Événements incompatibles, contraires": {
+      competences: [
+        "4e — Le lien est fait entre les probabilités de deux événements contraires"
+      ]
+    },
+    "Fonctions linéaires et affines": {
+      competences: [
+        "5e — La dépendance de deux grandeurs est traduite par un tableau de valeurs ou une formule",
+        "4e — La dépendance est aussi traduite par un graphique ; notation et vocabulaire fonctionnels non formalisés en 4e",
+        "3e — Les notions de variable, fonction, antécédent, image sont formalisées ; fonctions affines et linéaires présentées par expressions algébriques et représentations graphiques"
+      ]
+    },
+    "Représentation graphique, coefficient directeur": {
+      competences: [
+        "4e — Les représentations graphiques permettent de déterminer des images et des antécédents, interprétés selon le contexte",
+        "3e — Travail sur le passage d'un mode de représentation d'une fonction (graphique, symbolique, tableau) à un autre"
+      ]
+    },
+    "Lecture et interprétation de graphiques": {
+      competences: [
+        "4e — Déterminer des images et des antécédents à partir d'une représentation graphique et les interpréter selon le contexte"
+      ]
+    },
+    "Résolution graphique d'équations et inéquations": {
+      competences: [
+        "3e — Les fonctions sont utilisées pour modéliser des phénomènes continus et résoudre des problèmes"
+      ]
+    },
+    "Lecture de tableaux et graphiques de la vie courante": {
+      competences: [
+        "Tout le cycle — Lire et interpréter des données de la vie courante sous forme de tableaux ou de diagrammes"
+      ]
+    },
+    "Utilisation d'un tableur (formules, graphiques)": {
+      competences: [
+        "5e — Représentation de données au tableur-grapheur (tableaux, diagrammes)",
+        "3e — Simulation d'expériences aléatoires et dénombrements à l'aide d'un tableur ou d'un logiciel de programmation"
+      ]
+    },
+
+    // Thème C — Grandeurs et mesures
+    "Unités et conversions": {
+      competences: [
+        "4e — Les conversions d'unités sont travaillées, notamment pour les grandeurs composées",
+        "3e — Réinvestissement du calcul avec les puissances de 10 pour les conversions d'unités (ex. 1 m³ = 10⁶ cm³)"
+      ]
+    },
+    "Périmètres des figures usuelles": {
+      competences: [
+        "Tout le cycle — Mener des calculs de longueurs et exprimer les résultats dans les unités adaptées"
+      ]
+    },
+    "Aires : carré, rectangle, triangle, disque, trapèze": {
+      competences: [
+        "5e — Les formules d'aires du rectangle, du triangle et du disque sont entretenues ; enrichies par l'aire du parallélogramme"
+      ]
+    },
+    "Volumes : cube, pavé, cylindre, prisme, pyramide, cône, sphère": {
+      competences: [
+        "5e — Le volume du pavé droit est entretenu, enrichi par le volume du prisme et du cylindre ; correspondance entre unités de volume et de contenance",
+        "4e — Le lexique s'étend au volume de la pyramide et du cône (lien avec le prisme/cylindre de même base et hauteur)",
+        "3e — La formule du volume d'une boule est utilisée"
+      ]
+    },
+    "Effet d'un agrandissement réduction": {
+      competences: [
+        "4e — Les élèves connaissent et utilisent l'effet d'un agrandissement ou d'une réduction sur les longueurs, les aires et les volumes, en lien avec la proportionnalité"
+      ]
+    },
+    "Vitesse, débit, densité": {
+      competences: [
+        "4e — Des grandeurs produits (trafic, énergie) et des grandeurs quotients (vitesse, débit, concentration, masse volumique) sont introduites à travers la résolution de problèmes"
+      ]
+    },
+    "Masse volumique": {
+      competences: [
+        "4e — Grandeur quotient introduite à travers la résolution de problèmes, avec sensibilisation au contrôle de cohérence des unités"
+      ]
+    },
+    "Échelles": {
+      competences: [
+        "4e — Problèmes de géométrie relevant de la proportionnalité (agrandissement, réduction, configuration de Thalès)"
+      ]
+    },
+    "Calculs de durées, conversions horaires": {
+      competences: [
+        "5e — Les calculs portent aussi sur des durées et des horaires, en prenant appui sur des contextes issus d'autres disciplines ou de la vie quotidienne"
+      ]
+    },
+    "Mesure des angles, angles remarquables": {
+      competences: [
+        "5e — La caractérisation angulaire du parallélisme (angles alternes-internes, angles correspondants) est énoncée ; la somme des angles d'un triangle peut être démontrée"
+      ]
+    },
+    "Pourcentages appliqués (remises, TVA, intérêts)": {
+      competences: [
+        "3e — Lien entre taux d'évolution et coefficient multiplicateur"
+      ]
+    },
+    "Proportionnalité appliquée aux grandeurs": {
+      competences: [
+        "3e — Le champ des problèmes de géométrie relevant de la proportionnalité est élargi (homothéties, triangles semblables, configurations de Thalès)"
+      ]
+    },
+
+    // Thème D — Espace et géométrie
+    "Triangles et quadrilatères": {
+      competences: [
+        "5e — Somme des angles d'un triangle, inégalité triangulaire énoncées ; constructions de triangles à partir de longueurs/angles",
+        "5e — Le parallélogramme est défini à partir d'une propriété, l'autre étant démontrée et devenant caractéristique"
+      ]
+    },
+    "Propriétés et caractérisations des figures": {
+      competences: [
+        "5e — Consolidation du travail sur les codages de figures (interprétation, réalisation)",
+        "4e — Les cas d'égalité des triangles sont présentés et utilisés pour résoudre des problèmes, en lien avec la construction d'un triangle de mesures données"
+      ]
+    },
+    "Théorème de Pythagore (et réciproque)": {
+      competences: [
+        "4e — Le théorème de Pythagore (plusieurs démonstrations possibles) et sa réciproque sont énoncés et utilisés"
+      ]
+    },
+    "Théorème de Thalès (et réciproque)": {
+      competences: [
+        "4e — Le théorème de Thalès et sa réciproque dans la configuration des triangles emboîtés sont énoncés et utilisés",
+        "3e — Le théorème de Thalès et sa réciproque dans la configuration du papillon sont énoncés et utilisés"
+      ]
+    },
+    "Trigonométrie dans le triangle rectangle": {
+      competences: [
+        "4e — La définition du cosinus d'un angle découle, grâce au théorème de Thalès, de l'indépendance du rapport des longueurs le définissant",
+        "3e — Les lignes trigonométriques (cosinus, sinus, tangente) sont utilisées pour calculer des longueurs ou des angles"
+      ]
+    },
+    "Cercle : rayon, diamètre, tangente, angles": {
+      competences: [
+        "Tout le cycle — Mobiliser les connaissances sur le cercle pour déterminer des grandeurs géométriques"
+      ]
+    },
+    "Symétries axiale et centrale": {
+      competences: [
+        "5e — Effet des symétries axiale et centrale sur les longueurs, les aires, les angles (grandeurs et mesures)",
+        "5e — Transformation d'une figure par symétrie centrale ; propriétés (conservation de l'alignement, du parallélisme, des longueurs, des angles) ; lien avec le parallélogramme"
+      ]
+    },
+    "Translations, rotations, homothéties": {
+      competences: [
+        "4e — Transformer une figure par translation ; identifier des translations dans des frises/pavages ; lien translation-parallélogramme",
+        "3e — Transformer une figure par rotation et par homothétie (rapport positif ou négatif) ; lien entre angle et rotation, entre Thalès et les homothéties"
+      ]
+    },
+    "Constructions géométriques": {
+      competences: [
+        "5e — Constructions de triangles à partir de la mesure d'une longueur et de deux angles, ou d'un angle et de deux longueurs"
+      ]
+    },
+    "Solides usuels (cube, pavé, prisme, cylindre, pyramide, cône, sphère)": {
+      competences: [
+        "5e — Reconnaissance des solides (pavé droit, cube, cylindre, pyramide, cône, boule) à partir d'un objet réel, d'une image ou d'une représentation en perspective cavalière"
+      ]
+    },
+    "Patrons, représentations en perspective": {
+      competences: [
+        "5e — Construire et mettre en relation une représentation en perspective cavalière et un patron d'un pavé droit ou d'un cylindre",
+        "4e — Idem pour une pyramide ou un cône",
+        "3e — Produire et mettre en relation différentes représentations des solides étudiés (patrons, perspective cavalière, vues de face/dessus, en coupe)"
+      ]
+    },
+    "Sections de solides": {
+      competences: [
+        "3e — Un logiciel de géométrie est utilisé pour visualiser des solides et leurs sections planes"
+      ]
+    },
+    "Repérage sur une droite graduée, dans le plan": {
+      competences: [
+        "5e — Le repérage se fait sur une droite graduée ou dans le plan muni d'un repère orthogonal",
+        "4e — Le repérage se fait dans un pavé droit (abscisse, ordonnée, altitude)",
+        "3e — Le repérage s'étend à la sphère (latitude, longitude)"
+      ]
+    },
+    "Coordonnées d'un point, distance entre deux points": {
+      competences: [
+        "5e — Repérage dans le plan muni d'un repère orthogonal",
+        "4e — Repérage dans un pavé droit (abscisse, ordonnée, altitude)"
+      ]
+    },
+    "Lien avec les fonctions": {
+      competences: [
+        "3e — Les fonctions affines et linéaires sont présentées par leurs expressions algébriques et leurs représentations graphiques"
+      ]
+    },
+    "Vocabulaire de la démonstration": {
+      competences: [
+        "4e — Une progressivité dans l'apprentissage de la recherche de preuve est aménagée ; aucun formalisme excessif n'est exigé dans la rédaction"
+      ]
+    },
+    "Rédaction d'une démonstration géométrique": {
+      competences: [
+        "4e — Démonstrations possibles : somme des angles d'un triangle, théorème de Pythagore",
+        "3e — Démonstration possible du théorème de Thalès (configuration du papillon) en utilisant une symétrie centrale ; caractérisation angulaire des triangles semblables"
+      ]
+    },
+
+    // Thème E — Algorithmique et programmation
+    // Cette progressivité s'exprime en 3 niveaux de complexité (et non par classe) :
+    // certains élèves réalisent des activités de niveau 3 dès le début du cycle.
+    "Notion d'algorithme, de programme": {
+      competences: [
+        "Niveau 1 — Mettre en ordre et/ou compléter des blocs Scratch fournis par le professeur pour construire un programme simple"
+      ]
+    },
+    "Variables, affectation": {
+      competences: [
+        "Niveau 2 — Intégration d'une variable dans un programme de déplacement, de construction géométrique, de calcul ou de simulation d'une expérience aléatoire"
+      ]
+    },
+    "Structures conditionnelles (si... alors... sinon)": {
+      competences: [
+        "Niveau 1 — Utilisation progressive des instructions conditionnelles pour écrire des scripts de déplacement, de construction géométrique ou de calcul",
+        "Niveau 2 — Écriture d'une séquence d'instructions avec condition « si... alors »"
+      ]
+    },
+    "Boucles (pour, tant que)": {
+      competences: [
+        "Niveau 1 — Utilisation progressive de la boucle « répéter... fois »",
+        "Niveau 2 — Écriture d'une séquence d'instructions avec boucle « répéter... fois »",
+        "Niveau 3 — Utilisation simultanée des boucles « répéter... fois » et « répéter jusqu'à... » pour des figures, calculs et déplacements plus complexes"
+      ]
+    },
+    "Programmation par blocs (Scratch)": {
+      competences: [
+        "Niveau 1 — Mettre en ordre et/ou compléter des blocs Scratch fournis par le professeur pour construire un programme simple"
+      ]
+    },
+    "Initiation à un langage textuel (Python)": {
+      competences: [
+        "Niveau 2 — S'initier à la programmation sans viser une connaissance experte et exhaustive d'un langage ou d'un logiciel particulier"
+      ]
+    },
+    "Lire, modifier, écrire des scripts simples": {
+      competences: [
+        "Niveau 2 — Écriture de programmes déclenchés par des événements extérieurs",
+        "Niveau 3 — Écriture de plusieurs scripts fonctionnant en parallèle pour gérer les interactions et créer des jeux"
+      ]
+    },
+    "Algorithmes de calcul (moyenne, tri de nombres)": {
+      competences: [
+        "Niveau 1 — Écriture de scripts de programme de calcul",
+        "Niveau 2 — Intégration d'une variable dans un programme de calcul ou de simulation d'une expérience aléatoire"
+      ]
+    },
+    "Algorithmes géométriques (tracé de figures)": {
+      competences: [
+        "Niveau 1 — Écriture de scripts de construction géométrique",
+        "Niveau 2 — Intégration d'une variable dans un programme de construction géométrique"
+      ]
+    },
+    "Lien avec la résolution de problèmes": {
+      competences: [
+        "Niveau 3 — La décomposition d'un problème en sous-problèmes et la traduction d'un sous-problème par la création d'un bloc-utilisateur contribuent au développement des compétences visées"
+      ]
+    },
+  };
+
   // Masquer la navbar au scroll vers le bas
   const nav = document.getElementById('nav');
   let prevY = 0;
@@ -2897,313 +3408,6 @@ h1.hero-title{
     });
   })();
 
-  // Modal de ressources par sous-thème
-  (function () {
-    const overlay = document.getElementById('crpe-modal-overlay');
-    const titleEl = document.getElementById('crpe-modal-title');
-    const closeBtn = document.getElementById('crpe-modal-close');
-    const tabs = document.querySelectorAll('.crpe-modal-tab');
-    const panels = document.querySelectorAll('.crpe-modal-panel');
-    const competencesPanel = document.querySelector('.crpe-modal-panel[data-panel="competences"]');
-    const DEFAULT_COMPETENCES_HTML = '<p>Compétences à venir.</p>';
-    if (!overlay || !titleEl || !closeBtn) return;
-
-    // Compétences associées, extraites mot pour mot du programme de mathématiques du
-    // cycle 4 (BOEN n°31 du 30 juillet 2020), réparties par sous-thème correspondant.
-    // Chaque compétence est associée aux classes (5e/4e/3e) où elle est travaillée,
-    // d'après les Repères annuels de progression pour le cycle 4 (Annexe 26).
-    const crpeCompetencesCycle4 = {
-      "Nombres rationnels": [
-        { text: "Utiliser diverses représentations d'un même nombre (écriture décimale ou fractionnaire, notation scientifique, repérage sur une droite graduée).", levels: ["4e", "3e"] },
-        { text: "Passer d'une représentation d'un nombre à une autre.", levels: ["4e", "3e"] },
-        { text: "Comparer, ranger, encadrer des nombres rationnels en écriture décimale, fractionnaire ou scientifique.", levels: ["5e", "4e"] },
-        { text: "Repérer et placer un nombre rationnel sur une droite graduée.", levels: ["5e", "4e"] },
-        { text: "Associer à des objets des ordres de grandeur (par exemple taille d'un atome, d'une bactérie, d'une alvéole pulmonaire, longueur de l'intestin, capacité de stockage d'un disque dur, vitesses du son et de la lumière, populations française et mondiale, distance Terre-Lune, distance du Soleil à l'étoile la plus proche, etc.).", levels: ["4e"] },
-        { text: "Présenter les fractions sous forme irréductible.", levels: ["2nde"] },
-        { text: "Effectuer des opérations et des comparaisons entre des fractions simples.", levels: ["2nde"] }
-      ],
-      "Nombres irrationnels": [
-        { text: "Donner un encadrement, d'amplitude donnée, d'un nombre réel par des décimaux.", levels: ["2nde"] },
-        { text: "Dans le cadre de la résolution de problèmes, arrondir en donnant le nombre de chiffres significatifs adapté à la situation étudiée.", levels: ["2nde"] }
-      ],
-      "Nombres réels": [
-        { text: "Lire l'abscisse d'un nombre réel sur une droite graduée et placer un nombre réel d'abscisse donnée.", levels: ["2nde"] },
-        { text: "Représenter un intervalle de la droite numérique. Déterminer si un nombre réel appartient à un intervalle donné.", levels: ["2nde"] },
-        { text: "Donner un encadrement, d'amplitude donnée, d'un nombre réel par des décimaux.", levels: ["2nde"] },
-        { text: "Dans le cadre de la résolution de problèmes, arrondir en donnant le nombre de chiffres significatifs adapté à la situation étudiée.", levels: ["2nde"] }
-      ],
-      "Opérations": [
-        { text: "Calculer avec des nombres relatifs, des fractions, des nombres décimaux.", levels: ["5e", "4e", "3e"] },
-        { text: "Vérifier la vraisemblance d'un résultat, notamment en estimant son ordre de grandeur.", levels: ["5e", "4e", "3e"] },
-        { text: "Effectuer des calculs numériques simples impliquant des puissances, notamment en utilisant la notation scientifique.", levels: ["4e", "3e"] },
-        { text: "Utiliser la racine carrée pour résoudre des problèmes, notamment géométriques.", levels: ["4e", "3e"] },
-        { text: "Effectuer des calculs et des comparaisons pour traiter des problèmes.", levels: ["5e", "4e", "3e"] },
-        { text: "Comparer deux nombres directement ou par calcul de leur différence, ou, s'ils sont strictement positifs, de leur quotient.", levels: ["2nde"] },
-        { text: "Effectuer des opérations et des comparaisons entre des fractions simples.", levels: ["2nde"] },
-        { text: "Effectuer des opérations sur les puissances.", levels: ["2nde"] },
-        { text: "Passer d'une écriture d'un nombre à une autre (décimale, fractionnaire, pourcentage).", levels: ["2nde"] },
-        { text: "Estimer un ordre de grandeur.", levels: ["2nde"] },
-        { text: "S'assurer de la vraisemblance, de la cohérence d'un résultat.", levels: ["2nde"] },
-        { text: "Effectuer des calculs numériques ou littéraux mettant en jeu des puissances, des racines carrées, des écritures fractionnaires.", levels: ["2nde"] }
-      ],
-      "Modes de calcul": [
-        { text: "Calculer avec des nombres relatifs, des fractions, des nombres décimaux.", levels: ["5e", "4e", "3e"] },
-        { text: "Vérifier la vraisemblance d'un résultat, notamment en estimant son ordre de grandeur.", levels: ["5e", "4e", "3e"] },
-        { text: "Effectuer des calculs numériques simples impliquant des puissances, notamment en utilisant la notation scientifique.", levels: ["4e", "3e"] },
-        { text: "Utiliser la racine carrée pour résoudre des problèmes, notamment géométriques.", levels: ["4e", "3e"] },
-        { text: "Effectuer des calculs et des comparaisons pour traiter des problèmes.", levels: ["5e", "4e", "3e"] },
-        { text: "Effectuer des calculs numériques ou littéraux mettant en jeu des puissances, des racines carrées, des écritures fractionnaires.", levels: ["2nde"] },
-        { text: "Effectuer une application numérique d'une formule (notamment pour les formules utilisées dans les autres disciplines).", levels: ["2nde"] }
-      ],
-      "Multiples et diviseurs": [
-        { text: "Déterminer si un entier est ou n'est pas multiple ou diviseur d'un autre entier.", levels: ["5e"] },
-        { text: "Déterminer les nombres premiers inférieurs ou égaux à 100.", levels: ["4e"] },
-        { text: "Utiliser les critères de divisibilité par 2, 3, 5, 9, 10.", levels: ["5e"] },
-        { text: "Déterminer les diviseurs d'un nombre à la main, à l'aide d'un tableur, d'une calculatrice.", levels: ["3e"] },
-        { text: "Décomposer un nombre entier en produit de facteurs premiers (à la main ou à l'aide d'un logiciel).", levels: ["5e", "4e"] },
-        { text: "Simplifier une fraction pour la rendre irréductible.", levels: ["4e", "3e"] },
-        { text: "Modéliser et résoudre des problèmes mettant en jeu la divisibilité (engrenages, conjonction de phénomènes, etc.).", levels: ["5e", "4e", "3e"] },
-        { text: "Modéliser et résoudre des problèmes mobilisant les notions de multiple, de diviseur, de nombre pair, de nombre impair.", levels: ["2nde"] },
-        { text: "Présenter les fractions sous forme irréductible.", levels: ["2nde"] }
-      ],
-      "Calcul algébrique": [
-        { text: "Développer, factoriser, réduire des expressions algébriques dans des cas très simples.", levels: ["4e", "3e"] },
-        { text: "Utiliser le calcul littéral pour traduire une propriété générale (par exemple la distributivité simple), pour démontrer un résultat général (par exemple que la somme de trois entiers consécutifs est un multiple de trois), pour valider ou réfuter une conjecture, pour modéliser une situation.", levels: ["5e", "4e", "3e"] },
-        { text: "Mettre un problème en équation en vue de sa résolution.", levels: ["4e"] },
-        { text: "Résoudre algébriquement des équations du premier degré ou s'y ramenant (équations produits), en particulier des équations du type x² = a.", levels: ["4e", "3e"] },
-        { text: "Effectuer un calcul littéral élémentaire (expressions additives, expressions multiplicatives).", levels: ["2nde"] },
-        { text: "Développer, factoriser, réduire une expression algébrique simple (identités (a + b)², (a – b)², (a + b)(a – b) ; factorisation de ax² + bx, ax + bx).", levels: ["2nde"] },
-        { text: "Choisir la forme la plus adaptée (factorisée, développée réduite) d'une expression en vue de la résolution d'un problème.", levels: ["2nde"] },
-        { text: "Sur des cas simples de relations entre variables (par exemple U = RI, d = vt, S = πr², V = abc, V = πr²h), exprimer une variable en fonction des autres.", levels: ["2nde"] },
-        { text: "Isoler une variable dans une égalité qui en comporte plusieurs, sur des exemples internes aux mathématiques ou issus des autres disciplines.", levels: ["2nde"] }
-      ],
-      "Équations": [
-        { text: "Développer, factoriser, réduire des expressions algébriques dans des cas très simples.", levels: ["4e", "3e"] },
-        { text: "Utiliser le calcul littéral pour traduire une propriété générale (par exemple la distributivité simple), pour démontrer un résultat général (par exemple que la somme de trois entiers consécutifs est un multiple de trois), pour valider ou réfuter une conjecture, pour modéliser une situation.", levels: ["5e", "4e", "3e"] },
-        { text: "Mettre un problème en équation en vue de sa résolution.", levels: ["4e"] },
-        { text: "Résoudre algébriquement des équations du premier degré ou s'y ramenant (équations produits), en particulier des équations du type x² = a.", levels: ["4e", "3e"] },
-        { text: "Résoudre une équation du type x² = a, ax + b = cx + d ou a/x = b.", levels: ["2nde"] },
-        { text: "Donner l'ensemble des solutions d'une équation du premier degré du type ax = b, a + x = b, ax + b = cx + d, d'une équation du type x² = a.", levels: ["2nde"] }
-      ],
-      "Inéquations du premier degré": [
-        { text: "Résoudre une inéquation du premier degré.", levels: ["2nde"] },
-        { text: "Modéliser un problème par une inéquation.", levels: ["2nde"] },
-        { text: "Donner l'ensemble des solutions d'une inéquation du premier degré du type a ⩾ b, a + x ⩾ b, ax + b ⩾ cx + d.", levels: ["2nde"] }
-      ],
-      "Mise en équation de problèmes": [
-        { text: "Utiliser le calcul littéral pour traduire une propriété générale (par exemple la distributivité simple), pour démontrer un résultat général (par exemple que la somme de trois entiers consécutifs est un multiple de trois), pour valider ou réfuter une conjecture, pour modéliser une situation.", levels: ["5e", "4e", "3e"] },
-        { text: "Mettre un problème en équation en vue de sa résolution.", levels: ["4e"] },
-        { text: "Résoudre algébriquement des équations du premier degré ou s'y ramenant (équations produits), en particulier des équations du type x² = a.", levels: ["4e", "3e"] },
-        { text: "Modéliser un problème par une inéquation.", levels: ["2nde"] },
-        { text: "Résoudre des problèmes modélisés par des équations ou des inéquations se ramenant au premier degré.", levels: ["2nde"] },
-        { text: "Isoler une variable dans une égalité qui en comporte plusieurs, sur des exemples internes aux mathématiques ou issus des autres disciplines.", levels: ["2nde"] }
-      ],
-      "Fonctions numériques": [
-        { text: "Passer d'un mode de représentation d'une fonction à un autre.", levels: ["4e", "3e"] },
-        { text: "Déterminer, à partir d'un mode de représentation, l'image ou un antécédent d'un nombre par une fonction.", levels: ["4e", "3e"] },
-        { text: "Représenter graphiquement une fonction linéaire, une fonction affine.", levels: ["3e"] },
-        { text: "Modéliser un phénomène continu par une fonction.", levels: ["3e"] },
-        { text: "Modéliser une situation de proportionnalité à l'aide d'une fonction linéaire.", levels: ["3e"] },
-        { text: "Résoudre des problèmes modélisés par des fonctions.", levels: ["3e"] }
-      ],
-      "Fonctions usuelles (affines, linéaires...)": [
-        { text: "Passer d'un mode de représentation d'une fonction à un autre.", levels: ["4e", "3e"] },
-        { text: "Déterminer, à partir d'un mode de représentation, l'image ou un antécédent d'un nombre par une fonction.", levels: ["4e", "3e"] },
-        { text: "Représenter graphiquement une fonction linéaire, une fonction affine.", levels: ["3e"] },
-        { text: "Modéliser un phénomène continu par une fonction.", levels: ["3e"] },
-        { text: "Modéliser une situation de proportionnalité à l'aide d'une fonction linéaire.", levels: ["3e"] },
-        { text: "Résoudre des problèmes modélisés par des fonctions.", levels: ["3e"] }
-      ],
-      "Proportionnalité simple": [
-        { text: "Reconnaître une situation de proportionnalité ou de non-proportionnalité.", levels: ["5e", "4e", "3e"] },
-        { text: "Calculer une quatrième proportionnelle.", levels: ["4e"] },
-        { text: "Utiliser une formule liant deux grandeurs dans une situation de proportionnalité (par exemple la longueur d'un cercle en fonction de son rayon, la loi d'Ohm exprimant la tension en fonction de l'intensité, la distance parcourue en fonction du temps à vitesse constante, etc.).", levels: ["4e", "3e"] },
-        { text: "Résoudre des problèmes utilisant la proportionnalité (pourcentages, échelles, agrandissement réduction).", levels: ["5e", "4e", "3e"] }
-      ],
-      "Problèmes de proportionnalité": [
-        { text: "Reconnaître une situation de proportionnalité ou de non-proportionnalité.", levels: ["5e", "4e", "3e"] },
-        { text: "Calculer une quatrième proportionnelle.", levels: ["4e"] },
-        { text: "Utiliser une formule liant deux grandeurs dans une situation de proportionnalité (par exemple la longueur d'un cercle en fonction de son rayon, la loi d'Ohm exprimant la tension en fonction de l'intensité, la distance parcourue en fonction du temps à vitesse constante, etc.).", levels: ["4e", "3e"] },
-        { text: "Résoudre des problèmes utilisant la proportionnalité (pourcentages, échelles, agrandissement réduction).", levels: ["5e", "4e", "3e"] }
-      ],
-      "Proportionnalité multiple, partages": [
-        { text: "Reconnaître une situation de proportionnalité ou de non-proportionnalité.", levels: ["5e", "4e", "3e"] },
-        { text: "Calculer une quatrième proportionnelle.", levels: ["4e"] },
-        { text: "Partager une quantité (par exemple une somme d'argent) en deux ou trois parts selon un ratio donné.", levels: ["5e", "4e", "3e"] },
-        { text: "Résoudre des problèmes utilisant la proportionnalité (pourcentages, échelles, agrandissement réduction).", levels: ["5e", "4e", "3e"] }
-      ],
-      "Série statistique et paramètres": [
-        { text: "Recueillir des données, les organiser.", levels: ["5e"] },
-        { text: "Lire et interpréter des données sous forme de données brutes, de tableau, de diagramme (diagramme en bâtons, diagramme circulaire, histogramme).", levels: ["5e", "4e", "3e"] },
-        { text: "Utiliser un tableur-grapheur pour présenter des données sous la forme d'un tableau ou d'un diagramme.", levels: ["5e", "4e", "3e"] },
-        { text: "Calculer des effectifs, des fréquences.", levels: ["5e", "4e", "3e"] },
-        { text: "Calculer et interpréter des indicateurs de position ou de dispersion d'une série statistique.", levels: ["5e", "4e", "3e"] }
-      ],
-      "Représentations graphiques": [
-        { text: "Recueillir des données, les organiser.", levels: ["5e"] },
-        { text: "Lire et interpréter des données sous forme de données brutes, de tableau, de diagramme (diagramme en bâtons, diagramme circulaire, histogramme).", levels: ["5e", "4e", "3e"] },
-        { text: "Utiliser un tableur-grapheur pour présenter des données sous la forme d'un tableau ou d'un diagramme.", levels: ["5e", "4e", "3e"] }
-      ],
-      "Applications": [
-        { text: "Calculer des effectifs, des fréquences.", levels: ["5e", "4e", "3e"] },
-        { text: "Calculer et interpréter des indicateurs de position ou de dispersion d'une série statistique.", levels: ["5e", "4e", "3e"] }
-      ],
-      "Vocabulaire des probabilités": [
-        { text: "Aborder les questions relatives au hasard à partir de problèmes simples.", levels: ["5e"] },
-        { text: "Exprimer des probabilités sous diverses formes (décimale, fractionnaire, pourcentage).", levels: ["5e"] }
-      ],
-      "Propriétés des probabilités": [
-        { text: "Aborder les questions relatives au hasard à partir de problèmes simples.", levels: ["5e"] },
-        { text: "Calculer des probabilités dans des cas simples (par exemple évaluation des chances de gain dans un jeu).", levels: ["5e", "4e"] },
-        { text: "Faire le lien entre fréquence et probabilité.", levels: ["3e"] }
-      ],
-      "Calcul d'une probabilité simple": [
-        { text: "Calculer des probabilités dans des cas simples (par exemple évaluation des chances de gain dans un jeu).", levels: ["5e", "4e", "3e"] },
-        { text: "Exprimer des probabilités sous diverses formes (décimale, fractionnaire, pourcentage).", levels: ["5e"] },
-        { text: "Faire le lien entre fréquence et probabilité.", levels: ["3e"] }
-      ],
-      "Grandeurs fondamentales": [
-        { text: "Mener des calculs impliquant des grandeurs mesurables, notamment des grandeurs composées, exprimer les résultats dans les unités adaptées.", levels: ["5e", "4e", "3e"] },
-        { text: "Vérifier la cohérence des résultats du point de vue des unités.", levels: ["5e", "4e"] },
-        { text: "Effectuer des conversions d'unités.", levels: ["4e", "3e"] }
-      ],
-      "Mesurer une grandeur": [
-        { text: "Mener des calculs impliquant des grandeurs mesurables, notamment des grandeurs composées, exprimer les résultats dans les unités adaptées.", levels: ["5e", "4e", "3e"] },
-        { text: "Vérifier la cohérence des résultats du point de vue des unités.", levels: ["5e", "4e"] },
-        { text: "Effectuer des conversions d'unités.", levels: ["4e", "3e"] }
-      ],
-      "Grandeurs simples": [
-        { text: "Mener des calculs impliquant des grandeurs mesurables, exprimer les résultats dans les unités adaptées.", levels: ["5e"] },
-        { text: "Vérifier la cohérence des résultats du point de vue des unités.", levels: ["5e"] },
-        { text: "Effectuer des conversions d'unités.", levels: ["5e"] }
-      ],
-      "Grandeurs composées": [
-        { text: "Mener des calculs impliquant des grandeurs mesurables, notamment des grandeurs composées, exprimer les résultats dans les unités adaptées.", levels: ["4e"] },
-        { text: "Vérifier la cohérence des résultats du point de vue des unités.", levels: ["4e"] }
-      ],
-      "Notation scientifique": [
-        { text: "Utiliser diverses représentations d'un même nombre (écriture décimale ou fractionnaire, notation scientifique, repérage sur une droite graduée).", levels: ["4e"] },
-        { text: "Passer d'une représentation d'un nombre à une autre.", levels: ["4e"] },
-        { text: "Effectuer des calculs numériques simples impliquant des puissances, notamment en utilisant la notation scientifique.", levels: ["4e", "3e"] }
-      ],
-      "Scratch": [
-        { text: "Écrire, mettre au point (tester, corriger) et exécuter un programme en réponse à un problème donné.", levels: ["5e", "4e", "3e"] }
-      ],
-      "Tableur": [
-        { text: "Utiliser un tableur-grapheur pour présenter des données sous la forme d'un tableau ou d'un diagramme.", levels: ["5e", "4e", "3e"] },
-        { text: "Déterminer les diviseurs d'un nombre à la main, à l'aide d'un tableur, d'une calculatrice.", levels: ["3e"] }
-      ],
-      "Premiers éléments de géométrie plane": [
-        { text: "Mettre en œuvre ou écrire un protocole de construction d'une figure géométrique.", levels: ["5e", "4e"] },
-        { text: "Mobiliser les connaissances des figures, des configurations et des transformations au programme pour déterminer des grandeurs géométriques.", levels: ["4e", "3e"] },
-        { text: "Mener des raisonnements et s'initier à la démonstration en utilisant les propriétés des figures, des configurations et des transformations.", levels: ["5e", "4e", "3e"] }
-      ],
-      "Les angles": [
-        { text: "Mettre en œuvre ou écrire un protocole de construction d'une figure géométrique.", levels: ["5e"] },
-        { text: "Mener des raisonnements et s'initier à la démonstration en utilisant les propriétés des figures, des configurations et des transformations.", levels: ["5e", "4e"] }
-      ],
-      "Angles et droites parallèles": [
-        { text: "Mener des raisonnements et s'initier à la démonstration en utilisant les propriétés des figures, des configurations et des transformations.", levels: ["5e", "3e"] }
-      ],
-      "Tracés à la règle et au compas": [
-        { text: "Mettre en œuvre ou écrire un protocole de construction d'une figure géométrique.", levels: ["5e"] },
-        { text: "Faire le lien entre les cas d'égalité des triangles et la construction d'un triangle à partir de la donnée de longueurs des côtés et/ou de mesures d'angles.", levels: ["4e"] }
-      ],
-      "Propriété de Thalès": [
-        { text: "Mobiliser les connaissances des figures, des configurations et des transformations au programme pour déterminer des grandeurs géométriques.", levels: ["4e", "3e"] },
-        { text: "Mener des raisonnements et s'initier à la démonstration en utilisant les propriétés des figures, des configurations et des transformations.", levels: ["4e", "3e"] }
-      ],
-      "Les triangles": [
-        { text: "Faire le lien entre les cas d'égalité des triangles et la construction d'un triangle à partir de la donnée de longueurs des côtés et/ou de mesures d'angles.", levels: ["4e"] },
-        { text: "Mobiliser les connaissances des figures, des configurations et des transformations au programme pour déterminer des grandeurs géométriques.", levels: ["4e", "3e"] },
-        { text: "Mener des raisonnements et s'initier à la démonstration en utilisant les propriétés des figures, des configurations et des transformations.", levels: ["5e", "4e", "3e"] }
-      ],
-      "Les quadrilatères": [
-        { text: "Mobiliser les connaissances des figures, des configurations et des transformations au programme pour déterminer des grandeurs géométriques.", levels: ["5e"] },
-        { text: "Mener des raisonnements et s'initier à la démonstration en utilisant les propriétés des figures, des configurations et des transformations.", levels: ["5e"] }
-      ],
-      "Espace et plan": [
-        { text: "(Se) repérer sur une droite graduée, dans le plan muni d'un repère orthogonal, dans un parallélépipède rectangle, sur une sphère.", levels: ["5e", "4e", "3e"] },
-        { text: "Reconnaître des solides (pavé droit, cube, prisme, cylindre, pyramide, cône, boule).", levels: ["5e"] },
-        { text: "Construire et mettre en relation des représentations de ces solides (vues en perspective cavalière, de face, de dessus, sections planes, patrons, etc.).", levels: ["5e", "4e", "3e"] },
-        { text: "Utiliser un logiciel de géométrie dynamique pour représenter des solides.", levels: ["5e", "3e"] }
-      ],
-      "Les polyèdres": [
-        { text: "Reconnaître des solides (pavé droit, cube, prisme, cylindre, pyramide, cône, boule).", levels: ["5e"] },
-        { text: "Construire et mettre en relation des représentations de ces solides (vues en perspective cavalière, de face, de dessus, sections planes, patrons, etc.).", levels: ["5e", "4e"] }
-      ],
-      "Les patrons de polyèdres": [
-        { text: "Construire et mettre en relation des représentations de ces solides (vues en perspective cavalière, de face, de dessus, sections planes, patrons, etc.).", levels: ["5e", "4e", "3e"] },
-        { text: "Utiliser un logiciel de géométrie dynamique pour représenter des solides.", levels: ["3e"] }
-      ],
-      "Les transformations planes": [
-        { text: "Comprendre l'effet d'une translation, d'une symétrie (axiale et centrale), d'une rotation, d'une homothétie sur une figure.", levels: ["5e", "4e", "3e"] },
-        { text: "Mobiliser les connaissances des figures, des configurations et des transformations au programme pour déterminer des grandeurs géométriques.", levels: ["3e"] },
-        { text: "Utiliser un rapport de réduction ou d'agrandissement (architecture, maquettes) pour calculer des longueurs, des aires, des volumes.", levels: ["4e"] },
-        { text: "Utiliser des transformations pour calculer des grandeurs géométriques.", levels: ["4e", "3e"] },
-        { text: "Faire le lien entre la proportionnalité et certaines configurations ou transformations géométriques (agrandissement réduction, triangles semblables, homothéties).", levels: ["4e", "3e"] }
-      ],
-      "Translations": [
-        { text: "Comprendre l'effet d'une translation, d'une symétrie (axiale et centrale), d'une rotation, d'une homothétie sur une figure.", levels: ["4e"] }
-      ],
-      "Rotations": [
-        { text: "Comprendre l'effet d'une translation, d'une symétrie (axiale et centrale), d'une rotation, d'une homothétie sur une figure.", levels: ["3e"] }
-      ],
-      "Symétries centrales": [
-        { text: "Comprendre l'effet d'une translation, d'une symétrie (axiale et centrale), d'une rotation, d'une homothétie sur une figure.", levels: ["5e"] }
-      ],
-      "Symétrie axiale, réflexion": [
-        { text: "Comprendre l'effet d'une translation, d'une symétrie (axiale et centrale), d'une rotation, d'une homothétie sur une figure.", levels: ["5e"] }
-      ],
-      "Composition de transformations": [
-        { text: "Comprendre l'effet d'une translation, d'une symétrie (axiale et centrale), d'une rotation, d'une homothétie sur une figure.", levels: ["3e"] },
-        { text: "Mobiliser les connaissances des figures, des configurations et des transformations au programme pour déterminer des grandeurs géométriques.", levels: ["3e"] }
-      ]
-    };
-
-    function competencesHtmlFor(title) {
-      const list = crpeCompetencesCycle4[title];
-      if (!list) return DEFAULT_COMPETENCES_HTML;
-      const items = list.map((c) => {
-        const badges = c.levels.map((lvl) => `<span class="crpe-level-badge crpe-level-${lvl}">${lvl}</span>`).join('');
-        return `<li><span class="crpe-competence-text">${c.text}</span><span class="crpe-level-badges">${badges}</span></li>`;
-      }).join('');
-      return `<p><em>Compétences associées, programme de mathématiques du cycle 4 (BOEN n°31 du 30 juillet 2020) et, pour la partie « Nombres et calculs, algèbre », programme de seconde générale et technologique, avec la ou les classes (5e/4e/3e/2nde) où elles sont travaillées.</em></p><ul class="crpe-competence-list">${items}</ul>`;
-    }
-
-    function activateTab(tabName) {
-      tabs.forEach((t) => t.classList.toggle('is-active', t.getAttribute('data-tab') === tabName));
-      panels.forEach((p) => p.classList.toggle('is-active', p.getAttribute('data-panel') === tabName));
-    }
-
-    function openModal(title) {
-      titleEl.textContent = title;
-      if (competencesPanel) competencesPanel.innerHTML = competencesHtmlFor(title);
-      activateTab('contenu');
-      overlay.classList.add('is-open');
-    }
-    function closeModal() {
-      overlay.classList.remove('is-open');
-    }
-
-    document.querySelectorAll('.crpe-subtheme-btn').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        openModal(btn.getAttribute('data-modal-title') || btn.textContent.trim());
-      });
-    });
-
-    tabs.forEach((tab) => {
-      tab.addEventListener('click', () => activateTab(tab.getAttribute('data-tab')));
-    });
-
-    closeBtn.addEventListener('click', closeModal);
-    overlay.addEventListener('click', (e) => {
-      if (e.target === overlay) closeModal();
-    });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeModal();
-    });
-  })();
 
   // Bouton "haut de page"
   document.getElementById('scrolltop-button').addEventListener('click', () => {
@@ -3228,6 +3432,102 @@ h1.hero-title{
         btn.classList.remove('is-active');
         btn.setAttribute('aria-expanded', 'false');
       }
+    });
+  })();
+
+  // Modal sous-thème : Compétences / Ressources / Annales
+  (function () {
+    const overlay = document.getElementById('subtheme-modal-overlay');
+    const eyebrow = document.getElementById('subtheme-modal-eyebrow');
+    const titleEl = document.getElementById('subtheme-modal-title');
+    const closeBtn = document.getElementById('subtheme-modal-close');
+    const tabs = Array.from(document.querySelectorAll('.subtheme-modal-tab'));
+    const panels = {
+      competences: document.getElementById('subtheme-modal-competences'),
+      ressources: document.getElementById('subtheme-modal-ressources'),
+      annales: document.getElementById('subtheme-modal-annales'),
+    };
+    let lastFocused = null;
+
+    const LEVEL_META = {
+      '5e':   { code: '5e',  label: '5e',              color: '#3AA1A0' },
+      '4e':   { code: '4e',  label: '4e',              color: '#7B6FD1' },
+      '3e':   { code: '3e',  label: '3e',              color: '#E8598A' },
+      'Tout le cycle': { code: 'cycle', label: 'Cycle 4', color: '#8A6273' },
+      'Niveau 1': { code: 'n1', label: 'Niv. 1', color: '#4FA8DE' },
+      'Niveau 2': { code: 'n2', label: 'Niv. 2', color: '#2E7FB8' },
+      'Niveau 3': { code: 'n3', label: 'Niv. 3', color: '#1B5A8C' },
+    };
+    const LEVEL_PREFIX_RE = /^(5e|4e|3e|Niveau \d|Tout le cycle)\s*—\s*(.*)$/;
+
+    function parseItem(raw) {
+      const m = raw.match(LEVEL_PREFIX_RE);
+      if (!m) return { meta: null, text: raw };
+      const meta = LEVEL_META[m[1]] || null;
+      return { meta, text: m[2] };
+    }
+
+    function renderPanel(key, items) {
+      const el = panels[key];
+      if (!items || !items.length) {
+        el.innerHTML = '<p class="subtheme-modal-empty">Contenu à venir.</p>';
+        return;
+      }
+      el.innerHTML = '<ul class="subtheme-modal-list">' +
+        items.map(raw => {
+          const { meta, text } = parseItem(raw);
+          const badge = meta
+            ? `<span class="subtheme-level-badge" data-level="${meta.code}">${meta.label}</span>`
+            : '';
+          return `<li>${badge}<span class="subtheme-modal-item-text">${text}</span></li>`;
+        }).join('') +
+        '</ul>';
+    }
+
+    function setActiveTab(key) {
+      tabs.forEach(t => t.classList.toggle('is-active', t.dataset.panel === key));
+      Object.entries(panels).forEach(([k, el]) => el.classList.toggle('is-active', k === key));
+    }
+
+    function openModal(themeName, cardTitle) {
+      const data = subthemeData[themeName] || {};
+      eyebrow.textContent = cardTitle || 'Sous-thème';
+      titleEl.textContent = themeName;
+      renderPanel('competences', data.competences);
+      renderPanel('ressources', data.ressources);
+      renderPanel('annales', data.annales);
+      setActiveTab('competences');
+
+      lastFocused = document.activeElement;
+      overlay.classList.add('is-open');
+      document.body.classList.add('modal-open');
+      closeBtn.focus();
+    }
+
+    function closeModal() {
+      overlay.classList.remove('is-open');
+      document.body.classList.remove('modal-open');
+      if (lastFocused) lastFocused.focus();
+    }
+
+    document.querySelectorAll('.crpe-subtheme-btn').forEach((btn) => {
+      btn.setAttribute('tabindex', '0');
+      btn.setAttribute('role', 'button');
+      const cardTitle = btn.closest('.crpe-theme-pink-card')?.querySelector('.crpe-theme-pink-card-title')?.textContent.trim();
+      btn.addEventListener('click', () => openModal(btn.textContent.trim(), cardTitle));
+      btn.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openModal(btn.textContent.trim(), cardTitle);
+        }
+      });
+    });
+
+    tabs.forEach(tab => tab.addEventListener('click', () => setActiveTab(tab.dataset.panel)));
+    closeBtn.addEventListener('click', closeModal);
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && overlay.classList.contains('is-open')) closeModal();
     });
   })();
 </script>
