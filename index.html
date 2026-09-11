@@ -518,21 +518,24 @@ h1.hero-title{
 /* Ressources epub : grille de 3 cartes ouvrant le lecteur */
 .crpe-epub-grid{
   display:grid;
-  grid-template-columns:repeat(3, 1fr);
+  grid-template-columns:repeat(5, 1fr);
   gap:20px;
   margin-top:4px;
 }
-@media (max-width:900px){
-  .crpe-epub-grid{ grid-template-columns:1fr; }
+@media (max-width:1000px){
+  .crpe-epub-grid{ grid-template-columns:repeat(3, 1fr); }
+}
+@media (max-width:640px){
+  .crpe-epub-grid{ grid-template-columns:repeat(2, 1fr); }
 }
 .crpe-epub-card{
   display:flex;
   flex-direction:column;
   align-items:flex-start;
-  gap:14px;
+  gap:8px;
   width:100%;
   text-align:left;
-  padding:22px;
+  padding:10px;
   border-radius:var(--radius-md);
   border:1px solid var(--line);
   background:rgba(232,89,138,0.05);
@@ -547,25 +550,29 @@ h1.hero-title{
   border-color:var(--accent);
   outline:none;
 }
-.crpe-epub-icon{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  width:44px;
-  height:44px;
-  border-radius:10px;
-  background:rgba(232,89,138,0.14);
-  color:var(--accent);
+.crpe-epub-cover{
+  width:100%;
+  aspect-ratio:2/3;
+  border-radius:6px;
+  overflow:hidden;
+  background:rgba(232,89,138,0.08);
+  border:1px solid var(--line);
   flex-shrink:0;
 }
+.crpe-epub-cover img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
 .crpe-epub-title{
-  font-size:0.92rem;
+  font-size:0.74rem;
   font-weight:800;
   color:var(--white);
-  line-height:1.4;
+  line-height:1.3;
 }
 .crpe-epub-sub{
-  font-size:0.76rem;
+  font-size:0.65rem;
   font-weight:600;
   color:var(--grey-dim);
   letter-spacing:0.03em;
@@ -677,6 +684,59 @@ h1.hero-title{
   color:var(--grey-dim);
   font-size:0.85rem;
   background:var(--bg-panel);
+}
+.epub-modal-gate{
+  position:absolute;
+  inset:0;
+  display:none;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  background:var(--bg-panel);
+  padding:24px;
+  text-align:center;
+}
+.epub-modal-gate p{
+  margin:0;
+  font-size:0.84rem;
+  color:var(--grey);
+  max-width:320px;
+}
+.epub-modal-gate-form{
+  display:flex;
+  gap:8px;
+}
+.epub-modal-gate-input{
+  padding:10px 14px;
+  border-radius:8px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,0.04);
+  color:var(--white);
+  font-size:0.9rem;
+  width:180px;
+  text-align:center;
+  letter-spacing:0.15em;
+}
+.epub-modal-gate-input:focus{
+  outline:none;
+  border-color:var(--accent);
+}
+.epub-modal-gate-submit{
+  padding:10px 18px;
+  border-radius:8px;
+  border:1px solid var(--accent);
+  background:rgba(232,89,138,0.14);
+  color:var(--accent);
+  font-weight:700;
+  font-size:0.86rem;
+  cursor:pointer;
+}
+.epub-modal-gate-submit:hover{ background:rgba(232,89,138,0.24); }
+.epub-modal-gate-error{
+  font-size:0.78rem;
+  color:#f26d6d;
+  min-height:1.1em;
 }
 @media (max-width:700px){
   .epub-modal{ height:92vh; max-width:100%; }
@@ -3157,22 +3217,22 @@ body.modal-open{ overflow:hidden; }
       <div class="snt-big-card">
         <div class="crpe-epub-grid">
           <button type="button" class="crpe-epub-card" data-epub-src="Ressources/Maths - CRPE 2024-2025.epub" data-epub-title="Maths - CRPE 2024-2025">
-            <span class="crpe-epub-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+            <span class="crpe-epub-cover">
+              <img src="Ressources/Maths - CRPE 2024-2025.jpg" alt="" loading="lazy">
             </span>
             <span class="crpe-epub-sub">Ebook</span>
             <span class="crpe-epub-title">Maths - CRPE 2024-2025</span>
           </button>
           <button type="button" class="crpe-epub-card" data-epub-src="Ressources/Maths - CRPE 2024-2025 - 40 Fiches De Remise À Niveau.epub" data-epub-title="Maths - CRPE 2024-2025 — 40 Fiches de remise à niveau">
-            <span class="crpe-epub-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+            <span class="crpe-epub-cover">
+              <img src="Ressources/Maths - CRPE 2024-2025 - 40 Fiches De Remise À Niveau.jpg" alt="" loading="lazy">
             </span>
             <span class="crpe-epub-sub">Ebook</span>
             <span class="crpe-epub-title">Maths - CRPE 2024-2025 — 40 fiches de remise à niveau</span>
           </button>
           <button type="button" class="crpe-epub-card" data-epub-src="Ressources/Objectif CRPE 2025 - Maths - La leçon.epub" data-epub-title="Objectif CRPE 2025 - Maths - La leçon">
-            <span class="crpe-epub-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+            <span class="crpe-epub-cover">
+              <img src="Ressources/Objectif CRPE 2025 - Maths - La leçon.jpg" alt="" loading="lazy">
             </span>
             <span class="crpe-epub-sub">Ebook</span>
             <span class="crpe-epub-title">Objectif CRPE 2025 - Maths - La leçon</span>
@@ -3204,6 +3264,14 @@ body.modal-open{ overflow:hidden; }
     <div class="epub-modal-body">
       <div id="epub-reader-area"></div>
       <div class="epub-modal-status" id="epub-status">Chargement du livre…</div>
+      <div class="epub-modal-gate" id="epub-gate">
+        <p>Ce contenu est protégé. Saisissez le mot de passe pour l'ouvrir.</p>
+        <form class="epub-modal-gate-form" id="epub-gate-form" autocomplete="off">
+          <input type="password" class="epub-modal-gate-input" id="epub-gate-input" placeholder="Mot de passe" autocomplete="off">
+          <button type="submit" class="epub-modal-gate-submit">Valider</button>
+        </form>
+        <span class="epub-modal-gate-error" id="epub-gate-error"></span>
+      </div>
     </div>
   </div>
 </div>
@@ -4628,7 +4696,23 @@ body.modal-open{ overflow:hidden; }
     const locEl = document.getElementById('epub-loc');
     const prevBtn = document.getElementById('epub-prev');
     const nextBtn = document.getElementById('epub-next');
+    const gateEl = document.getElementById('epub-gate');
+    const gateForm = document.getElementById('epub-gate-form');
+    const gateInput = document.getElementById('epub-gate-input');
+    const gateError = document.getElementById('epub-gate-error');
     const areaId = 'epub-reader-area';
+
+    // Empreinte SHA-256 du mot de passe (le mot de passe lui-même n'apparaît jamais dans le code)
+    const PASSWORD_HASH = 'd261aa3454b76eb8e8b2fd179bd1239532c00c1478983ac51dd351696e42e14a';
+    let unlocked = false;
+    let pendingSrc = null;
+    let pendingTitle = null;
+
+    async function sha256Hex(text) {
+      const enc = new TextEncoder().encode(text);
+      const digest = await crypto.subtle.digest('SHA-256', enc);
+      return Array.from(new Uint8Array(digest)).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
 
     let book = null;
     let rendition = null;
@@ -4652,13 +4736,22 @@ body.modal-open{ overflow:hidden; }
       locEl.textContent = '';
     }
 
-    function openEpubModal(src, title) {
-      lastFocused = document.activeElement;
+    function showGate() {
+      gateEl.style.display = 'flex';
+      statusEl.style.display = 'none';
+      gateError.textContent = '';
+      gateInput.value = '';
+      setTimeout(() => gateInput.focus(), 50);
+    }
+
+    function hideGate() {
+      gateEl.style.display = 'none';
+    }
+
+    function loadBook(src, title) {
       titleEl.textContent = title || 'Lecture';
       statusEl.textContent = 'Chargement du livre…';
       statusEl.style.display = 'flex';
-      overlay.classList.add('is-open');
-      document.body.classList.add('modal-open');
 
       if (typeof ePub === 'undefined') {
         statusEl.textContent = "Le lecteur epub n'a pas pu se charger (connexion réseau requise).";
@@ -4695,12 +4788,46 @@ body.modal-open{ overflow:hidden; }
       }).catch(() => {});
     }
 
+    function openEpubModal(src, title) {
+      lastFocused = document.activeElement;
+      titleEl.textContent = title || 'Lecture';
+      overlay.classList.add('is-open');
+      document.body.classList.add('modal-open');
+
+      if (unlocked) {
+        hideGate();
+        loadBook(src, title);
+      } else {
+        pendingSrc = src;
+        pendingTitle = title;
+        statusEl.style.display = 'none';
+        showGate();
+      }
+    }
+
     function closeEpubModal() {
       overlay.classList.remove('is-open');
       document.body.classList.remove('modal-open');
       destroyBook();
+      hideGate();
       if (lastFocused) lastFocused.focus();
     }
+
+    gateForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const value = gateInput.value.trim();
+      if (!value) return;
+      const hash = await sha256Hex(value);
+      if (hash === PASSWORD_HASH) {
+        unlocked = true;
+        hideGate();
+        loadBook(pendingSrc, pendingTitle);
+      } else {
+        gateError.textContent = 'Mot de passe incorrect.';
+        gateInput.value = '';
+        gateInput.focus();
+      }
+    });
 
     document.querySelectorAll('.crpe-epub-card').forEach((btn) => {
       btn.addEventListener('click', () => {
