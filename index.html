@@ -762,10 +762,13 @@ h1.hero-title{
   position:relative;
   min-height:0;
   background:#fff;
+  overflow:auto;
 }
 #epub-reader-area{
   width:100%;
   height:100%;
+  transform-origin:top center;
+  transition:transform 0.15s ease;
 }
 .epub-modal-status{
   position:absolute;
@@ -4926,18 +4929,17 @@ body.modal-open{ overflow:hidden; }
 
     function applyZoom() {
       zoomLevelEl.textContent = zoomLevel + '%';
-      if (rendition) {
-        rendition.themes.fontSize(zoomLevel + '%');
-      }
+      const area = document.getElementById(areaId);
+      const scale = zoomLevel / 100;
+      area.style.transform = 'scale(' + scale + ')';
+      // Compense la largeur/hauteur visuelles pour que le contenu zoomé reste utilisable au scroll
+      area.style.width = (100 / scale) + '%';
+      area.style.height = (100 / scale) + '%';
     }
 
     function setZoom(newLevel) {
       zoomLevel = Math.max(ZOOM_MIN, Math.min(ZOOM_MAX, newLevel));
       applyZoom();
-      // La pagination dépend de la taille du texte : on régénère les repères de position
-      if (book && book.locations) {
-        book.locations.generate(1600).catch(() => {});
-      }
     }
 
     function loadBook(src, title) {
@@ -4953,6 +4955,10 @@ body.modal-open{ overflow:hidden; }
       destroyBook();
       zoomLevel = 100;
       zoomLevelEl.textContent = '100%';
+      const area = document.getElementById(areaId);
+      area.style.transform = '';
+      area.style.width = '100%';
+      area.style.height = '100%';
 
       book = ePub(encodeURI(src));
       rendition = book.renderTo(areaId, {
@@ -4963,7 +4969,6 @@ body.modal-open{ overflow:hidden; }
       rendition.themes.default({
         'body': { 'padding': '0 !important' }
       });
-      rendition.themes.fontSize(zoomLevel + '%');
 
       rendition.display()
         .then(() => { statusEl.style.display = 'none'; })
