@@ -746,6 +746,12 @@ h1.hero-title{
   cursor:pointer;
 }
 .epub-modal-nav-btn:hover{ color:var(--white); border-color:var(--accent); }
+.epub-modal-nav-sep{
+  width:1px;
+  height:22px;
+  background:var(--line);
+  margin:0 2px;
+}
 .epub-modal-nav-loc{
   font-size:0.75rem;
   color:var(--grey-dim);
@@ -3350,6 +3356,14 @@ body.modal-open{ overflow:hidden; }
       <button type="button" class="epub-modal-nav-btn" id="epub-next" aria-label="Page suivante">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
       </button>
+      <span class="epub-modal-nav-sep"></span>
+      <button type="button" class="epub-modal-nav-btn" id="epub-zoom-out" aria-label="Réduire le zoom">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+      </button>
+      <span class="epub-modal-nav-loc" id="epub-zoom-level">100%</span>
+      <button type="button" class="epub-modal-nav-btn" id="epub-zoom-in" aria-label="Augmenter le zoom">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+      </button>
     </div>
     <div class="epub-modal-body">
       <div id="epub-reader-area"></div>
@@ -4803,7 +4817,15 @@ body.modal-open{ overflow:hidden; }
     const tocPanel = document.getElementById('epub-toc');
     const tocClose = document.getElementById('epub-toc-close');
     const tocList = document.getElementById('epub-toc-list');
+    const zoomInBtn = document.getElementById('epub-zoom-in');
+    const zoomOutBtn = document.getElementById('epub-zoom-out');
+    const zoomLevelEl = document.getElementById('epub-zoom-level');
     const areaId = 'epub-reader-area';
+
+    const ZOOM_MIN = 70;
+    const ZOOM_MAX = 220;
+    const ZOOM_STEP = 10;
+    let zoomLevel = 100;
 
     // Empreinte SHA-256 du mot de passe (le mot de passe lui-même n'apparaît jamais dans le code)
     const PASSWORD_HASH = 'd261aa3454b76eb8e8b2fd179bd1239532c00c1478983ac51dd351696e42e14a';
@@ -4902,6 +4924,22 @@ body.modal-open{ overflow:hidden; }
       tocBtn.classList.remove('is-active');
     }
 
+    function applyZoom() {
+      zoomLevelEl.textContent = zoomLevel + '%';
+      if (rendition) {
+        rendition.themes.fontSize(zoomLevel + '%');
+      }
+    }
+
+    function setZoom(newLevel) {
+      zoomLevel = Math.max(ZOOM_MIN, Math.min(ZOOM_MAX, newLevel));
+      applyZoom();
+      // La pagination dépend de la taille du texte : on régénère les repères de position
+      if (book && book.locations) {
+        book.locations.generate(1600).catch(() => {});
+      }
+    }
+
     function loadBook(src, title) {
       titleEl.textContent = title || 'Lecture';
       statusEl.textContent = 'Chargement du livre…';
@@ -4913,6 +4951,8 @@ body.modal-open{ overflow:hidden; }
       }
 
       destroyBook();
+      zoomLevel = 100;
+      zoomLevelEl.textContent = '100%';
 
       book = ePub(encodeURI(src));
       rendition = book.renderTo(areaId, {
@@ -4920,6 +4960,10 @@ body.modal-open{ overflow:hidden; }
         height: '100%',
         flow: 'paginated'
       });
+      rendition.themes.default({
+        'body': { 'padding': '0 !important' }
+      });
+      rendition.themes.fontSize(zoomLevel + '%');
 
       rendition.display()
         .then(() => { statusEl.style.display = 'none'; })
@@ -5001,6 +5045,8 @@ body.modal-open{ overflow:hidden; }
 
     prevBtn.addEventListener('click', () => { if (rendition) rendition.prev(); });
     nextBtn.addEventListener('click', () => { if (rendition) rendition.next(); });
+    zoomInBtn.addEventListener('click', () => setZoom(zoomLevel + ZOOM_STEP));
+    zoomOutBtn.addEventListener('click', () => setZoom(zoomLevel - ZOOM_STEP));
 
     closeBtn.addEventListener('click', closeEpubModal);
     overlay.addEventListener('click', (e) => { if (e.target === overlay) closeEpubModal(); });
