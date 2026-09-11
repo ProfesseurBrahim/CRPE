@@ -638,6 +638,92 @@ h1.hero-title{
   flex-shrink:0;
 }
 .epub-modal-close:hover{ color:var(--white); border-color:var(--accent); }
+.epub-modal-toc-btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:32px;
+  height:32px;
+  border-radius:8px;
+  border:1px solid var(--line);
+  background:transparent;
+  color:var(--grey);
+  cursor:pointer;
+  flex-shrink:0;
+}
+.epub-modal-toc-btn:hover{ color:var(--white); border-color:var(--accent); }
+.epub-modal-toc-btn.is-active{ color:var(--accent); border-color:var(--accent); }
+.epub-modal-toc{
+  position:absolute;
+  top:0;
+  left:0;
+  bottom:0;
+  width:260px;
+  max-width:78%;
+  background:var(--bg-panel);
+  border-right:1px solid var(--line);
+  box-shadow:20px 0 40px rgba(0,0,0,0.3);
+  display:flex;
+  flex-direction:column;
+  transform:translateX(-100%);
+  transition:transform 0.22s ease;
+  z-index:5;
+}
+.epub-modal-toc.is-open{ transform:translateX(0); }
+.epub-modal-toc-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px 16px;
+  border-bottom:1px solid var(--line);
+  font-size:0.8rem;
+  font-weight:800;
+  color:var(--white);
+  flex-shrink:0;
+}
+.epub-modal-toc-close{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:26px;
+  height:26px;
+  border-radius:6px;
+  border:1px solid var(--line);
+  background:transparent;
+  color:var(--grey);
+  cursor:pointer;
+}
+.epub-modal-toc-close:hover{ color:var(--white); border-color:var(--accent); }
+.epub-modal-toc-list{
+  flex:1;
+  overflow-y:auto;
+  padding:8px;
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+}
+.epub-modal-toc-item{
+  display:block;
+  width:100%;
+  text-align:left;
+  padding:9px 10px;
+  border-radius:8px;
+  border:none;
+  background:transparent;
+  color:var(--grey);
+  font-size:0.78rem;
+  line-height:1.4;
+  cursor:pointer;
+  font-family:inherit;
+}
+.epub-modal-toc-item:hover{ background:rgba(232,89,138,0.1); color:var(--white); }
+.epub-modal-toc-item.is-current{ background:rgba(232,89,138,0.16); color:var(--accent); font-weight:700; }
+.epub-modal-toc-item.is-sub{ padding-left:22px; font-size:0.74rem; }
+.epub-modal-toc-empty{
+  padding:14px;
+  font-size:0.76rem;
+  color:var(--grey-dim);
+}
 .epub-modal-nav{
   display:flex;
   align-items:center;
@@ -3247,6 +3333,9 @@ body.modal-open{ overflow:hidden; }
 <div class="epub-modal-overlay" id="epub-modal-overlay">
   <div class="epub-modal" role="dialog" aria-modal="true" aria-labelledby="epub-modal-title">
     <div class="epub-modal-head">
+      <button type="button" class="epub-modal-toc-btn" id="epub-toc-btn" aria-label="Sommaire">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"></line><line x1="4" y1="12" x2="20" y2="12"></line><line x1="4" y1="18" x2="14" y2="18"></line></svg>
+      </button>
       <h3 class="epub-modal-title" id="epub-modal-title"></h3>
       <button type="button" class="epub-modal-close" id="epub-modal-close" aria-label="Fermer">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="4" y1="4" x2="20" y2="20"></line><line x1="20" y1="4" x2="4" y2="20"></line></svg>
@@ -3271,6 +3360,15 @@ body.modal-open{ overflow:hidden; }
           <button type="submit" class="epub-modal-gate-submit">Valider</button>
         </form>
         <span class="epub-modal-gate-error" id="epub-gate-error"></span>
+      </div>
+      <div class="epub-modal-toc" id="epub-toc">
+        <div class="epub-modal-toc-head">
+          <span>Sommaire</span>
+          <button type="button" class="epub-modal-toc-close" id="epub-toc-close" aria-label="Fermer le sommaire">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="4" y1="4" x2="20" y2="20"></line><line x1="20" y1="4" x2="4" y2="20"></line></svg>
+          </button>
+        </div>
+        <div class="epub-modal-toc-list" id="epub-toc-list"></div>
       </div>
     </div>
   </div>
@@ -4700,6 +4798,10 @@ body.modal-open{ overflow:hidden; }
     const gateForm = document.getElementById('epub-gate-form');
     const gateInput = document.getElementById('epub-gate-input');
     const gateError = document.getElementById('epub-gate-error');
+    const tocBtn = document.getElementById('epub-toc-btn');
+    const tocPanel = document.getElementById('epub-toc');
+    const tocClose = document.getElementById('epub-toc-close');
+    const tocList = document.getElementById('epub-toc-list');
     const areaId = 'epub-reader-area';
 
     // Empreinte SHA-256 du mot de passe (le mot de passe lui-même n'apparaît jamais dans le code)
@@ -4734,6 +4836,8 @@ body.modal-open{ overflow:hidden; }
       }
       clearReaderArea();
       locEl.textContent = '';
+      tocList.innerHTML = '';
+      closeToc();
     }
 
     function showGate() {
@@ -4746,6 +4850,55 @@ body.modal-open{ overflow:hidden; }
 
     function hideGate() {
       gateEl.style.display = 'none';
+    }
+
+    function buildToc(chapters, depth) {
+      chapters.forEach((chapter) => {
+        const item = document.createElement('button');
+        item.type = 'button';
+        item.className = 'epub-modal-toc-item' + (depth > 0 ? ' is-sub' : '');
+        item.textContent = chapter.label ? chapter.label.trim() : 'Sans titre';
+        item.dataset.href = chapter.href;
+        item.addEventListener('click', () => {
+          if (rendition) rendition.display(chapter.href);
+          closeToc();
+        });
+        tocList.appendChild(item);
+        if (chapter.subitems && chapter.subitems.length) {
+          buildToc(chapter.subitems, depth + 1);
+        }
+      });
+    }
+
+    function loadToc() {
+      tocList.innerHTML = '';
+      if (!book || !book.navigation || !book.navigation.toc || !book.navigation.toc.length) {
+        const empty = document.createElement('div');
+        empty.className = 'epub-modal-toc-empty';
+        empty.textContent = 'Aucun sommaire disponible pour ce livre.';
+        tocList.appendChild(empty);
+        return;
+      }
+      buildToc(book.navigation.toc, 0);
+    }
+
+    function highlightCurrentToc(href) {
+      const items = tocList.querySelectorAll('.epub-modal-toc-item');
+      items.forEach((item) => {
+        const itemHref = item.dataset.href ? item.dataset.href.split('#')[0] : '';
+        const current = href ? href.split('#')[0] : '';
+        item.classList.toggle('is-current', itemHref && current && itemHref === current);
+      });
+    }
+
+    function openToc() {
+      tocPanel.classList.add('is-open');
+      tocBtn.classList.add('is-active');
+    }
+
+    function closeToc() {
+      tocPanel.classList.remove('is-open');
+      tocBtn.classList.remove('is-active');
     }
 
     function loadBook(src, title) {
@@ -4781,9 +4934,13 @@ body.modal-open{ overflow:hidden; }
         } else {
           locEl.textContent = '';
         }
+        if (location && location.start) {
+          highlightCurrentToc(location.start.href);
+        }
       });
 
       book.ready.then(() => {
+        loadToc();
         return book.locations.generate(1600);
       }).catch(() => {});
     }
@@ -4810,8 +4967,14 @@ body.modal-open{ overflow:hidden; }
       document.body.classList.remove('modal-open');
       destroyBook();
       hideGate();
+      closeToc();
       if (lastFocused) lastFocused.focus();
     }
+
+    tocBtn.addEventListener('click', () => {
+      if (tocPanel.classList.contains('is-open')) closeToc(); else openToc();
+    });
+    tocClose.addEventListener('click', closeToc);
 
     gateForm.addEventListener('submit', async (e) => {
       e.preventDefault();
