@@ -764,11 +764,13 @@ h1.hero-title{
   background:#fff;
   overflow:auto;
 }
+#epub-reader-wrap{
+  transform-origin:top left;
+  transition:transform 0.15s ease;
+}
 #epub-reader-area{
   width:100%;
   height:100%;
-  transform-origin:top left;
-  transition:transform 0.15s ease;
 }
 .epub-modal-status{
   position:absolute;
@@ -3369,7 +3371,7 @@ body.modal-open{ overflow:hidden; }
       </button>
     </div>
     <div class="epub-modal-body">
-      <div id="epub-reader-area"></div>
+      <div id="epub-reader-wrap"><div id="epub-reader-area"></div></div>
       <div class="epub-modal-status" id="epub-status">Chargement du livre…</div>
       <div class="epub-modal-gate" id="epub-gate">
         <p>Ce contenu est protégé. Saisissez le mot de passe pour l'ouvrir.</p>
@@ -4929,12 +4931,14 @@ body.modal-open{ overflow:hidden; }
 
     function applyZoom() {
       zoomLevelEl.textContent = zoomLevel + '%';
-      const area = document.getElementById(areaId);
+      const wrap = document.getElementById('epub-reader-wrap');
+      const body = wrap.parentElement; // .epub-modal-body
       const scale = zoomLevel / 100;
-      area.style.transform = 'scale(' + scale + ')';
-      // Compense la largeur/hauteur visuelles pour que le contenu zoomé reste utilisable au scroll
-      area.style.width = (100 / scale) + '%';
-      area.style.height = (100 / scale) + '%';
+      const baseWidth = body.clientWidth;
+      const baseHeight = body.clientHeight;
+      wrap.style.width = baseWidth + 'px';
+      wrap.style.height = baseHeight + 'px';
+      wrap.style.transform = 'scale(' + scale + ')';
     }
 
     function setZoom(newLevel) {
@@ -4955,10 +4959,11 @@ body.modal-open{ overflow:hidden; }
       destroyBook();
       zoomLevel = 100;
       zoomLevelEl.textContent = '100%';
-      const area = document.getElementById(areaId);
-      area.style.transform = '';
-      area.style.width = '100%';
-      area.style.height = '100%';
+      const wrap = document.getElementById('epub-reader-wrap');
+      const body = wrap.parentElement;
+      wrap.style.width = body.clientWidth + 'px';
+      wrap.style.height = body.clientHeight + 'px';
+      wrap.style.transform = '';
 
       book = ePub(encodeURI(src));
       rendition = book.renderTo(areaId, {
